@@ -4,7 +4,7 @@
 | | |
 | --- | --- |
 |Robin Prillwitz | `00805291`|
-|Simon Obermaier | `00800498`|
+|Simon Obermeier | `00800498`|
 |Anton Kraus | `00804697`|
 
 ---
