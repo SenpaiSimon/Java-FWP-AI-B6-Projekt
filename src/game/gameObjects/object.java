@@ -12,12 +12,13 @@ public class object {
     protected double height;
     protected type type;
 
-
-    public object(double xPos, double yPos, double length, double height, type type) {
+    public object(double xPos, double yPos, double length, double height) {
         this.xPos = xPos;
         this.yPos = yPos;
         this.length = length;
         this.height = height;
-        this.type = type;
     }
+
+    public void draw() {};
+    public void update() {};
 }
