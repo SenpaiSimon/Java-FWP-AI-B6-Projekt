@@ -13,9 +13,21 @@ public class game {
     private ArrayList <object> gameObjects = new ArrayList<object>();
     private long tick;
 
+    // debug prints -- may slow down application
+    public boolean debug;
+
     public Pane test;
 
-    public void start() {
+    public game(boolean debug) {
+        this.debug = debug;
+    }
+
+    public game() {
+        this.debug = false;
+    }
+
+    public void start(int fps) {
+        init();
         /*
          * Main Game Loop
          */
@@ -26,8 +38,13 @@ public class game {
                 tick += 1;
                 updateObjects();
                 draw();
+
+                if(tick % 60 == 0 && debug) {
+                    System.out.println("ticks: " + tick); // Debug test print
+                }
+        
             }
-        }, 0, 100, TimeUnit.MILLISECONDS);
+        }, 0, (1000/fps), TimeUnit.MILLISECONDS);
     }
 
     public void init() {
@@ -35,7 +52,6 @@ public class game {
     }
 
     public void draw() {
-        System.out.println(tick); // Debug test print
         for(object object: gameObjects) {
             object.draw();
         }
