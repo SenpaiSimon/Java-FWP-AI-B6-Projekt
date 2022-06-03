@@ -10,6 +10,5 @@
         "src/lib/javafx/javafx.web.jar",
         "src/lib/javafx/javafx-swt.jar"
     ],
-    "maven.view": "hierarchical",
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "automatic"
 }

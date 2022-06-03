@@ -2,13 +2,13 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.mycompany.app</groupId>
-  <artifactId>my-app</artifactId>
+  <artifactId>Sidescroller</artifactId>
   <version>1</version>
 
   <!-- Required to fix "source option 5 is no longer supported .use 7 or later" -->
   <properties>
-    <maven.compiler.source>16</maven.compiler.source>
-    <maven.compiler.target>16</maven.compiler.target>
+    <maven.compiler.source>18</maven.compiler.source>
+    <maven.compiler.target>18</maven.compiler.target>
   </properties>
 
   <build>
@@ -29,7 +29,7 @@
             <manifest>
               <addClasspath>true</addClasspath>
               <classpathPrefix>lib/</classpathPrefix>
-              <mainClass>src.mainStart</mainClass>
+              <mainClass>mainStart</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -39,15 +39,23 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>1.2.1</version>
         <configuration>
-            <mainClass>src.mainStart</mainClass>
+            <mainClass>mainStart</mainClass>
             <arguments>
                 <argument></argument>
             </arguments>
         </configuration>
-    </plugin>
+      </plugin>
     </plugins>
   </build>
   <dependencies>
+
+    <dependency>
+      <groupId>org.jfxcore</groupId>
+      <artifactId>javafx</artifactId>
+      <version>15-ea+1</version>
+      <type>pom</type>
+    </dependency>
+
     <!-- JavaFX Dependency
       This doesn't use the local
     -->
