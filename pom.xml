@@ -12,7 +12,7 @@
   </properties>
 
   <build>
-    <sourceDirectory></sourceDirectory>
+    <sourceDirectory>src</sourceDirectory>
     <plugins>
       <plugin>
         <!-- Build an executable JAR -->
