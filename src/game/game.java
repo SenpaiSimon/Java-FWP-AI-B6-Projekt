@@ -1,6 +1,9 @@
 package src.game;
 
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javafx.scene.layout.Pane;
 import src.game.gameObjects.object;
@@ -8,7 +11,7 @@ import src.game.gameObjects.player;
 
 public class game {
     private ArrayList <object> gameObjects = new ArrayList<object>();
-
+    private long tick;
 
     public Pane test;
 
@@ -16,10 +19,15 @@ public class game {
         /*
          * Main Game Loop
          */
-        while(true) {
-            updateObjects();
-            draw();
-        }
+        final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+        executorService.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                tick += 1;
+                updateObjects();
+                draw();
+            }
+        }, 0, 100, TimeUnit.MILLISECONDS);
     }
 
     public void init() {
@@ -27,6 +35,7 @@ public class game {
     }
 
     public void draw() {
+        System.out.println(tick); // Debug test print
         for(object object: gameObjects) {
             object.draw();
         }
