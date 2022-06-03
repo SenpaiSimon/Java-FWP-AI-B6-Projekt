@@ -28,12 +28,13 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <classpathPrefix>lib/</classpathPrefix>
+              <classpathPrefix>lib/javafx</classpathPrefix>
               <mainClass>mainStart</mainClass>
             </manifest>
           </archive>
         </configuration>
       </plugin>
+      <!-- Execute Programm -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
