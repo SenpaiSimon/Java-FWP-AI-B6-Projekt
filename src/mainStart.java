@@ -1,6 +1,4 @@
-package src;
-
-import src.game.game;
+import game.game;
 
 class mainStart {
     public static void main(String[] args) {

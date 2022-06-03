@@ -1,9 +1,9 @@
-package src.game.gameObjects;
+package game.gameObjects;
 
 public class player extends object{
     public player(double xPos, double yPos, double length, double height) {
         super(xPos, yPos, length, height);
-        this.type = src.game.ownTypes.type.player;
+        this.type = game.ownTypes.type.player;
     }
 
     @Override

@@ -1,6 +1,6 @@
-package src.game.gameObjects;
+package game.gameObjects;
 
-import src.game.ownTypes.type;
+import game.ownTypes.type;
 
 /*
  * Superclass for all the drawable things in the game

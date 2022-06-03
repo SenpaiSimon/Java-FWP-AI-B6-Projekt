@@ -9,5 +9,7 @@
         "src/lib/javafx/javafx.swing.jar",
         "src/lib/javafx/javafx.web.jar",
         "src/lib/javafx/javafx-swt.jar"
-    ]
+    ],
+    "maven.view": "hierarchical",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }

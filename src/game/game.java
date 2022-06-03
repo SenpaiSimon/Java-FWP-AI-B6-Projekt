@@ -1,4 +1,4 @@
-package src.game;
+package game;
 
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
@@ -6,8 +6,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import javafx.scene.layout.Pane;
-import src.game.gameObjects.object;
-import src.game.gameObjects.player;
+import game.gameObjects.object;
+import game.gameObjects.player;
 
 public class game {
     private ArrayList <object> gameObjects = new ArrayList<object>();
