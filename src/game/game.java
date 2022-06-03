@@ -2,6 +2,7 @@ package src.game;
 
 import java.util.ArrayList;
 
+import javafx.scene.layout.Pane;
 import src.game.gameObjects.object;
 import src.game.gameObjects.player;
 
@@ -9,7 +10,7 @@ public class game {
     private ArrayList <object> gameObjects = new ArrayList<object>();
 
 
-
+    public Pane test;
 
     public void start() {
         /*
