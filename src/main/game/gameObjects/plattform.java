@@ -1,9 +1,9 @@
-package game.gameObjects;
+package main.game.gameObjects;
 
 public class plattform extends object{
     public plattform(double xPos, double yPos, double length, double height) {
         super(xPos, yPos, length, height);
-        this.type = game.ownTypes.type.plattform;
+        this.type = main.game.ownTypes.type.plattform;
     }
 
     @Override

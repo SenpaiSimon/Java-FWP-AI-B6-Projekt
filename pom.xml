@@ -1,8 +1,8 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.mycompany.app</groupId>
-  <artifactId>Sidescroller</artifactId>
+  <groupId>com.javafwp</groupId>
+  <artifactId>main</artifactId>
   <version>1</version>
 
   <!-- Required to fix "source option 5 is no longer supported .use 7 or later" -->
@@ -12,7 +12,7 @@
   </properties>
 
   <build>
-    <sourceDirectory>src</sourceDirectory>
+    <sourceDirectory>main</sourceDirectory>
     <resources>
         <resource>
             <directory>src</directory>
@@ -23,13 +23,16 @@
         <!-- Build an executable JAR -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>3.1.0</version>
+        <version>3.2.0</version>
         <configuration>
+          <forceCreation>true</forceCreation>
+          <finalName>SidescrollerGame</finalName>
+          <!-- <excludes>**/*.java</excludes> -->
           <archive>
             <manifest>
-              <addClasspath>true</addClasspath>
-              <classpathPrefix>lib/javafx</classpathPrefix>
-              <mainClass>mainStart</mainClass>
+              <!-- <addClasspath>true</addClasspath>
+              <classpathPrefix>main/lib/javafx</classpathPrefix> -->
+              <mainClass>main.mainStart</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -40,7 +43,7 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>1.2.1</version>
         <configuration>
-            <mainClass>mainStart</mainClass>
+            <mainClass>main.mainStart</mainClass>
             <arguments>
                 <argument></argument>
             </arguments>
@@ -49,7 +52,6 @@
     </plugins>
   </build>
   <dependencies>
-
     <dependency>
       <groupId>org.jfxcore</groupId>
       <artifactId>javafx</artifactId>

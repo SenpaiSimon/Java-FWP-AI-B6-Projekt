@@ -1,9 +1,9 @@
-package game.gameObjects;
+package main.game.gameObjects;
 
 public class enemy extends object{
     public enemy(double xPos, double yPos, double length, double height) {
         super(xPos, yPos, length, height);
-        this.type = game.ownTypes.type.enemy;
+        this.type = main.game.ownTypes.type.enemy;
     }
 
     @Override

@@ -1,11 +1,11 @@
-package game.gameObjects;
+package main.game.gameObjects;
 
 public class player extends object{
     boolean canJump = true;
 
     public player(double xPos, double yPos, double length, double height) {
         super(xPos, yPos, length, height);
-        this.type = game.ownTypes.type.player;
+        this.type = main.game.ownTypes.type.player;
     }
 
     @Override
