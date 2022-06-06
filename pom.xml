@@ -15,8 +15,12 @@
   </properties>
 
   <build>
+    <resources>
+        <resource>
+            <directory>src</directory>
+        </resource>
+    </resources>
     <plugins>
-
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
         <executions>
@@ -33,8 +37,6 @@
           </descriptorRefs>
           <archive>
             <manifest>
-              <!-- <addClasspath>true</addClasspath> -->
-              <!-- <classpathPrefix>lib/javafx</classpathPrefix> -->
               <mainClass>com.javafwp.mainStart</mainClass>
             </manifest>
           </archive>
@@ -42,16 +44,6 @@
           <finalName>SidescrollerGame</finalName>
         </configuration>
       </plugin>
-
-      <!-- <plugin>
-        <groupId>org.openjfx</groupId>
-        <artifactId>javafx-maven-plugin</artifactId>
-        <version>0.0.8</version>
-        <configuration>
-            <mainClass>hellofx/org.openjfx.App</mainClass>
-        </configuration>
-      </plugin> -->
-
       <!-- Execute Programm -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
