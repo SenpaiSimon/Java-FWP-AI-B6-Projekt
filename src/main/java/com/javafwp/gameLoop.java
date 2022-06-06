@@ -35,7 +35,6 @@ public class gameLoop extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        System.out.println("start");
         init();
         Scene scene = new Scene(appRoot);
         scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
@@ -44,13 +43,11 @@ public class gameLoop extends Application{
         primaryStage.setScene(scene);
         primaryStage.show();
 
-
         // this will run at 60 fps
         AnimationTimer timer = new AnimationTimer() {
             @Override
             // Game Loop
             public void handle(long now) {
-                // System.out.println(now);
                 System.out.println(keys.toString());
                 update();
             }
@@ -60,7 +57,7 @@ public class gameLoop extends Application{
     }
 
     public void init() {
-        Rectangle background = new Rectangle(1280, 720);
+        Rectangle background = new Rectangle(100, 200);
 
         appRoot.getChildren().addAll(background);
     }
