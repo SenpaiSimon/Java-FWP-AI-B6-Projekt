@@ -2,17 +2,19 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.javafwp</groupId>
-  <artifactId>main</artifactId>
+  <artifactId>Java-FWP-AI-B6-Projekt</artifactId>
   <version>1</version>
 
-  <!-- Required to fix "source option 5 is no longer supported .use 7 or later" -->
   <properties>
+    <!-- Required to fix "source option 5 is no longer supported .use 7 or later" -->
     <maven.compiler.source>18</maven.compiler.source>
     <maven.compiler.target>18</maven.compiler.target>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <sdk>${project.basedir}/sdk</sdk>
   </properties>
 
   <build>
-    <sourceDirectory>main</sourceDirectory>
     <resources>
         <resource>
             <directory>src</directory>
@@ -20,21 +22,26 @@
     </resources>
     <plugins>
       <plugin>
-        <!-- Build an executable JAR -->
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>3.2.0</version>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
         <configuration>
-          <forceCreation>true</forceCreation>
-          <finalName>SidescrollerGame</finalName>
-          <!-- <excludes>**/*.java</excludes> -->
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
           <archive>
             <manifest>
-              <!-- <addClasspath>true</addClasspath>
-              <classpathPrefix>main/lib/javafx</classpathPrefix> -->
-              <mainClass>main.mainStart</mainClass>
+              <mainClass>com.javafwp.mainStart</mainClass>
             </manifest>
           </archive>
+          <forceCreation>true</forceCreation>
+          <finalName>SidescrollerGame</finalName>
         </configuration>
       </plugin>
       <!-- Execute Programm -->
@@ -43,29 +50,58 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>1.2.1</version>
         <configuration>
-            <mainClass>main.mainStart</mainClass>
+            <mainClass>com.javafwp.mainStart</mainClass>
             <arguments>
                 <argument></argument>
             </arguments>
         </configuration>
       </plugin>
+
     </plugins>
   </build>
+
   <dependencies>
-    <dependency>
-      <groupId>org.jfxcore</groupId>
-      <artifactId>javafx</artifactId>
-      <version>15-ea+1</version>
-      <type>pom</type>
+      <dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-base</artifactId>
+        <version>18</version>
     </dependency>
 
-    <!-- JavaFX Dependency
-      This doesn't use the local
-    -->
     <dependency>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-controls</artifactId>
-        <version>16</version>
+        <version>18</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-graphics</artifactId>
+        <version>18</version>
+        <!-- <classifier>mac</classifier> -->
+    </dependency>
+
+    <dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-fxml</artifactId>
+        <version>18</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-web</artifactId>
+        <version>18</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-media</artifactId>
+        <version>18</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-swing</artifactId>
+        <version>18</version>
     </dependency>
   </dependencies>
 </project>
