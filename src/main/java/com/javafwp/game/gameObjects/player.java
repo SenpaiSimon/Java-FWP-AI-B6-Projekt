@@ -8,16 +8,27 @@ import javafx.scene.paint.Color;
 public class player extends object{
     boolean canJump = true;
     Point2D vel;
+    double acc;
 
-    public player(double xPos, double yPos, double length, double height, Color color) {
+    public player(double xPos, double yPos, double length, double height, Color color, double acc) {
         super(xPos, yPos, length, height, color);
         this.type = com.javafwp.game.ownTypes.type.player;
-        vel = new Point2D(0, 0);
+        vel = new Point2D(0, 1);
+        this.acc = acc;
     }
 
-    // Applys Gravity
+    // Applys Gravity and Handles Collissions
     public void update(ArrayList<plattform> plattforms, ArrayList<enemy> enemys) {
-        entity.setTranslateY(entity.getTranslateY() + 1);
+        for(plattform plattform: plattforms) {
+            if(entity.getBoundsInParent().intersects(plattform.getEntity().getBoundsInParent())) {
+                vel = new Point2D(vel.getX(), 0);
+                entity.setTranslateY(plattform.getEntity().getTranslateY() - entity.getHeight());
+                canJump = true;
+            } else {
+                vel = vel.add(0, acc);
+                entity.setTranslateY(entity.getTranslateY() + vel.getY());
+            }
+        }   
     }
 
     // moves in x Dir
@@ -25,11 +36,12 @@ public class player extends object{
         entity.setTranslateX(entity.getTranslateX() + dir.getX());
     }   
 
-    // jump yea
-    public void jump() {
+    // jumping
+    public void jump(double force) {
         if(canJump) {
-            vel.add(0, -30);
-            canJump = true;
+            entity.setTranslateY(entity.getTranslateY() - 1);
+            vel = vel.add(0, -force);
+            canJump = false;
         }
     }
 }

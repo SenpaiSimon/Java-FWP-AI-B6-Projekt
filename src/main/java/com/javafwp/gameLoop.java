@@ -3,17 +3,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.javafwp.game.gameObjects.enemy;
-import com.javafwp.game.gameObjects.object;
 import com.javafwp.game.gameObjects.plattform;
 import com.javafwp.game.gameObjects.player;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Point2D;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
@@ -22,6 +21,22 @@ public class gameLoop extends Application{
     private ArrayList <enemy> enemys = new ArrayList<enemy>();
     private ArrayList <plattform> plattforms = new ArrayList<plattform>();
     private player player;
+
+    /*
+     * Globals for fine-tuning
+     */ 
+    // Window Stuff
+    private int width = 1280;
+    private int height = 720;
+    private Color backColor = Color.BLACK;
+
+    // Player stuff
+    private Color playerColor = Color.CORAL;
+    private double gravity = 0.2;
+    private double jumpForce = 10;
+
+    // plattform stuff
+    private double scrollSpeed = 2;
 
     // debug prints -- may slow down application
     public boolean debug = true;
@@ -38,13 +53,7 @@ public class gameLoop extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        init();
-        Scene scene = new Scene(appRoot);
-        scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
-        scene.setOnKeyReleased(event -> keys.put(event.getCode(), false));
-        primaryStage.setTitle("Simple Sidescroller");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        init(primaryStage);
 
         // this will run at 60 fps
         AnimationTimer timer = new AnimationTimer() {
@@ -62,10 +71,26 @@ public class gameLoop extends Application{
         timer.start();
     }
 
-    public void init() {
-        Rectangle background = new Rectangle(1280, 720);
-        player = new player(10, 10, 10, 15, javafx.scene.paint.Color.CORAL);
-        appRoot.getChildren().addAll(background, player.getEntity());
+    public void init(Stage primaryStage) {
+        // setup scene
+        Scene scene = new Scene(appRoot);
+        scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
+        scene.setOnKeyReleased(event -> keys.put(event.getCode(), false));
+        primaryStage.setTitle("Simple Sidescroller");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+        // add the player and background
+        Rectangle background = new Rectangle(width, height);
+        background.setFill(backColor);
+        player = new player(10, 10, 10, 15, playerColor, gravity);
+
+        // debug plattform
+        plattform platt = new plattform(0, 500, 1000, 50, Color.WHITE);
+        plattforms.add(platt);
+
+        // add everything to the screen
+        appRoot.getChildren().addAll(background, player.getEntity(), platt.getEntity());
     }
 
     public void keyActions() {
@@ -76,19 +101,20 @@ public class gameLoop extends Application{
             player.move(new Point2D(-5, 0));
         }
         if(isPressedKey(KeyCode.SPACE)) {
-            player.jump();
+            player.jump(jumpForce);
         }
     }
 
     public void update() {
         keyActions();
+        player.update(plattforms, enemys);
+
         for(plattform object: plattforms) {
             object.update();
         }
         for(enemy object: enemys) {
             object.update();
         }
-        player.update(plattforms, enemys);
     }
 
     public static void main(String[] args) {

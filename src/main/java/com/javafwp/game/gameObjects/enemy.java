@@ -9,11 +9,6 @@ public class enemy extends object{
     }
 
     @Override
-    public void draw() {
-
-    }
-
-    @Override
     public void update() {
 
     }
