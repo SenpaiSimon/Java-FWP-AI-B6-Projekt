@@ -21,7 +21,7 @@ public class player extends object{
     public void update(ArrayList<plattform> plattforms, ArrayList<enemy> enemys, double scrollSpeed) {
         boolean coll = false;
         plattform collPlattform = null;
-        
+
         // check if any intersection occured
         for(plattform plattform: plattforms) {
             if(entity.getBoundsInParent().intersects(plattform.getEntity().getBoundsInParent())) {

@@ -60,7 +60,7 @@ public class gameLoop extends Application{
     Text shopText;
 
     // debug prints -- may slow down application
-    public static boolean debug = true;
+    public static boolean debug = false;
 
     private HashMap<KeyCode, Boolean> keys = new HashMap<KeyCode, Boolean>();
 
