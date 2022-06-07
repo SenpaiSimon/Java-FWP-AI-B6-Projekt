@@ -5,8 +5,10 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import com.javafwp.game.gameObjects.enemy;
+import com.javafwp.game.gameObjects.heatbar;
 import com.javafwp.game.gameObjects.plattform;
 import com.javafwp.game.gameObjects.player;
+import com.javafwp.game.gameObjects.projectile;
 import com.javafwp.game.ownTypes.gameState;
 
 import javafx.animation.AnimationTimer;
@@ -21,14 +23,10 @@ import javafx.stage.Stage;
 
 public class gameLoop extends Application{
     AnimationTimer timer;
-
     private gameState gameState;
-    private ArrayList <enemy> enemys = new ArrayList<enemy>();
-    private ArrayList <plattform> plattforms = new ArrayList<plattform>();
-    private player player;
     Stage primaryStage;
     Text scoreText;
-    
+
     private int score = 0;
 
     /*
@@ -39,12 +37,14 @@ public class gameLoop extends Application{
     private int height = 720;
 
     // Player stuff
+    private player player;
     private Color playerColor = Color.CORAL;
     private double gravity = 0.4;
     private double jumpForce = 15;
     private double moveSpeed = 5;
 
     // plattform stuff
+    private ArrayList <plattform> plattforms = new ArrayList<plattform>();
     private double scrollSpeed = 4;
     private int distanceMinX = 200;
     private int distanceMaxX = 350;
@@ -53,11 +53,30 @@ public class gameLoop extends Application{
     private int plattformWidth = 100;
     private Color plattformColor = Color.WHITE;
 
+    // missle stuff
+    private ArrayList <projectile> projectiles = new ArrayList<projectile>();
+    private double projectileSpeed = 10;
+    private double missleLength = 10;
+    private double missleHeight = 2;
+    private Color missleColor = Color.RED;
+   
+    // heat stuff
+    private int heatPerShot = 50;
+    private int maxHeat = 300;
+    private int coolSpeed = 2;
+    private heatbar heatbar;
+    private double heatX = 10;
+    private double heatY = 10;
+    private double heatHeigth = 10;
+
+    // enemy stuff
+    private ArrayList <enemy> enemys = new ArrayList<enemy>();
+
     // main menu stuff
-    Text title;
+    private Text title;
 
     // shop stuff
-    Text shopText;
+    private Text shopText;
 
     // debug prints -- may slow down application
     public static boolean debug = false;
@@ -87,7 +106,6 @@ public class gameLoop extends Application{
                 update();
             }
         };
-
         timer.start();
     }
 
@@ -109,23 +127,33 @@ public class gameLoop extends Application{
         scene.getWindow().setWidth(width);
         primaryStage.show();
 
-        // Setup playing state
+        initPlayState();
+        initMenuState();
+        initShopState();
+        initHeatbar();
+ 
+        // set initial state
+        switchState(com.javafwp.game.ownTypes.gameState.mainMenu);
+    }
 
-        // add the player
-        player = new player((width/4) * 3 + 10, height/2 - 50, 10, 15, playerColor, gravity);
+    private void initHeatbar() {
+        heatbar = new heatbar(heatX, heatY, maxHeat, heatHeigth, Color.WHITE, Color.ORANGE);
+        scoreRoot.getChildren().addAll(heatbar.getEntity(), heatbar.getHeatbar());
+    }
 
-        // add the score text
-        scoreText = new Text();
-        scoreText.setTranslateX(width/32);
-        scoreText.setTranslateY(height/30);
-        scoreText.setStyle("-fx-font: 24 arial;");
-        scoreText.setFill(Color.WHITE);
+    private void initShopState() {
+       // setup shop state
+       shopText = new Text();
+       shopText.setText("this is shop");
+       shopText.setTranslateX(width/2);
+       shopText.setTranslateY(height/4);
+       shopText.setStyle("-fx-font: 50 arial;");
+       shopText.setFill(Color.GOLD);
 
-        // add game parts to its panes
-        scoreRoot.getChildren().add(scoreText);
-        gameRoot.getChildren().add(player.getEntity());
+       shopRoot.getChildren().addAll(shopText);
+    }
 
-
+    private void initMenuState() {
         // setup menu state
         title = new Text();
         title.setText("JAVA FWP Sidescroller");
@@ -135,19 +163,22 @@ public class gameLoop extends Application{
         title.setFill(Color.GOLD);
 
         menuRoot.getChildren().addAll(title);
+    }
 
-        // setup shop state
-        shopText = new Text();
-        shopText.setText("this is shop");
-        shopText.setTranslateX(width/2);
-        shopText.setTranslateY(height/4);
-        shopText.setStyle("-fx-font: 50 arial;");
-        shopText.setFill(Color.GOLD);
+    private void initPlayState() {
+        // add the player
+        player = new player((width/4) * 3 + 10, height/2 - 50, 10, 15, playerColor, gravity);
 
-        shopRoot.getChildren().addAll(shopText);
+        // add the score text
+        scoreText = new Text();
+        scoreText.setTranslateX(heatX);
+        scoreText.setTranslateY(heatY + heatHeigth + 30);
+        scoreText.setStyle("-fx-font: 24 arial;");
+        scoreText.setFill(Color.WHITE);
 
-        // set initial state
-        switchState(com.javafwp.game.ownTypes.gameState.mainMenu);
+        // add game parts to its panes
+        scoreRoot.getChildren().add(scoreText);
+        gameRoot.getChildren().add(player.getEntity());
     }
 
     private void switchState(gameState newState) {
@@ -163,7 +194,6 @@ public class gameLoop extends Application{
                     appRoot.getChildren().removeAll(shopRoot);
                 } 
                 appRoot.getChildren().add(menuRoot);
-                System.out.println("main menu");
             break;
 
             case playing:
@@ -172,7 +202,6 @@ public class gameLoop extends Application{
                 }
                 appRoot.getChildren().addAll(scoreRoot, gameRoot);
                 resetGame(); // reset player on scene change
-                System.out.println("playing");
             break;
 
             case shop:
@@ -180,7 +209,6 @@ public class gameLoop extends Application{
                     appRoot.getChildren().removeAll(menuRoot);
                 }
                 appRoot.getChildren().addAll(shopRoot);
-                System.out.println("shop");
             break;
             
             case exit:
@@ -222,6 +250,22 @@ public class gameLoop extends Application{
         }
     }
 
+    private void addMissle() {
+        //sproot me baby
+        projectile newProj = new projectile(player.getEntity().getTranslateX() + player.getWidth(), player.getEntity().getTranslateY(), missleLength, missleHeight, missleColor);
+        projectiles.add(newProj);
+        gameRoot.getChildren().addAll(newProj.getEntity());
+    }
+
+    private void removeOffscreenMissle() {
+        if(projectiles.size() != 0) {
+            if(projectiles.get(0).getEntity().getTranslateX() > width + 200) {
+                gameRoot.getChildren().remove(projectiles.get(0).getEntity());
+                projectiles.remove(0);
+            }
+        }
+    }
+
     private int randomBetweenBounds(int min, int max) {
         Random ran = new Random();
         return min + ran.nextInt(max - min);
@@ -243,6 +287,7 @@ public class gameLoop extends Application{
             gameRoot.getChildren().remove(platt.getEntity());
         }
         plattforms.clear();
+        heatbar.reset();
     }
 
     private void updateTexts() {
@@ -251,13 +296,26 @@ public class gameLoop extends Application{
 
     private void keyActions() {
         if(isPressedKey(KeyCode.D)) {
-            player.move(new Point2D(moveSpeed, 0)); 
+            if(gameState == com.javafwp.game.ownTypes.gameState.playing) {
+                player.move(new Point2D(moveSpeed, 0)); 
+            }
         }
         if(isPressedKey(KeyCode.A)) {
-            player.move(new Point2D(-moveSpeed, 0));
+            if(gameState == com.javafwp.game.ownTypes.gameState.playing) {
+                player.move(new Point2D(-moveSpeed, 0));
+            }
         }
         if(isPressedKey(KeyCode.SPACE)) {
-            player.jump(jumpForce);
+            if(gameState == com.javafwp.game.ownTypes.gameState.playing) {
+                player.jump(jumpForce);
+            }
+        }
+        if(isPressedKey(KeyCode.W)) {
+            if(gameState == com.javafwp.game.ownTypes.gameState.playing) {
+                if(heatbar.addHeat(heatPerShot)) {
+                    addMissle();
+                }
+            }
         }
         if(isPressedKey(KeyCode.ESCAPE)) {
             if(gameState == com.javafwp.game.ownTypes.gameState.playing) {
@@ -308,12 +366,19 @@ public class gameLoop extends Application{
             addPlattform();
             removeOffscreenPlattform();
 
-            // text stuff
-            updateTexts();
-
             for(plattform object: plattforms) {
                 object.update(scrollSpeed);
             }
+
+            // text stuff
+            updateTexts();
+
+            // missle stuff
+            for(projectile object: projectiles) {
+                object.update(projectileSpeed);
+            }
+            removeOffscreenMissle();
+            heatbar.update(coolSpeed);
         }
     }
 

@@ -4,7 +4,9 @@ public class ownTypes {
     public enum type {
         enemy,
         plattform,
-        player
+        player,
+        projectile,
+        heatbar
     };
 
     public enum gameState {
