@@ -73,6 +73,15 @@ public class gameLoop extends Application{
 
     // enemy stuff
     private ArrayList <enemy> enemys = new ArrayList<enemy>();
+    private int maxEnemyCount = 6;
+    private int ticksBetweenSpawns = 200;
+    private int currentTick = 0;
+    private int enemyLength = 20;
+    private int enemyHeight = 20;
+    private int enemySpeed = 4;
+    private int  minEnemyDistanceX = width + 100;
+    private int  minEnemyDistanceY = height + 100;
+    private Color enemyColor = Color.DARKVIOLET;
 
     // main menu stuff
     private Text title;
@@ -283,6 +292,65 @@ public class gameLoop extends Application{
         }
     }
 
+    private void addEnemy() {
+        if(currentTick >= ticksBetweenSpawns && enemys.size() <= maxEnemyCount) {
+            int xPos = 0;
+            int yPos = 0;
+            Random ran = new Random();
+            switch(1 + ran.nextInt(4)) {
+                case 0: //left edge
+                    xPos = (int)(player.getEntity().getTranslateX() - minEnemyDistanceX);
+                    yPos = randomBetweenBounds(0, height);
+                break;
+
+                case 1: //right edge
+                    xPos = (int)(player.getEntity().getTranslateX() + minEnemyDistanceX);
+                    yPos = randomBetweenBounds(0, height);
+                break;
+
+                case 2: //top edge
+                    xPos = randomBetweenBounds(0, width);
+                    yPos = (int)(player.getEntity().getTranslateY() - minEnemyDistanceY);
+                break;
+
+                case 3: //bottom edge
+                    xPos = randomBetweenBounds(0, width);
+                    yPos = (int)(player.getEntity().getTranslateY() + minEnemyDistanceY);
+                break;
+            }
+            enemy enem = new enemy(xPos, yPos, enemyLength, enemyHeight, enemyColor);
+            enemys.add(enem);
+            gameRoot.getChildren().add(enem.getEntity());
+            currentTick = 0;
+        }
+        System.out.println(currentTick);
+        currentTick++;
+    }
+
+    private void enemyPlayerColl() {
+        for(enemy enem: enemys) {
+            if(player.getEntity().getBoundsInParent().intersects(enem.getEntity().getBoundsInParent())) {
+                resetGame();
+                break;
+            }
+        }
+    }
+
+    private void enemyProjColl() {
+        loop:
+        for(enemy enem: enemys) {
+            for(projectile proj: projectiles) {
+                if(enem.getEntity().getBoundsInParent().intersects(proj.getEntity().getBoundsInParent())) {
+                    gameRoot.getChildren().removeAll(enem.getEntity(), proj.getEntity());
+                    projectiles.remove(proj);
+                    enemys.remove(enem);
+                    score++;
+                    break loop;
+                }
+            }
+        }
+    }
+
     private int randomBetweenBounds(int min, int max) {
         Random ran = new Random();
         return min + ran.nextInt(max - min);
@@ -303,6 +371,15 @@ public class gameLoop extends Application{
         for(plattform platt: plattforms) {
             gameRoot.getChildren().remove(platt.getEntity());
         }
+        for(projectile proj: projectiles) {
+            gameRoot.getChildren().remove(proj.getEntity());
+        }
+        for(enemy enem: enemys) {
+            gameRoot.getChildren().remove(enem.getEntity());
+        }
+
+        projectiles.clear();
+        enemys.clear();
         plattforms.clear();
         heatbar.reset();
     }
@@ -376,7 +453,7 @@ public class gameLoop extends Application{
 
         if(gameState == com.javafwp.game.ownTypes.gameState.playing) {
              // player stuff
-            player.update(plattforms, enemys, scrollSpeed);
+            player.update(plattforms, scrollSpeed);
             playerDeath();
 
             // plattform stuff
@@ -396,6 +473,14 @@ public class gameLoop extends Application{
             }
             removeOffscreenMissle();
             heatbar.update(coolSpeed);
+
+            // enemy stuff
+            addEnemy();
+            for(enemy object: enemys) {
+                object.update(new Point2D(player.getEntity().getTranslateX(), player.getEntity().getTranslateY()), enemySpeed);
+            }
+            enemyPlayerColl();
+            enemyProjColl();
         }
     }
 

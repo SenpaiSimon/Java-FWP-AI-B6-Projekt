@@ -18,7 +18,7 @@ public class player extends object{
     }
 
     // Applys Gravity and Handles Collissions
-    public void update(ArrayList<plattform> plattforms, ArrayList<enemy> enemys, double scrollSpeed) {
+    public void update(ArrayList<plattform> plattforms, double scrollSpeed) {
         boolean coll = false;
         plattform collPlattform = null;
 
