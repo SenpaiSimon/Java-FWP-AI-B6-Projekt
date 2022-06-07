@@ -14,16 +14,12 @@ import com.javafwp.sprites.imageLoader;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.event.Event;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -44,6 +40,8 @@ public class gameLoop extends Application{
     // Window Stuff
     private int width = 1280;
     private int height = 720;
+    private Rectangle menuBackground;
+    private Rectangle shopBackground;
     private Rectangle playingBackground;
 
     // Player stuff
@@ -171,18 +169,30 @@ public class gameLoop extends Application{
     }
 
     private void initShopState() {
-       // setup shop state
-       shopText = new Text();
-       shopText.setText("this is shop");
-       shopText.setTranslateX(width/2);
-       shopText.setTranslateY(height/4);
-       shopText.setStyle("-fx-font: 50 arial;");
-       shopText.setFill(Color.GOLD);
+        // background
+        shopBackground = new Rectangle(width, height);
+        shopBackground.setTranslateX(0);
+        shopBackground.setTranslateY(0);
+        shopBackground.setFill(imageLoader.loadImage("shopBackground.jpg"));
 
-       shopRoot.getChildren().addAll(shopText);
+        // setup shop state
+        shopText = new Text();
+        shopText.setText("this is shop");
+        shopText.setTranslateX(width/2);
+        shopText.setTranslateY(height/4);
+        shopText.setStyle("-fx-font: 50 arial;");
+        shopText.setFill(Color.GOLD);
+
+        shopRoot.getChildren().addAll(shopBackground, shopText);
     }
 
     private void initMenuState() {
+        // background Image
+        menuBackground = new Rectangle(width, height);
+        menuBackground.setTranslateX(0);
+        menuBackground.setTranslateY(0);
+        menuBackground.setFill(imageLoader.loadImage("menuBackground.jpg"));
+    
         // setup menu state
         title = new Text();
         title.setText("JAVA FWP Sidescroller");
@@ -191,7 +201,7 @@ public class gameLoop extends Application{
         title.setStyle("-fx-font: 50 arial;");
         title.setFill(Color.GOLD);
 
-        //button = new Button("Press me Hard Daddy");
+        //button
         displayHelpMesage = new Rectangle(200, 50);
         displayHelpMesage.setTranslateX(60);
         displayHelpMesage.setTranslateY(60);
@@ -200,19 +210,15 @@ public class gameLoop extends Application{
             displayHelpMesagePressed(event);
         });
 
-
-
-
-        menuRoot.getChildren().addAll(title, displayHelpMesage);
+        menuRoot.getChildren().addAll(menuBackground, title, displayHelpMesage);
     }
 
     private void initPlayState() {
-        // add the background
+        // background
         playingBackground = new Rectangle(width, height);
         playingBackground.setTranslateX(0);
         playingBackground.setTranslateY(0);
-        Image playingBackPic = imageLoader.loadImage("background.jpg");
-        playingBackground.setFill(new ImagePattern(playingBackPic));
+        playingBackground.setFill(imageLoader.loadImage("playingBackground.jpg"));
 
         // add the player
         player = new player((width/4) * 3 + 10, height/2 - 50, 10, 15, playerColor, gravity);
@@ -308,7 +314,11 @@ public class gameLoop extends Application{
 
     private void addMissle() {
         //shoot me baby
-        Point2D dir = new Point2D(-(player.getEntity().getTranslateX() - mousePos.getX()), -(player.getEntity().getTranslateY() - mousePos.getY()));
+        Point2D dir = new Point2D(1, 0);;
+        if(mousePos != null) {
+            dir = new Point2D(-(player.getEntity().getTranslateX() - mousePos.getX()), -(player.getEntity().getTranslateY() - mousePos.getY()));
+        }
+
         projectile newProj = new projectile(player.getEntity().getTranslateX() + player.getWidth(), player.getEntity().getTranslateY(), missleLength, missleHeight, missleColor, dir);
         projectiles.add(newProj);
         gameRoot.getChildren().addAll(newProj.getEntity());
