@@ -40,6 +40,9 @@ public class gameLoop extends Application{
     private int distanceMinX = 200;
     private int distanceMaxX = 350;
     private int distanceY = 150;
+    private int plattformHeight = 10;
+    private int plattformWidth = 100;
+    private Color plattformColor = Color.WHITE;
 
     // debug prints -- may slow down application
     public boolean debug = false;
@@ -49,10 +52,6 @@ public class gameLoop extends Application{
     private Pane appRoot = new Pane();
     private Pane gameRoot = new Pane();
     private Pane uiRoot = new Pane();
-
-    private boolean isPressedKey(KeyCode key) {
-        return keys.getOrDefault(key, false);
-    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -75,6 +74,10 @@ public class gameLoop extends Application{
         timer.start();
     }
 
+    private boolean isPressedKey(KeyCode key) {
+        return keys.getOrDefault(key, false);
+    }
+
     public void init(Stage primaryStage) {
         // setup the main scene
         Scene scene = new Scene(appRoot);
@@ -90,14 +93,10 @@ public class gameLoop extends Application{
         primaryStage.show();
 
         // add the player
-        player = new player(10, 10, 10, 15, playerColor, gravity);
-
-        // debug plattform
-        plattform platt = new plattform(0, 500, 1000, 50, Color.WHITE);
-        plattforms.add(platt);
+        player = new player((width/4) * 3 + 10, height/2 - 50, 10, 15, playerColor, gravity);
 
         // add everything to the screen
-        gameRoot.getChildren().addAll(player.getEntity(), platt.getEntity());
+        gameRoot.getChildren().add(player.getEntity());
         appRoot.getChildren().addAll(gameRoot, uiRoot);
     }
 
@@ -105,10 +104,14 @@ public class gameLoop extends Application{
         if(plattforms.size() != 0) {
             plattform lastPlattform = plattforms.get(plattforms.size() - 1);
             if(lastPlattform.getEntity().getTranslateX() + lastPlattform.getWidth() < width) { // plattform is fully in window
-                plattform newPlatt = new plattform(width + randomBetweenBounds(distanceMinX, distanceMaxX), height/2 + randomBetweenBounds(-distanceY, distanceY), 100, 10, Color.WHITE);
+                plattform newPlatt = new plattform(width + randomBetweenBounds(distanceMinX, distanceMaxX), height/2 + randomBetweenBounds(-distanceY, distanceY), plattformWidth, plattformHeight, plattformColor);
                 plattforms.add(newPlatt);
                 gameRoot.getChildren().add(newPlatt.getEntity());
             }
+        } else {
+            plattform firstPlatt = new plattform(width/4 * 3, height/2, plattformWidth, plattformHeight, Color.DEEPPINK);
+            plattforms.add(firstPlatt);
+            gameRoot.getChildren().add(firstPlatt.getEntity());
         }
     }
 
@@ -129,7 +132,11 @@ public class gameLoop extends Application{
     public void playerDeath() {
         if(player.getEntity().getTranslateY() + player.getHeight() > height) {
             // what happens player when death
-            player.death();
+            player.death((width/4) * 3 + 10, height/2 - 50);
+            for(plattform platt: plattforms) {
+                gameRoot.getChildren().remove(platt.getEntity());
+            }
+            plattforms.clear();
         }
     }
 

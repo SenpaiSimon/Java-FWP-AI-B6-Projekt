@@ -59,8 +59,9 @@ public class player extends object{
     }
 
     // dying
-    public void death() {
-        entity.setTranslateY(10);
+    public void death(double spawnX, double spawnY) { 
+        entity.setTranslateY(spawnY);
+        entity.setTranslateX(spawnX);
         vel = new Point2D(0, 0);
     }
 }
