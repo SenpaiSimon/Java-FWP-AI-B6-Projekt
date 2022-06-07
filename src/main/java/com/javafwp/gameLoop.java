@@ -270,7 +270,7 @@ public class gameLoop extends Application{
         if(plattforms.size() != 0) {
             plattform lastPlattform = plattforms.get(plattforms.size() - 1);
             if(lastPlattform.getEntity().getTranslateX() + lastPlattform.getWidth() < width) { // plattform is fully in window
-                plattform newPlatt = new plattform(width + randomBetweenBounds(distanceMinX, distanceMaxX), height/2 + randomBetweenBounds(-distanceY, distanceY), plattformWidth, plattformHeight, plattformColor);
+                plattform newPlatt = new plattform(width + randomBetweenBounds(distanceMinX, distanceMaxX), height/3 * 2 + randomBetweenBounds(-distanceY, distanceY), plattformWidth, plattformHeight, plattformColor);
                 plattforms.add(newPlatt);
                 gameRoot.getChildren().add(newPlatt.getEntity());
                 score++;
@@ -343,7 +343,6 @@ public class gameLoop extends Application{
             gameRoot.getChildren().add(enem.getEntity());
             currentTick = 0;
         }
-        System.out.println(currentTick);
         currentTick++;
     }
 
