@@ -13,12 +13,15 @@ import com.javafwp.game.ownTypes.gameState;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.Event;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -76,6 +79,7 @@ public class gameLoop extends Application{
 
     // main menu stuff
     private Text title;
+    private Rectangle displayHelpMesage;
 
     // shop stuff
     private Text shopText;
@@ -170,7 +174,19 @@ public class gameLoop extends Application{
         title.setStyle("-fx-font: 50 arial;");
         title.setFill(Color.GOLD);
 
-        menuRoot.getChildren().addAll(title);
+        //button = new Button("Press me Hard Daddy");
+        displayHelpMesage = new Rectangle(200, 50);
+        displayHelpMesage.setTranslateX(60);
+        displayHelpMesage.setTranslateY(60);
+        displayHelpMesage.setFill(Color.RED);
+        displayHelpMesage.setOnMouseClicked(event -> {
+            displayHelpMesagePressed(event);
+        });
+
+
+
+
+        menuRoot.getChildren().addAll(title, displayHelpMesage);
     }
 
     private void initPlayState() {
@@ -191,6 +207,10 @@ public class gameLoop extends Application{
 
     private void updateMousePosition(MouseEvent mousePointer) {
         mousePos = new Point2D(mousePointer.getX(), mousePointer.getY());
+    }
+
+    private void displayHelpMesagePressed(MouseEvent mousePointer) {
+        System.out.println();
     }
 
     private void switchState(gameState newState) {
