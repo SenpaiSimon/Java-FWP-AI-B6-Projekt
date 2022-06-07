@@ -10,6 +10,7 @@ import com.javafwp.game.gameObjects.plattform;
 import com.javafwp.game.gameObjects.player;
 import com.javafwp.game.gameObjects.projectile;
 import com.javafwp.game.ownTypes.gameState;
+import com.javafwp.sprites.imageLoader;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -17,10 +18,12 @@ import javafx.event.Event;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -31,6 +34,7 @@ public class gameLoop extends Application{
     Stage primaryStage;
     Text scoreText;
     Point2D mousePos;
+    imageLoader imageLoader;
 
     private int score = 0;
 
@@ -40,6 +44,7 @@ public class gameLoop extends Application{
     // Window Stuff
     private int width = 1280;
     private int height = 720;
+    private Rectangle playingBackground;
 
     // Player stuff
     private player player;
@@ -129,6 +134,9 @@ public class gameLoop extends Application{
     }
 
     private void init(Stage primaryStage) {
+        // loading images made easy
+        imageLoader = new imageLoader();
+        
         // setup the main scene
         Scene scene = new Scene(appRoot);
         scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
@@ -199,6 +207,13 @@ public class gameLoop extends Application{
     }
 
     private void initPlayState() {
+        // add the background
+        playingBackground = new Rectangle(width, height);
+        playingBackground.setTranslateX(0);
+        playingBackground.setTranslateY(0);
+        Image playingBackPic = imageLoader.loadImage("background.jpg");
+        playingBackground.setFill(new ImagePattern(playingBackPic));
+
         // add the player
         player = new player((width/4) * 3 + 10, height/2 - 50, 10, 15, playerColor, gravity);
 
@@ -211,7 +226,7 @@ public class gameLoop extends Application{
 
         // add game parts to its panes
         scoreRoot.getChildren().add(scoreText);
-        gameRoot.getChildren().add(player.getEntity());
+        gameRoot.getChildren().addAll(playingBackground, player.getEntity());
     }
 
     private void updateMousePosition(MouseEvent mousePointer) {
