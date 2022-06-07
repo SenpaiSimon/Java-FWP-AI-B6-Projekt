@@ -262,7 +262,7 @@ public class gameLoop extends Application{
                 if(gameState == com.javafwp.game.ownTypes.gameState.mainMenu) {
                     appRoot.getChildren().removeAll(menuRoot);
                 }
-                appRoot.getChildren().addAll(scoreRoot, gameRoot);
+                appRoot.getChildren().addAll(gameRoot, scoreRoot);
                 resetGame(); // reset player on scene change
             break;
 
