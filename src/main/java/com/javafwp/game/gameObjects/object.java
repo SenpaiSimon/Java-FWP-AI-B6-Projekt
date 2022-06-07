@@ -31,4 +31,8 @@ public class object{
     public double getHeight () {
         return entity.getHeight();
     }
+
+    public void setFill(Color color) {
+        entity.setFill(color);
+    }
 }

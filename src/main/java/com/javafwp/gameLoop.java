@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
@@ -22,6 +23,8 @@ public class gameLoop extends Application{
     private ArrayList <plattform> plattforms = new ArrayList<plattform>();
     private player player;
     Stage primaryStage;
+    private int score = 0;
+    Text scoreText;
 
     /*
      * Globals for fine-tuning
@@ -34,6 +37,7 @@ public class gameLoop extends Application{
     private Color playerColor = Color.CORAL;
     private double gravity = 0.4;
     private double jumpForce = 15;
+    private double moveSpeed = 5;
 
     // plattform stuff
     private double scrollSpeed = 4;
@@ -78,7 +82,7 @@ public class gameLoop extends Application{
         return keys.getOrDefault(key, false);
     }
 
-    public void init(Stage primaryStage) {
+    private void init(Stage primaryStage) {
         // setup the main scene
         Scene scene = new Scene(appRoot);
         scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
@@ -95,18 +99,27 @@ public class gameLoop extends Application{
         // add the player
         player = new player((width/4) * 3 + 10, height/2 - 50, 10, 15, playerColor, gravity);
 
+        // add the score text
+        scoreText = new Text();
+        scoreText.setTranslateX(width/32);
+        scoreText.setTranslateY(height/30);
+        scoreText.setStyle("-fx-font: 24 arial;");
+        scoreText.setFill(Color.WHITE);
+
         // add everything to the screen
+        uiRoot.getChildren().add(scoreText);
         gameRoot.getChildren().add(player.getEntity());
         appRoot.getChildren().addAll(gameRoot, uiRoot);
     }
 
-    public void addPlattform() {
+    private void addPlattform() {
         if(plattforms.size() != 0) {
             plattform lastPlattform = plattforms.get(plattforms.size() - 1);
             if(lastPlattform.getEntity().getTranslateX() + lastPlattform.getWidth() < width) { // plattform is fully in window
                 plattform newPlatt = new plattform(width + randomBetweenBounds(distanceMinX, distanceMaxX), height/2 + randomBetweenBounds(-distanceY, distanceY), plattformWidth, plattformHeight, plattformColor);
                 plattforms.add(newPlatt);
                 gameRoot.getChildren().add(newPlatt.getEntity());
+                score++;
             }
         } else {
             plattform firstPlatt = new plattform(width/4 * 3, height/2, plattformWidth, plattformHeight, Color.DEEPPINK);
@@ -115,7 +128,7 @@ public class gameLoop extends Application{
         }
     }
 
-    public void removeOffscreenPlattform() {
+    private void removeOffscreenPlattform() {
         if(plattforms.size() != 0) {
             if(plattforms.get(0).getEntity().getTranslateX() + plattforms.get(0).getWidth() + 100 < 0) {
                 gameRoot.getChildren().remove(plattforms.get(0).getEntity());
@@ -124,15 +137,18 @@ public class gameLoop extends Application{
         }
     }
 
-    public int randomBetweenBounds(int min, int max) {
+    private int randomBetweenBounds(int min, int max) {
         Random ran = new Random();
         return min + ran.nextInt(max - min);
     }
 
-    public void playerDeath() {
+    private void playerDeath() {
         if(player.getEntity().getTranslateY() + player.getHeight() > height) {
             // what happens player when death
             player.death((width/4) * 3 + 10, height/2 - 50);
+            score = 0;
+
+            // remove them from the scene and clear the list
             for(plattform platt: plattforms) {
                 gameRoot.getChildren().remove(platt.getEntity());
             }
@@ -140,12 +156,16 @@ public class gameLoop extends Application{
         }
     }
 
-    public void keyActions() {
+    private void updateTexts() {
+        scoreText.setText("Score: " + score);
+    }
+
+    private void keyActions() {
         if(isPressedKey(KeyCode.D)) {
-            player.move(new Point2D(5, 0)); 
+            player.move(new Point2D(moveSpeed, 0)); 
         }
         if(isPressedKey(KeyCode.A)) {
-            player.move(new Point2D(-5, 0));
+            player.move(new Point2D(-moveSpeed, 0));
         }
         if(isPressedKey(KeyCode.SPACE)) {
             player.jump(jumpForce);
@@ -155,16 +175,19 @@ public class gameLoop extends Application{
         }
     }
 
-    public void update() {
+    private void update() {
         keyActions();
 
-        //player stuff
+        // player stuff
         player.update(plattforms, enemys, scrollSpeed);
         playerDeath();
 
-        //plattform stuff
+        // plattform stuff
         addPlattform();
         removeOffscreenPlattform();
+
+        // text stuff
+        updateTexts();
 
         for(plattform object: plattforms) {
             object.update(scrollSpeed);
