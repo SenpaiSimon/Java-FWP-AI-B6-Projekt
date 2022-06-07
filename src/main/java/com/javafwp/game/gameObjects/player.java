@@ -6,7 +6,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 
 public class player extends object{
-    boolean canJump = true;
+    boolean canJump = false;
     Point2D vel;
     double acc;
 
@@ -18,17 +18,30 @@ public class player extends object{
     }
 
     // Applys Gravity and Handles Collissions
-    public void update(ArrayList<plattform> plattforms, ArrayList<enemy> enemys) {
+    public void update(ArrayList<plattform> plattforms, ArrayList<enemy> enemys, double scrollSpeed) {
+        boolean coll = false;
+        plattform collPlattform = null;
+
         for(plattform plattform: plattforms) {
             if(entity.getBoundsInParent().intersects(plattform.getEntity().getBoundsInParent())) {
-                vel = new Point2D(vel.getX(), 0);
-                entity.setTranslateY(plattform.getEntity().getTranslateY() - entity.getHeight());
-                canJump = true;
-            } else {
-                vel = vel.add(0, acc);
-                entity.setTranslateY(entity.getTranslateY() + vel.getY());
+                collPlattform = plattform;
+                coll = true;
+                break;
             }
-        }   
+        } 
+        
+        if(coll) {
+            vel = new Point2D(vel.getX(), 0);
+            entity.setTranslateY(collPlattform.getEntity().getTranslateY() - entity.getHeight());
+            canJump = true;
+
+            // move player alongside plattform
+            move(new Point2D(-scrollSpeed, 0));
+        } else {
+            // accel downwards
+            vel = vel.add(0, acc);
+            entity.setTranslateY(entity.getTranslateY() + vel.getY());
+        }
     }
 
     // moves in x Dir
@@ -43,5 +56,11 @@ public class player extends object{
             vel = vel.add(0, -force);
             canJump = false;
         }
+    }
+
+    // dying
+    public void death() {
+        entity.setTranslateY(10);
+        vel = new Point2D(0, 0);
     }
 }

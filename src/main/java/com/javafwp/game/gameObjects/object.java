@@ -24,5 +24,11 @@ public class object{
         return entity;
     }
 
-    public void update() {};
+    public double getWidth () {
+        return entity.getWidth();
+    }
+
+    public double getHeight () {
+        return entity.getHeight();
+    }
 }

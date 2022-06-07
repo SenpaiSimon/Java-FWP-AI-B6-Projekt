@@ -1,6 +1,7 @@
 package com.javafwp;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 import com.javafwp.game.gameObjects.enemy;
 import com.javafwp.game.gameObjects.plattform;
@@ -13,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 
@@ -21,6 +21,7 @@ public class gameLoop extends Application{
     private ArrayList <enemy> enemys = new ArrayList<enemy>();
     private ArrayList <plattform> plattforms = new ArrayList<plattform>();
     private player player;
+    Stage primaryStage;
 
     /*
      * Globals for fine-tuning
@@ -28,18 +29,20 @@ public class gameLoop extends Application{
     // Window Stuff
     private int width = 1280;
     private int height = 720;
-    private Color backColor = Color.BLACK;
 
     // Player stuff
     private Color playerColor = Color.CORAL;
-    private double gravity = 0.2;
-    private double jumpForce = 10;
+    private double gravity = 0.4;
+    private double jumpForce = 15;
 
     // plattform stuff
-    private double scrollSpeed = 2;
+    private double scrollSpeed = 4;
+    private int distanceMinX = 200;
+    private int distanceMaxX = 350;
+    private int distanceY = 150;
 
     // debug prints -- may slow down application
-    public boolean debug = true;
+    public boolean debug = false;
 
     private HashMap<KeyCode, Boolean> keys = new HashMap<KeyCode, Boolean>();
 
@@ -53,6 +56,7 @@ public class gameLoop extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        this.primaryStage = primaryStage;
         init(primaryStage);
 
         // this will run at 60 fps
@@ -72,17 +76,20 @@ public class gameLoop extends Application{
     }
 
     public void init(Stage primaryStage) {
-        // setup scene
+        // setup the main scene
         Scene scene = new Scene(appRoot);
         scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
         scene.setOnKeyReleased(event -> keys.put(event.getCode(), false));
+        scene.setFill(Color.BLACK);
+
+        // setup the primary stage order has to be like this
         primaryStage.setTitle("Simple Sidescroller");
         primaryStage.setScene(scene);
+        scene.getWindow().setHeight(height);
+        scene.getWindow().setWidth(width);
         primaryStage.show();
 
-        // add the player and background
-        Rectangle background = new Rectangle(width, height);
-        background.setFill(backColor);
+        // add the player
         player = new player(10, 10, 10, 15, playerColor, gravity);
 
         // debug plattform
@@ -90,7 +97,40 @@ public class gameLoop extends Application{
         plattforms.add(platt);
 
         // add everything to the screen
-        appRoot.getChildren().addAll(background, player.getEntity(), platt.getEntity());
+        gameRoot.getChildren().addAll(player.getEntity(), platt.getEntity());
+        appRoot.getChildren().addAll(gameRoot, uiRoot);
+    }
+
+    public void addPlattform() {
+        if(plattforms.size() != 0) {
+            plattform lastPlattform = plattforms.get(plattforms.size() - 1);
+            if(lastPlattform.getEntity().getTranslateX() + lastPlattform.getWidth() < width) { // plattform is fully in window
+                plattform newPlatt = new plattform(width + randomBetweenBounds(distanceMinX, distanceMaxX), height/2 + randomBetweenBounds(-distanceY, distanceY), 100, 10, Color.WHITE);
+                plattforms.add(newPlatt);
+                gameRoot.getChildren().add(newPlatt.getEntity());
+            }
+        }
+    }
+
+    public void removeOffscreenPlattform() {
+        if(plattforms.size() != 0) {
+            if(plattforms.get(0).getEntity().getTranslateX() + plattforms.get(0).getWidth() + 100 < 0) {
+                gameRoot.getChildren().remove(plattforms.get(0).getEntity());
+                plattforms.remove(0);
+            }
+        }
+    }
+
+    public int randomBetweenBounds(int min, int max) {
+        Random ran = new Random();
+        return min + ran.nextInt(max - min);
+    }
+
+    public void playerDeath() {
+        if(player.getEntity().getTranslateY() + player.getHeight() > height) {
+            // what happens player when death
+            player.death();
+        }
     }
 
     public void keyActions() {
@@ -103,17 +143,27 @@ public class gameLoop extends Application{
         if(isPressedKey(KeyCode.SPACE)) {
             player.jump(jumpForce);
         }
+        if(isPressedKey(KeyCode.ESCAPE)) {
+            primaryStage.close();
+        }
     }
 
     public void update() {
         keyActions();
-        player.update(plattforms, enemys);
+
+        //player stuff
+        player.update(plattforms, enemys, scrollSpeed);
+        playerDeath();
+
+        //plattform stuff
+        addPlattform();
+        removeOffscreenPlattform();
 
         for(plattform object: plattforms) {
-            object.update();
+            object.update(scrollSpeed);
         }
         for(enemy object: enemys) {
-            object.update();
+            
         }
     }
 

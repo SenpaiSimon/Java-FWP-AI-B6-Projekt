@@ -7,9 +7,4 @@ public class enemy extends object{
         super(xPos, yPos, length, height, color);
         this.type = com.javafwp.game.ownTypes.type.enemy;
     }
-
-    @Override
-    public void update() {
-
-    }
 }

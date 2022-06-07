@@ -8,8 +8,7 @@ public class plattform extends object{
         this.type = com.javafwp.game.ownTypes.type.plattform;
     }
 
-    @Override
-    public void update() {
-
+    public void update(double speed) {
+        entity.setTranslateX(entity.getTranslateX() - speed);
     }
 }
