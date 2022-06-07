@@ -21,7 +21,8 @@ public class player extends object{
     public void update(ArrayList<plattform> plattforms, ArrayList<enemy> enemys, double scrollSpeed) {
         boolean coll = false;
         plattform collPlattform = null;
-
+        
+        // check if any intersection occured
         for(plattform plattform: plattforms) {
             if(entity.getBoundsInParent().intersects(plattform.getEntity().getBoundsInParent())) {
                 collPlattform = plattform;
@@ -30,6 +31,7 @@ public class player extends object{
             }
         } 
         
+        // handle collision
         if(coll) {
             vel = new Point2D(vel.getX(), 0);
             entity.setTranslateY(collPlattform.getEntity().getTranslateY() - entity.getHeight());

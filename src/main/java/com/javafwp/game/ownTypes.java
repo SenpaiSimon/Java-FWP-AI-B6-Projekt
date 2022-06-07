@@ -6,4 +6,11 @@ public class ownTypes {
         plattform,
         player
     };
+
+    public enum gameState {
+        playing,
+        exit,
+        mainMenu,
+        shop
+    };
 }
