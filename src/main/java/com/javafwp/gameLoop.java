@@ -16,6 +16,7 @@ import javafx.application.Application;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -26,6 +27,7 @@ public class gameLoop extends Application{
     private gameState gameState;
     Stage primaryStage;
     Text scoreText;
+    Point2D mousePos;
 
     private int score = 0;
 
@@ -56,8 +58,8 @@ public class gameLoop extends Application{
     // missle stuff
     private ArrayList <projectile> projectiles = new ArrayList<projectile>();
     private double projectileSpeed = 10;
-    private double missleLength = 10;
-    private double missleHeight = 2;
+    private double missleLength = 5;
+    private double missleHeight = 5;
     private Color missleColor = Color.RED;
    
     // heat stuff
@@ -127,6 +129,12 @@ public class gameLoop extends Application{
         scene.getWindow().setWidth(width);
         primaryStage.show();
 
+        // add listener for mouse positions
+        gameRoot.setOnMouseMoved(mousePointer -> {
+            updateMousePosition(mousePointer);
+        });
+
+        // init the rest 
         initPlayState();
         initMenuState();
         initShopState();
@@ -179,6 +187,10 @@ public class gameLoop extends Application{
         // add game parts to its panes
         scoreRoot.getChildren().add(scoreText);
         gameRoot.getChildren().add(player.getEntity());
+    }
+
+    private void updateMousePosition(MouseEvent mousePointer) {
+        mousePos = new Point2D(mousePointer.getX(), mousePointer.getY());
     }
 
     private void switchState(gameState newState) {
@@ -251,17 +263,22 @@ public class gameLoop extends Application{
     }
 
     private void addMissle() {
-        //sproot me baby
-        projectile newProj = new projectile(player.getEntity().getTranslateX() + player.getWidth(), player.getEntity().getTranslateY(), missleLength, missleHeight, missleColor);
+        //shoot me baby
+        Point2D dir = new Point2D(-(player.getEntity().getTranslateX() - mousePos.getX()), -(player.getEntity().getTranslateY() - mousePos.getY()));
+        projectile newProj = new projectile(player.getEntity().getTranslateX() + player.getWidth(), player.getEntity().getTranslateY(), missleLength, missleHeight, missleColor, dir);
         projectiles.add(newProj);
         gameRoot.getChildren().addAll(newProj.getEntity());
     }
 
     private void removeOffscreenMissle() {
-        if(projectiles.size() != 0) {
-            if(projectiles.get(0).getEntity().getTranslateX() > width + 200) {
-                gameRoot.getChildren().remove(projectiles.get(0).getEntity());
-                projectiles.remove(0);
+        for(projectile p: projectiles) {
+            if((p.getEntity().getTranslateX() > width + 100) || // right edge
+               (p.getEntity().getTranslateX() + missleLength < -100) || // left edge
+               (p.getEntity().getTranslateY() + missleHeight < -100) || // top edge
+               (p.getEntity().getTranslateY() > height + 100)) { // bottom edge
+                gameRoot.getChildren().remove(p.getEntity());
+                projectiles.remove(p);
+                break;
             }
         }
     }
