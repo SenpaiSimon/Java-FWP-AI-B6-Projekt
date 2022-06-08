@@ -3,7 +3,6 @@ package com.javafwp.game.gameObjects;
 import java.util.ArrayList;
 
 import javafx.geometry.Point2D;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
 public class player extends object{

@@ -3,7 +3,6 @@ package com.javafwp.game.gameObjects;
 import com.javafwp.game.ownTypes.type;
 
 import javafx.scene.Node;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 

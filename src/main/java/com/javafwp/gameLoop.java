@@ -16,12 +16,10 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -46,7 +44,6 @@ public class gameLoop extends Application{
 
     // Player stuff
     private player player;
-    private Color playerColor = Color.CORAL;
     private double gravity = 0.4;
     private double jumpForce = 15;
     private double moveSpeed = 5;
