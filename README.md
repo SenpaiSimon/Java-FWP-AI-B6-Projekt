@@ -59,8 +59,8 @@ Das Projekt wurde mit `microsoft visualstudio code` erstellt. Die Ausführung un
 - [ ] Javadoc Kommentierung
 
 *Besondere Herrausforderung*:
-- [x] GUI mit `JavaSwing` oder `JavaFX`
-- [x] Lauffähge `JAR` Datei
+- [x] GUI mit `JavaSwing` oder `JavaFX`
+- [x] Lauffähge `JAR` Datei
 - [ ] relationale Datenbank (Gewünscht)
 
 ---
