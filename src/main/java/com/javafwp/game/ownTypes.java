@@ -13,6 +13,7 @@ public class ownTypes {
         playing,
         exit,
         mainMenu,
-        shop
+        shop,
+        death
     };
 }

@@ -39,8 +39,6 @@ public class gameLoop extends Application{
     // Window Stuff
     private int width = 1280;
     private int height = 720;
-    private Rectangle menuBackground;
-    private Rectangle shopBackground;
     private Rectangle playingBackground;
 
     // Player stuff
@@ -88,11 +86,16 @@ public class gameLoop extends Application{
     private int  minEnemyDistanceY = height + 100;
     private Color enemyColor = Color.DARKVIOLET;
 
+    // death screen stuff
+    private Text deathMessage;
+
     // main menu stuff
+    private Rectangle menuBackground;
     private Text title;
     private Rectangle displayHelpMesage;
 
     // shop stuff
+    private Rectangle shopBackground;
     private Text shopText;
 
     // debug prints -- may slow down application
@@ -105,6 +108,7 @@ public class gameLoop extends Application{
     private Pane scoreRoot = new Pane();
     private Pane menuRoot = new Pane();
     private Pane shopRoot = new Pane();
+    private Pane deahRoot = new Pane();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -161,6 +165,7 @@ public class gameLoop extends Application{
         initMenuState();
         initShopState();
         initHeatbar();
+        initDeathScreen();
  
         // set initial state
         switchState(com.javafwp.game.ownTypes.gameState.mainMenu);
@@ -238,6 +243,19 @@ public class gameLoop extends Application{
         gameRoot.getChildren().addAll(playingBackground, player.getEntity());
     }
 
+    private void initDeathScreen() {
+        // text
+        deathMessage = new Text();
+        deathMessage.setText("u ded lol");
+        deathMessage.setTranslateX(width/2);
+        deathMessage.setTranslateY(height/4);
+        deathMessage.setStyle("-fx-font: 50 arial;");
+        deathMessage.setFill(Color.GOLD);
+
+        // add everything
+        deahRoot.getChildren().addAll(deathMessage);
+    }
+
     private void displayHelpMesagePressed(MouseEvent mousePointer) {
         System.out.println();
     }
@@ -253,15 +271,22 @@ public class gameLoop extends Application{
                     appRoot.getChildren().removeAll(gameRoot, scoreRoot);
                 } else if(gameState == com.javafwp.game.ownTypes.gameState.shop) {
                     appRoot.getChildren().removeAll(shopRoot);
-                } 
+                } else if(gameState == com.javafwp.game.ownTypes.gameState.death) {
+                    appRoot.getChildren().removeAll(deahRoot, gameRoot, scoreRoot);
+                }
                 appRoot.getChildren().add(menuRoot);
             break;
 
             case playing:
                 if(gameState == com.javafwp.game.ownTypes.gameState.mainMenu) {
                     appRoot.getChildren().removeAll(menuRoot);
+                } else if (gameState == com.javafwp.game.ownTypes.gameState.death) {
+                    appRoot.getChildren().remove(deahRoot);
                 }
-                appRoot.getChildren().addAll(gameRoot, scoreRoot);
+
+                if(gameState != com.javafwp.game.ownTypes.gameState.death) { // because we dont unload these when in death menu
+                    appRoot.getChildren().addAll(gameRoot, scoreRoot);
+                }
                 resetGame(); // reset player on scene change
             break;
 
@@ -276,6 +301,13 @@ public class gameLoop extends Application{
                 if(gameState == com.javafwp.game.ownTypes.gameState.mainMenu) {
                     primaryStage.close();
                 }
+            break;
+
+            case death:
+                if(gameState == com.javafwp.game.ownTypes.gameState.playing) {
+                    // nothing to unload yet
+                }
+                appRoot.getChildren().addAll(deahRoot);
             break;
 
             default:
@@ -373,7 +405,7 @@ public class gameLoop extends Application{
     private void enemyPlayerColl() {
         for(enemy enem: enemys) {
             if(player.getEntity().getBoundsInParent().intersects(enem.getEntity().getBoundsInParent())) {
-                resetGame();
+                switchState(com.javafwp.game.ownTypes.gameState.death);
                 break;
             }
         }
@@ -401,7 +433,7 @@ public class gameLoop extends Application{
 
     private void playerDeath() {
         if(player.getEntity().getTranslateY() + player.getHeight() > height) {
-            resetGame();
+            switchState(com.javafwp.game.ownTypes.gameState.death);
         }
     }
 
@@ -445,6 +477,8 @@ public class gameLoop extends Application{
         if(isPressedKey(KeyCode.SPACE)) {
             if(gameState == com.javafwp.game.ownTypes.gameState.playing) {
                 player.jump(jumpForce);
+            } else if (gameState == com.javafwp.game.ownTypes.gameState.death) {
+                switchState(com.javafwp.game.ownTypes.gameState.playing);
             }
         }
         if(isPressedKey(KeyCode.ESCAPE)) {
@@ -452,7 +486,9 @@ public class gameLoop extends Application{
                 switchState(com.javafwp.game.ownTypes.gameState.mainMenu);
             } else if(gameState == com.javafwp.game.ownTypes.gameState.mainMenu) {
                 switchState(com.javafwp.game.ownTypes.gameState.exit);
-            }   else if(gameState == com.javafwp.game.ownTypes.gameState.shop)  {
+            } else if(gameState == com.javafwp.game.ownTypes.gameState.shop)  {
+                switchState(com.javafwp.game.ownTypes.gameState.mainMenu);
+            } else if(gameState == com.javafwp.game.ownTypes.gameState.death) {
                 switchState(com.javafwp.game.ownTypes.gameState.mainMenu);
             }
             synchronousInputDelay(100);
