@@ -29,7 +29,6 @@ public class gameLoop extends Application{
     private gameState gameState;
     Stage primaryStage;
     Text scoreText;
-    Point2D mousePos;
     imageLoader imageLoader;
 
     private int score = 0;
@@ -149,8 +148,12 @@ public class gameLoop extends Application{
         primaryStage.show();
 
         // add listener for mouse positions
-        gameRoot.setOnMouseMoved(mousePointer -> {
-            updateMousePosition(mousePointer);
+        gameRoot.setOnMouseClicked(mousePointer -> {
+            if(gameState == com.javafwp.game.ownTypes.gameState.playing) {
+                if(heatbar.addHeat(heatPerShot)) {
+                    addMissle(mousePointer);
+                }
+            }
         });
 
         // init the rest 
@@ -235,10 +238,6 @@ public class gameLoop extends Application{
         gameRoot.getChildren().addAll(playingBackground, player.getEntity());
     }
 
-    private void updateMousePosition(MouseEvent mousePointer) {
-        mousePos = new Point2D(mousePointer.getX(), mousePointer.getY());
-    }
-
     private void displayHelpMesagePressed(MouseEvent mousePointer) {
         System.out.println();
     }
@@ -312,7 +311,7 @@ public class gameLoop extends Application{
         }
     }
 
-    private void addMissle() {
+    private void addMissle(MouseEvent mousePos) {
         //shoot me baby
         Point2D dir = new Point2D(1, 0);;
         if(mousePos != null) {
@@ -446,13 +445,6 @@ public class gameLoop extends Application{
         if(isPressedKey(KeyCode.SPACE)) {
             if(gameState == com.javafwp.game.ownTypes.gameState.playing) {
                 player.jump(jumpForce);
-            }
-        }
-        if(isPressedKey(KeyCode.W)) {
-            if(gameState == com.javafwp.game.ownTypes.gameState.playing) {
-                if(heatbar.addHeat(heatPerShot)) {
-                    addMissle();
-                }
             }
         }
         if(isPressedKey(KeyCode.ESCAPE)) {
