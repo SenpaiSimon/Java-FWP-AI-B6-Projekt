@@ -284,7 +284,8 @@ public class gameLoop extends Application{
                     appRoot.getChildren().remove(deahRoot);
                 }
 
-                if(gameState != com.javafwp.game.ownTypes.gameState.death) { // because we dont unload these when in death menu
+                if(gameState != com.javafwp.game.ownTypes.gameState.death) { 
+                    // because we dont unload these when in death menu
                     appRoot.getChildren().addAll(gameRoot, scoreRoot);
                 }
                 resetGame(); // reset player on scene change
