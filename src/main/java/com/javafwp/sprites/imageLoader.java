@@ -8,12 +8,13 @@ import javafx.scene.paint.ImagePattern;
 /*
  * HOW TO USE
  * fill out a rectangle with the image using:
- * 
+ *
  * imageLoader imagaLoader = new imageLoader();
  * rect.setFill(imageLoader.loadImage("filename.fileextension"));
  */
 public class imageLoader {
     public ImagePattern loadImage(String fileName) {
-        return new ImagePattern((new Image(getClass().getResourceAsStream(fileName))));
+        Image image = new Image(getClass().getResourceAsStream(fileName), 1024, 1024, true, false);
+        return new ImagePattern( image );
     }
 }
