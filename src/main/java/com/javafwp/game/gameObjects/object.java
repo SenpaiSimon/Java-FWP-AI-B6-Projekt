@@ -4,6 +4,7 @@ import com.javafwp.game.ownTypes.type;
 
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 /*
@@ -13,11 +14,11 @@ public class object{
     protected type type;
     protected Rectangle entity;
 
-    public object(double xPos, double yPos, double length, double height, Color color) {
+    public object(double xPos, double yPos, double length, double height, Paint paint) {
         entity = new Rectangle(length, height);
         entity.setTranslateX(xPos);
         entity.setTranslateY(yPos);
-        entity.setFill(color);
+        entity.setFill(paint);
     }
 
     public Node getEntity() {
@@ -32,7 +33,7 @@ public class object{
         return entity.getHeight();
     }
 
-    public void setFill(Color color) {
-        entity.setFill(color);
+    public void setFill(Paint paint) {
+        entity.setFill(paint);
     }
 }
