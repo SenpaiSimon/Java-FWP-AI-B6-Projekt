@@ -16,6 +16,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -52,7 +53,7 @@ public class gameLoop extends Application{
 
     // plattform stuff
     private ArrayList <plattform> plattforms = new ArrayList<plattform>();
-    private double scrollSpeed = 1;
+    private double scrollSpeed = 3;
     private int distanceMinX = 200;
     private int distanceMaxX = 350;
     private int distanceY = 150;
@@ -63,9 +64,9 @@ public class gameLoop extends Application{
     // missle stuff
     private ArrayList <projectile> projectiles = new ArrayList<projectile>();
     private double projectileSpeed = 10;
-    private double missleLength = 5;
-    private double missleHeight = 5;
-    private Color missleColor = Color.RED;
+    private double missleLength = 32;
+    private double missleHeight = 32;
+    private Paint missleColor = imageLoader.loadImage("pizza.png");
 
     // heat stuff
     private int heatPerShot = 50;
@@ -79,14 +80,13 @@ public class gameLoop extends Application{
     // enemy stuff
     private ArrayList <enemy> enemys = new ArrayList<enemy>();
     private int maxEnemyCount = 6;
-    private int ticksBetweenSpawns = 200;
+    private int ticksBetweenSpawns = 100;
     private int currentTick = 0;
-    private int enemyLength = 20;
-    private int enemyHeight = 20;
-    private int enemySpeed = 4;
+    private int enemyLength = 48;
+    private int enemyHeight = 48;
+    private int enemySpeed = 1;
     private int  minEnemyDistanceX = width + 100;
     private int  minEnemyDistanceY = height + 100;
-    private Color enemyColor = Color.DARKVIOLET;
 
     // death screen stuff
     private Text deathMessage;
@@ -258,7 +258,7 @@ public class gameLoop extends Application{
     private void initDeathScreen() {
         // text
         deathMessage = new Text();
-        deathMessage.setText("u ded lol");
+        deathMessage.setText("u ded lol \nDominos wins!");
         deathMessage.setTranslateX(width/2);
         deathMessage.setTranslateY(height/4);
         deathMessage.setStyle("-fx-font: 50 arial;");
@@ -363,7 +363,13 @@ public class gameLoop extends Application{
             dir = new Point2D(-(player.getEntity().getTranslateX() - mousePos.getX()), -(player.getEntity().getTranslateY() - mousePos.getY()));
         }
 
-        projectile newProj = new projectile(player.getEntity().getTranslateX() + player.getWidth(), player.getEntity().getTranslateY(), missleLength, missleHeight, missleColor, dir);
+        // retain a bit of the players velocity
+        dir = dir.add(player.getVel().multiply(0.5));
+
+        projectile newProj = new projectile(
+            player.getEntity().getTranslateX() + player.getWidth() / 2.0,
+            player.getEntity().getTranslateY(),
+            missleLength, missleHeight, dir, missleColor);
         projectiles.add(newProj);
         gameRoot.getChildren().addAll(newProj.getEntity());
     }
@@ -407,7 +413,10 @@ public class gameLoop extends Application{
                     yPos = (int)(player.getEntity().getTranslateY() + minEnemyDistanceY);
                 break;
             }
-            enemy enem = new enemy(xPos, yPos, enemyLength, enemyHeight, enemyColor);
+            Paint[] enemyFrames = new Paint[2];
+            enemyFrames[0] = imageLoader.loadImage("dominos1.png");
+            enemyFrames[1] = imageLoader.loadImage("dominos2.png");
+            enemy enem = new enemy(xPos, yPos, enemyLength, enemyHeight, enemyFrames);
             enemys.add(enem);
             gameRoot.getChildren().add(enem.getEntity());
             currentTick = 0;
@@ -560,9 +569,9 @@ public class gameLoop extends Application{
             heatbar.update(coolSpeed);
 
             // enemy stuff
-            // addEnemy(); // TODO temporarily disabled cause they're annyoing af
+            addEnemy();
             for(enemy object: enemys) {
-                object.update(new Point2D(player.getEntity().getTranslateX(), player.getEntity().getTranslateY()), enemySpeed);
+                object.update(tick, new Point2D(player.getEntity().getTranslateX(), player.getEntity().getTranslateY()), enemySpeed);
             }
             enemyPlayerColl();
             enemyProjColl();
