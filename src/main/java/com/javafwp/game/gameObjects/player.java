@@ -9,6 +9,7 @@ import javafx.scene.paint.Paint;
 public class player extends object{
     boolean canJump = false;
     Point2D vel;
+
     double acc;
 
     Paint[] idleFrames;
@@ -66,6 +67,10 @@ public class player extends object{
             }
         }
 
+    }
+
+    public Point2D getVel() {
+        return vel;
     }
 
     // moves in x Dir
