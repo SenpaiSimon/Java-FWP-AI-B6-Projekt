@@ -56,8 +56,7 @@ public class player extends object{
 
         if(tick % 2000 == 0) {
             animationFrameCounter++;
-            System.out.println(this.vel.magnitude());
-            // System.out.println(acc);
+
             if(this.vel.magnitude() > 0)    {
                 animationFrameCounter = animationFrameCounter % runningFrames.length;
                 this.setFill((Paint)runningFrames[animationFrameCounter]);
