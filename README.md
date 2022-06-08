@@ -62,3 +62,7 @@ Das Projekt wurde mit `microsoft visualstudio code` erstellt. Die Ausführung un
 - [x] GUI mit `JavaSwing` oder `JavaFX`
 - [x] Lauffähge `JAR` Datei
 - [ ] relationale Datenbank (Gewünscht)
+
+---
+
+Das Projekt wird nicht von Pizza Hut, LLC oder Domino's Pizza, Inc. unterstützt.
