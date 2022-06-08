@@ -20,6 +20,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -29,13 +31,13 @@ public class gameLoop extends Application{
     private gameState gameState;
     Stage primaryStage;
     Text scoreText;
-    imageLoader imageLoader;
+    imageLoader imageLoader = new imageLoader();
 
     private int score = 0;
 
     /*
      * Globals for fine-tuning
-     */ 
+     */
     // Window Stuff
     private int width = 1280;
     private int height = 720;
@@ -50,13 +52,13 @@ public class gameLoop extends Application{
 
     // plattform stuff
     private ArrayList <plattform> plattforms = new ArrayList<plattform>();
-    private double scrollSpeed = 4;
+    private double scrollSpeed = 1;
     private int distanceMinX = 200;
     private int distanceMaxX = 350;
     private int distanceY = 150;
-    private int plattformHeight = 10;
-    private int plattformWidth = 100;
-    private Color plattformColor = Color.WHITE;
+    private int plattformHeight = 21 * 2;
+    private int plattformWidth = 68 * 2;
+    private Paint plattformPaint = imageLoader.loadImage("platform.png");
 
     // missle stuff
     private ArrayList <projectile> projectiles = new ArrayList<projectile>();
@@ -64,7 +66,7 @@ public class gameLoop extends Application{
     private double missleLength = 5;
     private double missleHeight = 5;
     private Color missleColor = Color.RED;
-   
+
     // heat stuff
     private int heatPerShot = 50;
     private int maxHeat = 300;
@@ -124,7 +126,7 @@ public class gameLoop extends Application{
                     System.out.println(keys.toString());
                     System.out.println("Player X: " + player.getEntity().getTranslateX() + "Player Y: " + player.getEntity().getTranslateY());
                 }
-                update();
+                update(now);
             }
         };
         timer.start();
@@ -135,9 +137,6 @@ public class gameLoop extends Application{
     }
 
     private void init(Stage primaryStage) {
-        // loading images made easy
-        imageLoader = new imageLoader();
-        
         // setup the main scene
         Scene scene = new Scene(appRoot);
         scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
@@ -160,13 +159,13 @@ public class gameLoop extends Application{
             }
         });
 
-        // init the rest 
+        // init the rest
         initPlayState();
         initMenuState();
         initShopState();
         initHeatbar();
         initDeathScreen();
- 
+
         // set initial state
         switchState(com.javafwp.game.ownTypes.gameState.mainMenu);
     }
@@ -199,8 +198,8 @@ public class gameLoop extends Application{
         menuBackground = new Rectangle(width, height);
         menuBackground.setTranslateX(0);
         menuBackground.setTranslateY(0);
-        menuBackground.setFill(imageLoader.loadImage("menuBackground.jpg"));
-    
+        menuBackground.setFill(imageLoader.loadImage("splashscreen.png"));
+
         // setup menu state
         title = new Text();
         title.setText("JAVA FWP Sidescroller");
@@ -229,7 +228,20 @@ public class gameLoop extends Application{
         playingBackground.setFill(imageLoader.loadImage("playingBackground.jpg"));
 
         // add the player
-        player = new player((width/4) * 3 + 10, height/2 - 50, 10, 15, playerColor, gravity);
+        Paint[] idleFrames = new Paint[2];
+        idleFrames[0] = imageLoader.loadImage("player-idle1.png");
+        idleFrames[1] = imageLoader.loadImage("player-idle2.png");
+        Paint[] runningFrames = new Paint[2];
+        runningFrames[0] = imageLoader.loadImage("player-running1.png");
+        runningFrames[1] = imageLoader.loadImage("player-running2.png");
+
+        player = new player(
+            (width/4.0) * 3 + 10,
+            height/2.0 - 50,
+            64.0, 64.0,
+            gravity,
+            idleFrames,
+            runningFrames);
 
         // add the score text
         scoreText = new Text();
@@ -264,9 +276,9 @@ public class gameLoop extends Application{
         if(gameState == newState)   {
             return; // nothing to do
         }
-        
+
         switch(newState) {
-            case mainMenu: 
+            case mainMenu:
                 if(gameState == com.javafwp.game.ownTypes.gameState.playing) {
                     appRoot.getChildren().removeAll(gameRoot, scoreRoot);
                 } else if(gameState == com.javafwp.game.ownTypes.gameState.shop) {
@@ -284,7 +296,7 @@ public class gameLoop extends Application{
                     appRoot.getChildren().remove(deahRoot);
                 }
 
-                if(gameState != com.javafwp.game.ownTypes.gameState.death) { 
+                if(gameState != com.javafwp.game.ownTypes.gameState.death) {
                     // because we dont unload these when in death menu
                     appRoot.getChildren().addAll(gameRoot, scoreRoot);
                 }
@@ -297,7 +309,7 @@ public class gameLoop extends Application{
                 }
                 appRoot.getChildren().addAll(shopRoot);
             break;
-            
+
             case exit:
                 if(gameState == com.javafwp.game.ownTypes.gameState.mainMenu) {
                     primaryStage.close();
@@ -323,13 +335,13 @@ public class gameLoop extends Application{
         if(plattforms.size() != 0) {
             plattform lastPlattform = plattforms.get(plattforms.size() - 1);
             if(lastPlattform.getEntity().getTranslateX() + lastPlattform.getWidth() < width) { // plattform is fully in window
-                plattform newPlatt = new plattform(width + randomBetweenBounds(distanceMinX, distanceMaxX), height/3 * 2 + randomBetweenBounds(-distanceY, distanceY), plattformWidth, plattformHeight, plattformColor);
+                plattform newPlatt = new plattform(width + randomBetweenBounds(distanceMinX, distanceMaxX), height/3 * 2 + randomBetweenBounds(-distanceY, distanceY), plattformWidth, plattformHeight, plattformPaint);
                 plattforms.add(newPlatt);
                 gameRoot.getChildren().add(newPlatt.getEntity());
                 score++;
             }
         } else {
-            plattform firstPlatt = new plattform(width/4 * 3, height/2, plattformWidth, plattformHeight, Color.DEEPPINK);
+            plattform firstPlatt = new plattform(width/4 * 3, height/2, plattformWidth, plattformHeight, plattformPaint);
             plattforms.add(firstPlatt);
             gameRoot.getChildren().add(firstPlatt.getEntity());
         }
@@ -467,7 +479,7 @@ public class gameLoop extends Application{
     private void keyActions() {
         if(isPressedKey(KeyCode.D)) {
             if(gameState == com.javafwp.game.ownTypes.gameState.playing) {
-                player.move(new Point2D(moveSpeed, 0)); 
+                player.move(new Point2D(moveSpeed, 0));
             }
         }
         if(isPressedKey(KeyCode.A)) {
@@ -500,7 +512,7 @@ public class gameLoop extends Application{
             }
             synchronousInputDelay(100);
         }
-        if(isPressedKey(KeyCode.E)) { 
+        if(isPressedKey(KeyCode.E)) {
             if(gameState == com.javafwp.game.ownTypes.gameState.shop) {
                 switchState(com.javafwp.game.ownTypes.gameState.mainMenu);
             } else if(gameState == com.javafwp.game.ownTypes.gameState.mainMenu) {
@@ -521,12 +533,12 @@ public class gameLoop extends Application{
         };
     }
 
-    private void update() {
+    private void update(long tick) {
         keyActions();
 
         if(gameState == com.javafwp.game.ownTypes.gameState.playing) {
              // player stuff
-            player.update(plattforms, scrollSpeed);
+            player.update(tick, plattforms, scrollSpeed);
             playerDeath();
 
             // plattform stuff
@@ -548,7 +560,7 @@ public class gameLoop extends Application{
             heatbar.update(coolSpeed);
 
             // enemy stuff
-            addEnemy();
+            // addEnemy(); // TODO temporarily disabled cause they're annyoing af
             for(enemy object: enemys) {
                 object.update(new Point2D(player.getEntity().getTranslateX(), player.getEntity().getTranslateY()), enemySpeed);
             }
