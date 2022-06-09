@@ -50,7 +50,7 @@ Das Projekt wurde mit [microsoft visualstudio code](https://code.visualstudio.co
 
 *Notwendig*:
 - [x] Vererbung
-- [ ] Interface
+- [x] Interface
 - [ ] Javadoc Kommentierung
 
 *Besondere Herrausforderung*:
