@@ -20,6 +20,10 @@ public class heatbar extends object {
         this.type = com.javafwp.game.ownTypes.type.heatbar;
     }
 
+    
+    /** 
+     * @param coolSpeed
+     */
     public void update(double coolSpeed) {
         if(currentHeat >= 0) {
             currentHeat -= coolSpeed;
@@ -31,6 +35,11 @@ public class heatbar extends object {
         heat.setWidth(currentHeat);
     }
 
+    
+    /** 
+     * @param heat
+     * @return boolean
+     */
     public boolean addHeat(int heat) {
         if(currentHeat + heat <= entity.getWidth()) {
             currentHeat += heat;
@@ -45,6 +54,10 @@ public class heatbar extends object {
         heat.setWidth(currentHeat);
     }
 
+    
+    /** 
+     * @return Node
+     */
     public Node getHeatbar() {
         return heat;
     }

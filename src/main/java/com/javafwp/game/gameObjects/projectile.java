@@ -12,6 +12,10 @@ public class projectile extends object {
         this.type = com.javafwp.game.ownTypes.type.projectile;
     }
 
+    
+    /** 
+     * @param speed
+     */
     public void update(double speed) {
         setX(getX() + speed * dir.getX());
         setY(getY() + speed * dir.getY());

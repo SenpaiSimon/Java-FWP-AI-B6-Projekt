@@ -20,45 +20,89 @@ public class object implements objectInterface {
         entity.setFill(paint);
     }
 
+    
+    /** 
+     * @return Node
+     */
     public Node getEntity() {
         return entity;
     }
 
+    
+    /** 
+     * @return double
+     */
     public double getWidth () {
         return entity.getWidth();
     }
 
+    
+    /** 
+     * @return double
+     */
     public double getHeight () {
         return entity.getHeight();
     }
 
+    
+    /** 
+     * @return type
+     */
     public type getType() {
         return type;
     }
 
+    
+    /** 
+     * @return double
+     */
     public double getX() {
         return entity.getTranslateX();
     }
+    
+    /** 
+     * @return double
+     */
     public double getY() {
         return entity.getTranslateY();
     }
 
+    
+    /** 
+     * @param paint
+     */
     public void setFill(Paint paint) {
         entity.setFill(paint);
     }
 
+    
+    /** 
+     * @param x
+     */
     public void setX(double x) {
         entity.setTranslateX(x);
     }
 
+    
+    /** 
+     * @param y
+     */
     public void setY(double y) {
         entity.setTranslateY(y);
     }
 
+    
+    /** 
+     * @param x
+     */
     public void addX(double x) {
         setX(getX() + x);
     }
 
+    
+    /** 
+     * @param y
+     */
     public void addY(double y) {
         setY(getY() + y);
     }

@@ -15,6 +15,12 @@ public class enemy extends object{
         this.frames = frames;
     }
 
+    
+    /** 
+     * @param tick
+     * @param playerPos
+     * @param speed
+     */
     public void update(long tick, Point2D playerPos, double speed) {
         Point2D dir = new Point2D(
             playerPos.getX() - getX(),

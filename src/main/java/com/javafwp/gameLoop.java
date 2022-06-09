@@ -110,6 +110,11 @@ public class gameLoop extends Application{
     private Pane shopRoot = new Pane();
     private Pane deahRoot = new Pane();
 
+    
+    /** 
+     * @param primaryStage
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
@@ -130,10 +135,19 @@ public class gameLoop extends Application{
         timer.start();
     }
 
+    
+    /** 
+     * @param key
+     * @return boolean
+     */
     private boolean isPressedKey(KeyCode key) {
         return keys.getOrDefault(key, false);
     }
 
+    
+    /** 
+     * @param primaryStage
+     */
     private void init(Stage primaryStage) {
         // setup the main scene
         Scene scene = new Scene(appRoot);
@@ -261,6 +275,10 @@ public class gameLoop extends Application{
         deahRoot.getChildren().addAll(deathMessage);
     }
 
+    
+    /** 
+     * @param newState
+     */
     private void switchState(gameState newState) {
         if(gameState == newState)   {
             return; // nothing to do
@@ -345,6 +363,10 @@ public class gameLoop extends Application{
         }
     }
 
+    
+    /** 
+     * @param mousePos
+     */
     private void addMissle(MouseEvent mousePos) {
         //shoot me baby
         Point2D dir = new Point2D(1, 0);;
@@ -437,6 +459,12 @@ public class gameLoop extends Application{
         }
     }
 
+    
+    /** 
+     * @param min
+     * @param max
+     * @return int
+     */
     private int randomBetweenBounds(int min, int max) {
         Random ran = new Random();
         return min + ran.nextInt(max - min);
@@ -520,6 +548,10 @@ public class gameLoop extends Application{
         }
     }
 
+    
+    /** 
+     * @param delay
+     */
     private void synchronousInputDelay(int delay) {
         if(gameState != com.javafwp.game.ownTypes.gameState.playing) {
             try {
@@ -531,6 +563,10 @@ public class gameLoop extends Application{
         };
     }
 
+    
+    /** 
+     * @param tick
+     */
     private void update(long tick) {
         keyActions();
 
@@ -573,6 +609,10 @@ public class gameLoop extends Application{
         }
     }
 
+    
+    /** 
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }

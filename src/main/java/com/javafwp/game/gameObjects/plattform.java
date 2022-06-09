@@ -8,6 +8,10 @@ public class plattform extends object{
         this.type = com.javafwp.game.ownTypes.type.plattform;
     }
 
+    
+    /** 
+     * @param speed
+     */
     public void update(double speed) {
         addX(-speed);
     }

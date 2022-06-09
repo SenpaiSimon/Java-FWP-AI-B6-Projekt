@@ -13,6 +13,11 @@ import javafx.scene.paint.ImagePattern;
  * rect.setFill(imageLoader.loadImage("filename.fileextension"));
  */
 public class imageLoader {
+    
+    /** 
+     * @param fileName
+     * @return ImagePattern
+     */
     public ImagePattern loadImage(String fileName) {
         Image image = new Image(getClass().getResourceAsStream(fileName), 1024, 1024, true, false);
         return new ImagePattern( image );

@@ -25,6 +25,12 @@ public class player extends object{
         this.runningFrames = runningFrames;
     }
 
+    
+    /** 
+     * @param tick
+     * @param plattforms
+     * @param scrollSpeed
+     */
     // Applys Gravity and Handles Collissions
     public void update(long tick, ArrayList<plattform> plattforms, double scrollSpeed) {
         boolean coll = false;
@@ -67,15 +73,27 @@ public class player extends object{
 
     }
 
+    
+    /** 
+     * @return Point2D
+     */
     public Point2D getVel() {
         return vel;
     }
 
+    
+    /** 
+     * @param dir
+     */
     // moves in x Dir
     public void move(Point2D dir) {
         addX(dir.getX());
     }
 
+    
+    /** 
+     * @param force
+     */
     // jumping
     public void jump(double force) {
         if(canJump) {
@@ -85,6 +103,11 @@ public class player extends object{
         }
     }
 
+    
+    /** 
+     * @param spawnX
+     * @param spawnY
+     */
     // dying
     public void death(double spawnX, double spawnY) {
         setY(spawnY);
@@ -92,6 +115,10 @@ public class player extends object{
         vel = new Point2D(0, 0);
     }
 
+    
+    /** 
+     * @return boolean
+     */
     public boolean getCanJump() {
         return canJump;
     }
