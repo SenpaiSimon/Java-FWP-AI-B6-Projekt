@@ -42,7 +42,7 @@ public class player extends object{
         // handle collision
         if(coll) {
             vel = new Point2D(vel.getX(), 0);
-            entity.setTranslateY(collPlattform.getEntity().getTranslateY() - entity.getHeight());
+            setY(collPlattform.getY() - getHeight());
             canJump = true;
 
             // move player alongside plattform
@@ -50,7 +50,7 @@ public class player extends object{
         } else {
             // accel downwards
             vel = vel.add(0, acc);
-            entity.setTranslateY(entity.getTranslateY() + vel.getY());
+            addY(vel.getY());
         }
 
         if(tick % 2000 == 0) {
@@ -73,13 +73,13 @@ public class player extends object{
 
     // moves in x Dir
     public void move(Point2D dir) {
-        entity.setTranslateX(entity.getTranslateX() + dir.getX());
+        addX(dir.getX());
     }
 
     // jumping
     public void jump(double force) {
         if(canJump) {
-            entity.setTranslateY(entity.getTranslateY() - 1);
+            addY(-1);
             vel = vel.add(0, -force);
             canJump = false;
         }
@@ -87,8 +87,8 @@ public class player extends object{
 
     // dying
     public void death(double spawnX, double spawnY) {
-        entity.setTranslateY(spawnY);
-        entity.setTranslateX(spawnX);
+        setY(spawnY);
+        setX(spawnX);
         vel = new Point2D(0, 0);
     }
 

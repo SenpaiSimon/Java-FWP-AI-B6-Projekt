@@ -122,7 +122,7 @@ public class gameLoop extends Application{
             public void handle(long now) {
                 if(debug) {
                     System.out.println(keys.toString());
-                    System.out.println("Player X: " + player.getEntity().getTranslateX() + "Player Y: " + player.getEntity().getTranslateY());
+                    System.out.println("Player X: " + player.getX() + "Player Y: " + player.getY());
                 }
                 update(now);
             }
@@ -210,26 +210,7 @@ public class gameLoop extends Application{
         menuOverlay.setTranslateX(0);
         menuOverlay.setTranslateY(0);
 
-        // TODO Cleanup
-        // setup menu state
-        // title = new Text();
-        // title.setText("JAVA FWP Sidescroller");
-        // title.setTranslateX(width/2);
-        // title.setTranslateY(height/4);
-        // title.setStyle("-fx-font: 50 arial;");
-        // title.setFill(Color.GOLD);
-
-        //button
-        // displayHelpMesage = new Rectangle(200, 50);
-        // displayHelpMesage.setTranslateX(60);
-        // displayHelpMesage.setTranslateY(60);
-        // displayHelpMesage.setFill(Color.RED);
-        // displayHelpMesage.setOnMouseClicked(event -> {
-        //     displayHelpMesagePressed(event);
-        // });
-
         menuRoot.getChildren().addAll(menuBackground, menuOverlay);
-        // menuRoot.getChildren().addAll(menuBackground, menuOverlay, title, displayHelpMesage);
     }
 
     private void initPlayState() {
@@ -342,7 +323,7 @@ public class gameLoop extends Application{
     private void addPlattform() {
         if(plattforms.size() != 0) {
             plattform lastPlattform = plattforms.get(plattforms.size() - 1);
-            if(lastPlattform.getEntity().getTranslateX() + lastPlattform.getWidth() < width) { // plattform is fully in window
+            if(lastPlattform.getX() + lastPlattform.getWidth() < width) { // plattform is fully in window
                 plattform newPlatt = new plattform(width + randomBetweenBounds(distanceMinX, distanceMaxX), height/3 * 2 + randomBetweenBounds(-distanceY, distanceY), plattformWidth, plattformHeight, plattformPaint);
                 plattforms.add(newPlatt);
                 gameRoot.getChildren().add(newPlatt.getEntity());
@@ -357,7 +338,7 @@ public class gameLoop extends Application{
 
     private void removeOffscreenPlattform() {
         if(plattforms.size() != 0) {
-            if(plattforms.get(0).getEntity().getTranslateX() + plattforms.get(0).getWidth() + 100 < 0) {
+            if(plattforms.get(0).getX() + plattforms.get(0).getWidth() + 100 < 0) {
                 gameRoot.getChildren().remove(plattforms.get(0).getEntity());
                 plattforms.remove(0);
             }
@@ -368,28 +349,28 @@ public class gameLoop extends Application{
         //shoot me baby
         Point2D dir = new Point2D(1, 0);;
         if(mousePos != null) {
-            dir = new Point2D(-(player.getEntity().getTranslateX() - mousePos.getX()), -(player.getEntity().getTranslateY() - mousePos.getY()));
+            dir = new Point2D(-(player.getX() - mousePos.getX()), -(player.getY() - mousePos.getY()));
         }
 
         // retain a bit of the players velocity
         dir = dir.add(player.getVel().multiply(0.5));
 
         projectile newProj = new projectile(
-            player.getEntity().getTranslateX() + player.getWidth() / 2.0,
-            player.getEntity().getTranslateY(),
+            player.getX() + player.getWidth() / 2.0,
+            player.getY(),
             missleLength, missleHeight, dir, missleColor);
         projectiles.add(newProj);
         gameRoot.getChildren().addAll(newProj.getEntity());
     }
 
     private void removeOffscreenMissle() {
-        for(projectile p: projectiles) {
-            if((p.getEntity().getTranslateX() > width + 100) || // right edge
-               (p.getEntity().getTranslateX() + missleLength < -100) || // left edge
-               (p.getEntity().getTranslateY() + missleHeight < -100) || // top edge
-               (p.getEntity().getTranslateY() > height + 100)) { // bottom edge
-                gameRoot.getChildren().remove(p.getEntity());
-                projectiles.remove(p);
+        for(projectile proj: projectiles) {
+            if((proj.getX() > width + 100) ||          // right edge
+               (proj.getX() + missleLength < -100) ||  // left edge
+               (proj.getY() + missleHeight < -100) ||  // top edge
+               (proj.getY() > height + 100)) {         // bottom edge
+                gameRoot.getChildren().remove(proj.getEntity());
+                projectiles.remove(proj);
                 break;
             }
         }
@@ -402,23 +383,23 @@ public class gameLoop extends Application{
             Random ran = new Random();
             switch(1 + ran.nextInt(4)) {
                 case 0: //left edge
-                    xPos = (int)(player.getEntity().getTranslateX() - minEnemyDistanceX);
+                    xPos = (int)(player.getX() - minEnemyDistanceX);
                     yPos = randomBetweenBounds(0, height);
                 break;
 
                 case 1: //right edge
-                    xPos = (int)(player.getEntity().getTranslateX() + minEnemyDistanceX);
+                    xPos = (int)(player.getX() + minEnemyDistanceX);
                     yPos = randomBetweenBounds(0, height);
                 break;
 
                 case 2: //top edge
                     xPos = randomBetweenBounds(0, width);
-                    yPos = (int)(player.getEntity().getTranslateY() - minEnemyDistanceY);
+                    yPos = (int)(player.getY() - minEnemyDistanceY);
                 break;
 
                 case 3: //bottom edge
                     xPos = randomBetweenBounds(0, width);
-                    yPos = (int)(player.getEntity().getTranslateY() + minEnemyDistanceY);
+                    yPos = (int)(player.getY() + minEnemyDistanceY);
                 break;
             }
             Paint[] enemyFrames = new Paint[2];
@@ -462,7 +443,7 @@ public class gameLoop extends Application{
     }
 
     private void playerDeath() {
-        if(player.getEntity().getTranslateY() + player.getHeight() > height) {
+        if(player.getY() + player.getHeight() > height) {
             switchState(com.javafwp.game.ownTypes.gameState.death);
         }
     }
@@ -579,7 +560,7 @@ public class gameLoop extends Application{
             // enemy stuff
             addEnemy();
             for(enemy object: enemys) {
-                object.update(tick, new Point2D(player.getEntity().getTranslateX(), player.getEntity().getTranslateY()), enemySpeed);
+                object.update(tick, new Point2D(player.getX(), player.getY()), enemySpeed);
             }
             enemyPlayerColl();
             enemyProjColl();

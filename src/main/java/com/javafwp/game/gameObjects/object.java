@@ -36,7 +36,30 @@ public class object implements objectInterface {
         return type;
     }
 
+    public double getX() {
+        return entity.getTranslateX();
+    }
+    public double getY() {
+        return entity.getTranslateY();
+    }
+
     public void setFill(Paint paint) {
         entity.setFill(paint);
+    }
+
+    public void setX(double x) {
+        entity.setTranslateX(x);
+    }
+
+    public void setY(double y) {
+        entity.setTranslateY(y);
+    }
+
+    public void addX(double x) {
+        setX(getX() + x);
+    }
+
+    public void addY(double y) {
+        setY(getY() + y);
     }
 }

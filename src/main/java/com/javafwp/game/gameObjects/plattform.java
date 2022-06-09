@@ -9,6 +9,6 @@ public class plattform extends object{
     }
 
     public void update(double speed) {
-        entity.setTranslateX(entity.getTranslateX() - speed);
+        addX(-speed);
     }
 }

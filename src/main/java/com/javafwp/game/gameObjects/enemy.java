@@ -17,11 +17,11 @@ public class enemy extends object{
 
     public void update(long tick, Point2D playerPos, double speed) {
         Point2D dir = new Point2D(
-            playerPos.getX() - entity.getTranslateX(),
-            playerPos.getY() - entity.getTranslateY()).normalize();
+            playerPos.getX() - getX(),
+            playerPos.getY() - getY()).normalize();
 
-        entity.setTranslateX(entity.getTranslateX() + dir.getX() * speed);
-        entity.setTranslateY(entity.getTranslateY() + dir.getY() * speed);
+        addX(dir.getX() * speed);
+        addY(dir.getY() * speed);
 
         if(tick % 500 == 0)    {
             animationCounter++;

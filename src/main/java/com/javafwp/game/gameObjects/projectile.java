@@ -13,7 +13,7 @@ public class projectile extends object {
     }
 
     public void update(double speed) {
-        entity.setTranslateX(entity.getTranslateX() + speed * dir.getX());
-        entity.setTranslateY(entity.getTranslateY() + speed * dir.getY());
+        setX(getX() + speed * dir.getX());
+        setY(getY() + speed * dir.getY());
     }
 }
