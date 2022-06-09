@@ -9,7 +9,7 @@ import javafx.scene.shape.Rectangle;
 /*
  * Superclass for all the drawable things in the game
  */
-public class object{
+public class object implements objectInterface {
     protected type type;
     protected Rectangle entity;
 
@@ -30,6 +30,10 @@ public class object{
 
     public double getHeight () {
         return entity.getHeight();
+    }
+
+    public type getType() {
+        return type;
     }
 
     public void setFill(Paint paint) {

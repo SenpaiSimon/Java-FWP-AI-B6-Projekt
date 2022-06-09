@@ -44,7 +44,6 @@ public class player extends object{
             vel = new Point2D(vel.getX(), 0);
             entity.setTranslateY(collPlattform.getEntity().getTranslateY() - entity.getHeight());
             canJump = true;
-            // collPlattform.setFill(Color.GREEN);
 
             // move player alongside plattform
             move(new Point2D(-scrollSpeed, 0));
