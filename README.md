@@ -5,22 +5,22 @@
 
 > Domino's Pizza® dominiert die Dystopie Düsburgs.
 > Kann Pizza Hut® den Ruf der runden Fressalien retten?
-> Begieb dich zur Auslieferung an die Front und beweise deine italienischen Wurzeln!
+> Begib dich zur Auslieferung an die Front und beweise deine italienischen Wurzeln!
 
 ---
 
 ## Kompilieren
 
-Das Projekt benutzt `Java 18`, `maven` und `JavaFX`.
+Das Projekt benutzt [`Java 18`](https://www.oracle.com/java/technologies/javase/jdk18-archive-downloads.html), [`maven`](https://maven.apache.org) und `JavaFX`.
 
-Zum Ausführen der Applikation aus dem root Verzeichniss:
+Zum Ausführen der Applikation aus dem root Verzeichnis:
 ```bash
 $ mvn clean package exec:java
 ```
 
-Die resultiernde `JAR` ist unter `./target` mit dem Suffix `-jar-with-dependencies.jar` anzufinden.
+Die resultierende `JAR` ist unter `./target` mit dem Suffix `-jar-with-dependencies.jar` anzufinden.
 
-Das Projekt wurde mit `microsoft visualstudio code` erstellt. Die Ausführung und Bearbeitung unter Eclipse oder IntelliJ wurde nicht getestet.
+Das Projekt wurde mit [microsoft visualstudio code](https://code.visualstudio.com) erstellt. Die Ausführung und Bearbeitung unter Eclipse oder IntelliJ wurde nicht getestet.
 
 ## Steuerung
 
@@ -50,7 +50,7 @@ Das Projekt wurde mit `microsoft visualstudio code` erstellt. Die Ausführung un
 
 *Notwendig*:
 - [x] Vererbung
-- [x] Interface
+- [ ] Interface
 - [ ] Javadoc Kommentierung
 
 *Besondere Herrausforderung*:
