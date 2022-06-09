@@ -15,12 +15,7 @@ Das Projekt benutzt `Java 18`, `maven` und `JavaFX`.
 
 Zum Ausführen der Applikation aus dem root Verzeichniss:
 ```bash
-$ mvn exec:java
-```
-
-Zum Erstellen einer `JAR` Datei:
-```bash
-$ mvn package
+$ mvn clean package exec:java
 ```
 
 Die resultiernde `JAR` ist unter `./target` mit dem Suffix `-jar-with-dependencies.jar` anzufinden.
