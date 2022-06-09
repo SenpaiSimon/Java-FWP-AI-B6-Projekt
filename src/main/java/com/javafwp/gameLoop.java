@@ -590,7 +590,7 @@ public class gameLoop extends Application{
             enemyPlayerColl();
             enemyProjColl();
         }   else if(gameState == com.javafwp.game.ownTypes.gameState.mainMenu)  {
-            if(tick % 100 == 0) {
+            if(tick % 1000 == 0) {
                 menuFrameCounter++;
                 menuFrameCounter = menuFrameCounter % menuFrames.length;
                 menuOverlay.setFill(menuFrames[menuFrameCounter]);
