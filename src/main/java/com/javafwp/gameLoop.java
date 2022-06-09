@@ -93,8 +93,6 @@ public class gameLoop extends Application{
     private Rectangle menuOverlay;
     private int menuFrameCounter;
     private Paint[] menuFrames;
-    private Text title;
-    private Rectangle displayHelpMesage;
 
     // shop stuff
     private Rectangle shopBackground;
@@ -280,10 +278,6 @@ public class gameLoop extends Application{
 
         // add everything
         deahRoot.getChildren().addAll(deathMessage);
-    }
-
-    private void displayHelpMesagePressed(MouseEvent mousePointer) {
-        System.out.println();
     }
 
     private void switchState(gameState newState) {
