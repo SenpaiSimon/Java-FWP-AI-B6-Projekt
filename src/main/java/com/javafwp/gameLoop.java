@@ -90,6 +90,9 @@ public class gameLoop extends Application{
 
     // main menu stuff
     private Rectangle menuBackground;
+    private Rectangle menuOverlay;
+    private int menuFrameCounter;
+    private Paint[] menuFrames;
     private Text title;
     private Rectangle displayHelpMesage;
 
@@ -195,26 +198,40 @@ public class gameLoop extends Application{
         menuBackground = new Rectangle(width, height);
         menuBackground.setTranslateX(0);
         menuBackground.setTranslateY(0);
+        // menuBackground.setFill(Color.BLACK);
         menuBackground.setFill(imageLoader.loadImage("splashscreen.png"));
 
+        menuFrameCounter = 0;
+        menuFrames = new Paint[10];
+        for(int i = 0; i < menuFrames.length; i++) {
+            String filename = "Flames0"+i+".png";
+            menuFrames[i] = imageLoader.loadImage(filename);
+        }
+
+        menuOverlay = new Rectangle(width, height);
+        menuOverlay.setTranslateX(0);
+        menuOverlay.setTranslateY(0);
+
+        // TODO Cleanup
         // setup menu state
-        title = new Text();
-        title.setText("JAVA FWP Sidescroller");
-        title.setTranslateX(width/2);
-        title.setTranslateY(height/4);
-        title.setStyle("-fx-font: 50 arial;");
-        title.setFill(Color.GOLD);
+        // title = new Text();
+        // title.setText("JAVA FWP Sidescroller");
+        // title.setTranslateX(width/2);
+        // title.setTranslateY(height/4);
+        // title.setStyle("-fx-font: 50 arial;");
+        // title.setFill(Color.GOLD);
 
         //button
-        displayHelpMesage = new Rectangle(200, 50);
-        displayHelpMesage.setTranslateX(60);
-        displayHelpMesage.setTranslateY(60);
-        displayHelpMesage.setFill(Color.RED);
-        displayHelpMesage.setOnMouseClicked(event -> {
-            displayHelpMesagePressed(event);
-        });
+        // displayHelpMesage = new Rectangle(200, 50);
+        // displayHelpMesage.setTranslateX(60);
+        // displayHelpMesage.setTranslateY(60);
+        // displayHelpMesage.setFill(Color.RED);
+        // displayHelpMesage.setOnMouseClicked(event -> {
+        //     displayHelpMesagePressed(event);
+        // });
 
-        menuRoot.getChildren().addAll(menuBackground, title, displayHelpMesage);
+        menuRoot.getChildren().addAll(menuBackground, menuOverlay);
+        // menuRoot.getChildren().addAll(menuBackground, menuOverlay, title, displayHelpMesage);
     }
 
     private void initPlayState() {
@@ -572,6 +589,12 @@ public class gameLoop extends Application{
             }
             enemyPlayerColl();
             enemyProjColl();
+        }   else if(gameState == com.javafwp.game.ownTypes.gameState.mainMenu)  {
+            if(tick % 100 == 0) {
+                menuFrameCounter++;
+                menuFrameCounter = menuFrameCounter % menuFrames.length;
+                menuOverlay.setFill(menuFrames[menuFrameCounter]);
+            }
         }
     }
 
