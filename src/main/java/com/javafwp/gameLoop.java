@@ -93,8 +93,6 @@ public class gameLoop extends Application{
     private Rectangle menuOverlay;
     private int menuFrameCounter;
     private Paint[] menuFrames;
-    private Text title;
-    private Rectangle displayHelpMesage;
 
     // shop stuff
     private Rectangle shopBackground;
@@ -280,10 +278,6 @@ public class gameLoop extends Application{
 
         // add everything
         deahRoot.getChildren().addAll(deathMessage);
-    }
-
-    private void displayHelpMesagePressed(MouseEvent mousePointer) {
-        System.out.println();
     }
 
     private void switchState(gameState newState) {
@@ -590,7 +584,7 @@ public class gameLoop extends Application{
             enemyPlayerColl();
             enemyProjColl();
         }   else if(gameState == com.javafwp.game.ownTypes.gameState.mainMenu)  {
-            if(tick % 100 == 0) {
+            if(tick % 1000 == 0) {
                 menuFrameCounter++;
                 menuFrameCounter = menuFrameCounter % menuFrames.length;
                 menuOverlay.setFill(menuFrames[menuFrameCounter]);
