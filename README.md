@@ -11,7 +11,7 @@
 
 ## JavaDoc
 
-Die aktuelle Dokumenation kann hier gefunden werden: [`click`](https://htmlpreview.github.io/?https://github.com/SenpaiSimon/Java-FWP-AI-B6-Projekt/blob/main/javadoc/apidocs/index.html)
+Die aktuelle Dokumentation kann hier gefunden werden: [`click`](https://htmlpreview.github.io/?https://github.com/SenpaiSimon/Java-FWP-AI-B6-Projekt/blob/main/javadoc/apidocs/index.html)
 
 ---
 
