@@ -1,5 +1,8 @@
 package com.javafwp.game.highscoreSystem;
 
+/**
+ * Einträge, welche in der Highscore Tabelle gespeichert werden
+ */
 public class highscoreEntry {
     private String name;
     private int score;

@@ -9,6 +9,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
+
+/**
+ * Einfaches Highscore Sytem zum hinzufügen von Highscores und auch verwalten
+ */
 public class highscoreSystem {
     private Text displayText;
     private Text infoDisplay;

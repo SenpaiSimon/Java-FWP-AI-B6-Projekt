@@ -1,5 +1,6 @@
 com.javafwp
 com.javafwp.game
 com.javafwp.game.gameObjects
+com.javafwp.game.highscoreSystem
 com.javafwp.sound
 com.javafwp.sprites
