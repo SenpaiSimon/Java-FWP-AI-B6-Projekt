@@ -25,7 +25,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class gameLoop extends Application{
+public class gameLoop extends Application implements globals{
     AnimationTimer timer;
     private gameState gameState;
     Stage primaryStage;
@@ -35,55 +35,33 @@ public class gameLoop extends Application{
     private int score = 0;
 
     /*
-     * Globals for fine-tuning
+     * Globals are now in the globals interface
      */
+
+    /*
+     * Private Variable Declarations
+     */
+    
     // Window Stuff
-    private int width = 1280;
-    private int height = 720;
     private Rectangle playingBackground;
 
     // Player stuff
     private player player;
-    private double gravity = 0.4;
-    private double jumpForce = 15;
-    private double moveSpeed = 5;
 
     // plattform stuff
     private ArrayList <plattform> plattforms = new ArrayList<plattform>();
-    private double scrollSpeed = 3;
-    private int distanceMinX = 200;
-    private int distanceMaxX = 350;
-    private int distanceY = 150;
-    private int plattformHeight = 21 * 2;
-    private int plattformWidth = 68 * 2;
     private Paint plattformPaint = imageLoader.loadImage("platform.png");
 
     // missle stuff
     private ArrayList <projectile> projectiles = new ArrayList<projectile>();
-    private double projectileSpeed = 10;
-    private double missleLength = 32;
-    private double missleHeight = 32;
     private Paint missleColor = imageLoader.loadImage("pizza.png");
 
-    // heat stuff
-    private int heatPerShot = 50;
-    private int maxHeat = 300;
-    private int coolSpeed = 2;
+    // heatbar stuff
     private heatbar heatbar;
-    private double heatX = 10;
-    private double heatY = 10;
-    private double heatHeigth = 10;
 
     // enemy stuff
     private ArrayList <enemy> enemys = new ArrayList<enemy>();
-    private int maxEnemyCount = 6;
-    private int ticksBetweenSpawns = 100;
-    private int currentTick = 0;
-    private int enemyLength = 48;
-    private int enemyHeight = 48;
-    private int enemySpeed = 1;
-    private int  minEnemyDistanceX = width + 100;
-    private int  minEnemyDistanceY = height + 100;
+    int currentTick = 0;
 
     // death screen stuff
     private Text deathMessage;
