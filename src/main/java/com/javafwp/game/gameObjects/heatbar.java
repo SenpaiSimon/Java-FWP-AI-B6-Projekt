@@ -77,11 +77,11 @@ public class heatbar extends object {
 
     
     /** 
-     * Gibt das innere JavaFX Objekt der Hitzeleiste zurück
+     * Gibt die inneren Node Objekte zurück
      * 
-     * @return Node
+     * @return Node[]
      */
-    public Node getHeatbar() {
-        return heat;
+    public Node[] getEntities() {
+        return new Node[]{entity, heat};
     }
 }
