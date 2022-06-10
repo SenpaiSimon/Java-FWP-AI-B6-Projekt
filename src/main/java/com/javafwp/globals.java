@@ -60,4 +60,6 @@ public interface globals {
      */
     int maxEntries = 10;
     int maxNameLength = 10;
+    int textXPos = 100;
+    int textYPos = 100;
 }

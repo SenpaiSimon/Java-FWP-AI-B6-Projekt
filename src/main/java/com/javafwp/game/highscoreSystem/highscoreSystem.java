@@ -4,46 +4,69 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class highscoreSystem {
     private Text displayText;
+    private Text infoDisplay;
+    private Text congrats;
     private TextField inputName;
     private ArrayList<highscoreEntry> entries;
-    private int maxEntries;
     private int tempScoreEntry;
-
+    
+    private int maxEntries;
     private int maxNameLength;
+    private int textXPos;
+    private int textYPos;
 
     /**
      * Kontruktor für das Highscore System
      * 
      * @param maxEntries
      */
-    public highscoreSystem(int maxEntries, int maxNameLength) {
+    public highscoreSystem(int textXPos, int textYPos, int maxEntries, int maxNameLength) {
+        this.textXPos = textXPos;
+        this.textYPos = textYPos;
         this.maxNameLength = maxNameLength;
         this.maxEntries = maxEntries;
 
         // display
         displayText = new Text();
-        displayText.setTranslateX(100);
-        displayText.setTranslateY(100);
-        displayText.setStyle("-fx-font: 15 arial;");
+        displayText.setTranslateX(this.textXPos);
+        displayText.setTranslateY(this.textYPos);
+        displayText.setStyle("-fx-font: 25 arial;");
         displayText.setFill(Color.WHITE);
+
+        // info text
+        infoDisplay = new Text();
+        infoDisplay.setTranslateX(this.textXPos);
+        infoDisplay.setStyle("-fx-font: 20 arial;");
+        infoDisplay.setFill(Color.RED);
+        infoDisplay.setVisible(false);
+
+        // congrats
+        congrats = new Text();
+        congrats.setTranslateX(this.textXPos);
+        congrats.setStyle("-fx-font: 20 arial;");
+        congrats.setFill(Color.GOLD);
+        congrats.setVisible(false);
 
         // input
         inputName = new TextField();
-        inputName.setTranslateX(400);
-        inputName.setTranslateY(200);
+        inputName.setTranslateX(textXPos);
+        inputName.setVisible(false);
+        inputName.setStyle("-fx-font: 15 arial;");
+        inputName.setMaxHeight(50);
 
         // other vars
         entries = new ArrayList<highscoreEntry>();
-        inputName.setVisible(false);
         tempScoreEntry = 0;
 
-        inputName.setOnAction(event -> { // if user pressed "ENTER"
+        // if user pressed "ENTER" complete addition
+        inputName.setOnAction(event -> { 
             completeAddingNewEntry();  
         }); 
 
@@ -51,25 +74,43 @@ public class highscoreSystem {
         inputName.setOnKeyTyped(even -> {
             if(inputName.isVisible()) {
                 String input = inputName.getText();
+                int tempPos = inputName.getCaretPosition();
+                if(inputName.getLength() > maxNameLength) {
+                    infoDisplay.setText("Name can not be longer than " + maxNameLength + " Letters!");
+                }
                 inputName.setText(input.substring(0, Math.min(input.length(), this.maxNameLength)));
-                inputName.end();
+                inputName.positionCaret(tempPos);
             }
         });
     }
 
+    
+    /** 
+     * Gibt die Möglichkeit frei einen neuen Eintrag hhinzuzufügen wenn dieser noch Platz hat oder besser ist als der letzte
+     * 
+     * @param newScore
+     */
     public void addEntry(int newScore) {
         sort();
-        if(entries.isEmpty() || entries.size() < maxEntries) {
+        if(entries.isEmpty() || entries.size() < maxEntries || newScore > entries.get(entries.size() - 1).getScore()) {
             // make user able to type in text
             inputName.setVisible(true);
+            infoDisplay.setVisible(true);
+            congrats.setVisible(true);
             tempScoreEntry = newScore;
-        } else if (newScore > entries.get(entries.size() - 1).getScore()) {
-            // make user able to type in text
-            inputName.setVisible(true);
-            tempScoreEntry = newScore;
+            congrats.setText("NEW HIGHSCORE! Enter name here:");
+            infoDisplay.setText("");
         }
+
+        // set the input field relative to the text height
+        congrats.setTranslateY(displayText.getBoundsInParent().getMinY() + displayText.getBoundsInParent().getHeight() + 40);
+        inputName.setTranslateY(congrats.getBoundsInParent().getMinY() + congrats.getBoundsInParent().getHeight() + 10);
+        infoDisplay.setTranslateY(inputName.getTranslateY() + inputName.getMaxHeight() + 10);
     }
 
+    /**
+     * Beendet das hinzufügen nachdem ENTER im Eingabefeld gedrückt wird
+     */
     private void completeAddingNewEntry() {
         if(!inputName.getText().isEmpty()) {
             // longest name is 10 letters
@@ -83,10 +124,17 @@ public class highscoreSystem {
 
             inputName.clear();
             inputName.setVisible(false);
+            infoDisplay.setVisible(false);
+            congrats.setVisible(false);
             generateText();
+        } else {
+            infoDisplay.setText("Name can not be empty!");
         }
     }
 
+    /**
+     * Sortiert die Einträge nach Score absteigend
+     */
     private void sort() {
         Collections.sort(entries, new Comparator<highscoreEntry>() {
             @Override
@@ -97,6 +145,9 @@ public class highscoreSystem {
         });
     }
 
+    /**
+     * Generiert den Text der den Highscore anzeigt
+     */
     public void generateText() {
         sort();
         String tempText = "Top " + maxEntries + " Highscores:\n";
@@ -107,13 +158,11 @@ public class highscoreSystem {
     }
     
     /** 
-     * @return Text
+     * Gibt alle Nodes des Systems zurück
+     * 
+     * @return Node[]
      */
-    public Text getDisplayText() {
-        return displayText;
-    }
-
-    public TextField getInputFied() {
-        return inputName;
+    public Node[] getEntities() {
+        return new Node[]{displayText, inputName, infoDisplay, congrats};
     }
 }

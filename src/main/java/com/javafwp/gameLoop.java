@@ -70,7 +70,7 @@ public class gameLoop extends Application implements globals{
     int currentTick = 0;
 
     // highscore system
-    highscoreSystem highscoreSystem = new highscoreSystem(maxEntries, maxNameLength);
+    highscoreSystem highscoreSystem = new highscoreSystem(textXPos, textYPos, maxEntries, maxNameLength);
 
     // death screen stuff
     private Text deathMessage;
@@ -187,7 +187,7 @@ public class gameLoop extends Application implements globals{
      */
     private void initHeatbar() {
         heatbar = new heatbar(heatX, heatY, maxHeat, heatHeigth, Color.WHITE, Color.ORANGE);
-        scoreRoot.getChildren().addAll(heatbar.getEntity(), heatbar.getHeatbar());
+        scoreRoot.getChildren().addAll(heatbar.getEntities());
     }
 
     /**
@@ -287,7 +287,8 @@ public class gameLoop extends Application implements globals{
         deathMessage.setFill(Color.GOLD);
 
         // add everything
-        deathRoot.getChildren().addAll(deathMessage, highscoreSystem.getDisplayText(), highscoreSystem.getInputFied());
+        deathRoot.getChildren().addAll(deathMessage);
+        deathRoot.getChildren().addAll(highscoreSystem.getEntities());
     }
 
     
