@@ -11,6 +11,7 @@ import com.javafwp.game.gameObjects.player;
 import com.javafwp.game.gameObjects.projectile;
 import com.javafwp.game.ownTypes.gameState;
 import com.javafwp.sprites.imageLoader;
+import com.javafwp.sound.musicPlayer;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -79,6 +80,9 @@ public class gameLoop extends Application implements globals{
     // shop stuff
     private Rectangle shopBackground;
     private Text shopText;
+
+    // sound stuff
+    private musicPlayer musicPlayer;
 
     // debug prints -- may slow down application
     public static boolean debug = false;
@@ -160,6 +164,8 @@ public class gameLoop extends Application implements globals{
                 }
             }
         });
+
+        musicPlayer = new musicPlayer();
 
         // init the rest
         initPlayState();
@@ -620,6 +626,7 @@ public class gameLoop extends Application implements globals{
      */
     private void update(long tick) {
         keyActions();
+        musicPlayer.updateMusic(gameState);
 
         if(gameState == com.javafwp.game.ownTypes.gameState.playing) {
              // player stuff
