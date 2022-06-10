@@ -3,12 +3,13 @@ package com.javafwp.sound;
 
 import com.javafwp.game.ownTypes.gameState;
 
-import java.lang.Math;
-import java.io.File;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
+/**
+ * Eigener Musik Player zum behandeln von Hintergrund Musik im Spiel
+ */
 public class musicPlayer {
     
     private MediaPlayer   menuLoop;
@@ -21,10 +22,10 @@ public class musicPlayer {
 
     private gameState lastGamestate = null;
 
-    private MediaPlayer  loadAudioClip(String filename)    {
-        return  new MediaPlayer (new Media( getClass().getResource(filename).toExternalForm()  ) );
-    }
-
+    /**
+     * Konstruktor des Musik Players
+     * Lädt die Sound Dateien vor
+     */
     public musicPlayer()   {
         this.menuLoop   = this.loadAudioClip("intro.wav"); 
         this.start      = this.loadAudioClip("start.wav"); 
@@ -35,14 +36,31 @@ public class musicPlayer {
         this.gameLoop.setCycleCount(AudioClip.INDEFINITE);
     }
 
+    /**
+     * Lädt .wav Datei aus einer Datei als Media Player Objekt
+     * 
+     * @param filename
+     * @return
+     */
+    private MediaPlayer loadAudioClip(String filename) {
+        return new MediaPlayer(new Media(getClass().getResource(filename).toExternalForm()));
+    }
+
+    /**
+     * TBD
+     */
     private void updateCued()   {
 
     }
 
+    /**
+     * Wechselt die Musik und Übergänge je nach Zustand des Spiels
+     * 
+     * @param gameState
+     */
     public void updateMusic(gameState gameState)  {
 
         if(gameState == this.lastGamestate) {
-         
                 if(currentClip == null && cuedClip != null) {
                     currentClip = cuedClip;
                     currentClip.play();
@@ -60,7 +78,6 @@ public class musicPlayer {
         }   else    {
             // we've transistioned from a state
             // cue the appropriate clip
-
             switch(gameState)   {
                 case mainMenu:
                     this.cuedClip = menuLoop;
@@ -81,6 +98,4 @@ public class musicPlayer {
 
         lastGamestate = gameState;
     }
-
-
 }
