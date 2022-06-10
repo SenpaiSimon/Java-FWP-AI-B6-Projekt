@@ -67,6 +67,7 @@
         <configuration>
           <reportOutputDirectory>javadoc</reportOutputDirectory>
           <show>private</show>
+          <name>JavaFWP-Sidescroller</name>
         </configuration>
       </plugin>
     </plugins>
