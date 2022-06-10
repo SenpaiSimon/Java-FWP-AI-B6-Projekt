@@ -9,6 +9,7 @@ import com.javafwp.game.gameObjects.heatbar;
 import com.javafwp.game.gameObjects.plattform;
 import com.javafwp.game.gameObjects.player;
 import com.javafwp.game.gameObjects.projectile;
+import com.javafwp.game.highscoreSystem.highscoreSystem;
 import com.javafwp.game.ownTypes.gameState;
 import com.javafwp.sprites.imageLoader;
 import com.javafwp.sound.musicPlayer;
@@ -68,6 +69,9 @@ public class gameLoop extends Application implements globals{
     private ArrayList <enemy> enemys = new ArrayList<enemy>();
     int currentTick = 0;
 
+    // highscore system
+    highscoreSystem highscoreSystem = new highscoreSystem(maxEntries, maxNameLength);
+
     // death screen stuff
     private Text deathMessage;
 
@@ -94,7 +98,7 @@ public class gameLoop extends Application implements globals{
     private Pane scoreRoot = new Pane();
     private Pane menuRoot = new Pane();
     private Pane shopRoot = new Pane();
-    private Pane deahRoot = new Pane();
+    private Pane deathRoot = new Pane();
 
     
     /** 
@@ -283,7 +287,7 @@ public class gameLoop extends Application implements globals{
         deathMessage.setFill(Color.GOLD);
 
         // add everything
-        deahRoot.getChildren().addAll(deathMessage);
+        deathRoot.getChildren().addAll(deathMessage, highscoreSystem.getDisplayText(), highscoreSystem.getInputFied());
     }
 
     
@@ -305,7 +309,7 @@ public class gameLoop extends Application implements globals{
                 } else if(gameState == com.javafwp.game.ownTypes.gameState.shop) {
                     appRoot.getChildren().removeAll(shopRoot);
                 } else if(gameState == com.javafwp.game.ownTypes.gameState.death) {
-                    appRoot.getChildren().removeAll(deahRoot, gameRoot, scoreRoot);
+                    appRoot.getChildren().removeAll(deathRoot, gameRoot, scoreRoot);
                 }
                 appRoot.getChildren().add(menuRoot);
             break;
@@ -314,7 +318,7 @@ public class gameLoop extends Application implements globals{
                 if(gameState == com.javafwp.game.ownTypes.gameState.mainMenu) {
                     appRoot.getChildren().removeAll(menuRoot);
                 } else if (gameState == com.javafwp.game.ownTypes.gameState.death) {
-                    appRoot.getChildren().remove(deahRoot);
+                    appRoot.getChildren().remove(deathRoot);
                 }
 
                 if(gameState != com.javafwp.game.ownTypes.gameState.death) {
@@ -341,7 +345,9 @@ public class gameLoop extends Application implements globals{
                 if(gameState == com.javafwp.game.ownTypes.gameState.playing) {
                     // nothing to unload yet
                 }
-                appRoot.getChildren().addAll(deahRoot);
+                appRoot.getChildren().addAll(deathRoot);
+                highscoreSystem.generateText();
+                highscoreSystem.addEntry(score);
             break;
 
             default:

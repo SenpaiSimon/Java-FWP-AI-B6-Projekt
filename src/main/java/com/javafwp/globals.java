@@ -54,4 +54,10 @@ public interface globals {
     int enemySpeed = 1;
     int minEnemyDistanceX = width + 100;
     int minEnemyDistanceY = height + 100;
+
+    /**
+     * Konstanten für Highscores
+     */
+    int maxEntries = 10;
+    int maxNameLength = 10;
 }
