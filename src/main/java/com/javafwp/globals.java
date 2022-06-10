@@ -1,16 +1,25 @@
 package com.javafwp;
 
+/**
+ * Globale Variablen um Fine-Tuning an der Anwendung auszuführen
+ */
 public interface globals {
-    // Window Stuff
+    /**
+     * Größe des Fensters
+     */
     int width = 1280;
     int height = 720;
 
-    // Player stuff
+    /**
+     * Konstanten für den Spieler
+     */
     double gravity = 0.4;
     double jumpForce = 15;
     double moveSpeed = 5;
 
-    // plattform stuff
+    /**
+     * Konstanten für Plattformen
+     */
     double scrollSpeed = 3;
     int distanceMinX = 200;
     int distanceMaxX = 350;
@@ -18,12 +27,16 @@ public interface globals {
     int plattformHeight = 21 * 2;
     int plattformWidth = 68 * 2;
 
-    // missle stuff
+    /**
+     * Konstanten für Projektile
+     */
     double projectileSpeed = 10;
     double missleLength = 32;
     double missleHeight = 32;
 
-    // heat stuff
+    /**
+     * Konstanten für die Hitzeleiste
+     */
     int heatPerShot = 50;
     int maxHeat = 300;
     int coolSpeed = 2;
@@ -31,7 +44,9 @@ public interface globals {
     double heatY = 10;
     double heatHeigth = 10;
 
-    // enemy stuff
+    /**
+     * Konstanten für Gegner
+     */
     int maxEnemyCount = 6;
     int ticksBetweenSpawns = 100;
     int enemyLength = 48;

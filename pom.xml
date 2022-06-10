@@ -66,6 +66,7 @@
         <version>3.4.0</version>
         <configuration>
           <reportOutputDirectory>javadoc</reportOutputDirectory>
+          <show>private</show>
         </configuration>
       </plugin>
     </plugins>

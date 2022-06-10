@@ -15,6 +15,12 @@ import javafx.scene.paint.ImagePattern;
 public class imageLoader {
     
     /** 
+     * Methode um Bilder als Input-Stream zu laden und dann als JavaFX Bild zurückzugeben
+     * 
+     * HOW TO USE
+     * imageLoader imagaLoader = new imageLoader();
+     * rect.setFill(imageLoader.loadImage("filename.fileextension"));
+     * 
      * @param fileName
      * @return ImagePattern
      */

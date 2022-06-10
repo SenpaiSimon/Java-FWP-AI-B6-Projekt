@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Paint;
 
+/**
+ * Spieler Objekt 
+ * Erbt von Objekt.java
+ */
 public class player extends object{
     boolean canJump = false;
     Point2D vel;
@@ -15,6 +19,17 @@ public class player extends object{
     Paint[] runningFrames;
     int animationFrameCounter = 0;
 
+    /**
+     * Konstruktor für den Spieler
+     * 
+     * @param xPos
+     * @param yPos
+     * @param length
+     * @param height
+     * @param acc
+     * @param idleFrames
+     * @param runningFrames
+     */
     public player(double xPos, double yPos, double length, double height, double acc, Paint[] idleFrames, Paint[] runningFrames) {
         super(xPos, yPos, length, height, idleFrames[0]);
         this.type = com.javafwp.game.ownTypes.type.player;
@@ -27,6 +42,10 @@ public class player extends object{
 
     
     /** 
+     * Prüft Kolliossionen des Spielers ab
+     * Gibt dem Spieler Schwerkraft
+     * Setzt die Animationen des Spielers
+     * 
      * @param tick
      * @param plattforms
      * @param scrollSpeed
@@ -75,6 +94,8 @@ public class player extends object{
 
     
     /** 
+     * Gibt den Geschwindigkeitsvektor des Spielers an
+     * 
      * @return Point2D
      */
     public Point2D getVel() {
@@ -83,6 +104,8 @@ public class player extends object{
 
     
     /** 
+     * Bewegt den Spieler um einen Vektor
+     * 
      * @param dir
      */
     // moves in x Dir
@@ -92,6 +115,8 @@ public class player extends object{
 
     
     /** 
+     * Lässt den Spieler springen mit einer definierten Kraft
+     * 
      * @param force
      */
     // jumping
@@ -104,7 +129,9 @@ public class player extends object{
     }
 
     
-    /** 
+    /**
+     * Setzt den Spieler nach einen Reset zurück
+     *  
      * @param spawnX
      * @param spawnY
      */
@@ -117,6 +144,8 @@ public class player extends object{
 
     
     /** 
+     * Gibt an ob der Spieler zur Zeit springen kann/darf
+     * 
      * @return boolean
      */
     public boolean getCanJump() {

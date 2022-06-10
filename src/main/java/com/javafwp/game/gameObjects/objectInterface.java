@@ -5,6 +5,9 @@ import com.javafwp.game.ownTypes.type;
 import javafx.scene.Node;
 import javafx.scene.paint.Paint;
 
+/**
+ * Interface welches alle Funktionen angibt, welche ein Spielobjekt haben sollte
+ */
 public interface objectInterface {
     public Node getEntity();
     public double getWidth ();

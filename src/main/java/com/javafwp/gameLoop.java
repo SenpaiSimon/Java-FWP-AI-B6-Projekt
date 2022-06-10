@@ -25,6 +25,11 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * Hauptklasse des Spieles, hier werden alle anderen Klassen verwaltet
+ * Erbt von javafx.application.Application 
+ * Implementiert globals.java
+ */
 public class gameLoop extends Application implements globals{
     AnimationTimer timer;
     private gameState gameState;
@@ -34,14 +39,13 @@ public class gameLoop extends Application implements globals{
 
     private int score = 0;
 
-    /*
+    /**
      * Globals are now in the globals interface
      */
 
-    /*
+    /**
      * Private Variable Declarations
      */
-    
     // Window Stuff
     private Rectangle playingBackground;
 
@@ -90,6 +94,9 @@ public class gameLoop extends Application implements globals{
 
     
     /** 
+     * Initialisiert alle Notwendigen Bestandteile der Anwendung
+     * Startet den Timer, welcher unser Spiel periodisch updated -- sollte mit 60 FPS laufen
+     * 
      * @param primaryStage
      * @throws Exception
      */
@@ -115,6 +122,8 @@ public class gameLoop extends Application implements globals{
 
     
     /** 
+     * Methode um Tastaturanschläge einfach abzufragen
+     * 
      * @param key
      * @return boolean
      */
@@ -124,6 +133,9 @@ public class gameLoop extends Application implements globals{
 
     
     /** 
+     * Initialisiert alle Bestandteile der Hauptszene
+     * Ruft die Init Funktionen der anderen Teile auf
+     * 
      * @param primaryStage
      */
     private void init(Stage primaryStage) {
@@ -160,11 +172,17 @@ public class gameLoop extends Application implements globals{
         switchState(com.javafwp.game.ownTypes.gameState.mainMenu);
     }
 
+    /**
+     * Initialisiert die Leiste welche Hitze anzeigt und dessen Bestandteile
+     */
     private void initHeatbar() {
         heatbar = new heatbar(heatX, heatY, maxHeat, heatHeigth, Color.WHITE, Color.ORANGE);
         scoreRoot.getChildren().addAll(heatbar.getEntity(), heatbar.getHeatbar());
     }
 
+    /**
+     * Initialisiert die Shop Seite und dessen Bestandteile
+     */ 
     private void initShopState() {
         // background
         shopBackground = new Rectangle(width, height);
@@ -183,6 +201,9 @@ public class gameLoop extends Application implements globals{
         shopRoot.getChildren().addAll(shopBackground, shopText);
     }
 
+    /**
+     * Initialisiert die Menu Seite und dessen Bestandteile
+     */ 
     private void initMenuState() {
         // background Image
         menuBackground = new Rectangle(width, height);
@@ -205,6 +226,9 @@ public class gameLoop extends Application implements globals{
         menuRoot.getChildren().addAll(menuBackground, menuOverlay);
     }
 
+    /**
+     * Initialisiert den Spielzustand und dessen Bestandteile
+     */ 
     private void initPlayState() {
         // background
         playingBackground = new Rectangle(width, height);
@@ -240,6 +264,9 @@ public class gameLoop extends Application implements globals{
         gameRoot.getChildren().addAll(playingBackground, player.getEntity());
     }
 
+    /**
+     * Initialisiert den Todes Screen und dessen Bestandteile
+     */ 
     private void initDeathScreen() {
         // text
         deathMessage = new Text();
@@ -255,6 +282,9 @@ public class gameLoop extends Application implements globals{
 
     
     /** 
+     * State Machine - Wechselt in den Zustand der Andwendung und lädt bzw entlädt 
+     * die jeweiligen Teile
+     * 
      * @param newState
      */
     private void switchState(gameState newState) {
@@ -316,6 +346,9 @@ public class gameLoop extends Application implements globals{
         gameState = newState;
     }
 
+    /**
+     * Fügt Plattformen in definierten Abständen hinzu
+     */
     private void addPlattform() {
         if(plattforms.size() != 0) {
             plattform lastPlattform = plattforms.get(plattforms.size() - 1);
@@ -332,6 +365,9 @@ public class gameLoop extends Application implements globals{
         }
     }
 
+    /**
+     * Entfernt Plattformen außerhalb des Bildschirms
+     */
     private void removeOffscreenPlattform() {
         if(plattforms.size() != 0) {
             if(plattforms.get(0).getX() + plattforms.get(0).getWidth() + 100 < 0) {
@@ -343,6 +379,10 @@ public class gameLoop extends Application implements globals{
 
     
     /** 
+     * Wird durch das OnClick Event in der Hauptszene aufgerufen
+     * Fügt ein neues Projektil hinzu
+     * Die Richtung wird durch den Vektor zwischen Spieler und Maus angegeben
+     * 
      * @param mousePos
      */
     private void addMissle(MouseEvent mousePos) {
@@ -363,6 +403,9 @@ public class gameLoop extends Application implements globals{
         gameRoot.getChildren().addAll(newProj.getEntity());
     }
 
+    /**
+     * Entfernt jegliche Projektile, welche nicht mehr auf dem Bildschirm liegen
+     */
     private void removeOffscreenMissle() {
         for(projectile proj: projectiles) {
             if((proj.getX() > width + 100) ||          // right edge
@@ -376,6 +419,10 @@ public class gameLoop extends Application implements globals{
         }
     }
 
+    /**
+     * Fügt Gegner an zufälligen Stellen außerhalb des Bildschirm hinzu
+     * Dies geschieht in definierten Zeitabständen
+     */
     private void addEnemy() {
         if(currentTick >= ticksBetweenSpawns && enemys.size() <= maxEnemyCount) {
             int xPos = 0;
@@ -413,6 +460,9 @@ public class gameLoop extends Application implements globals{
         currentTick++;
     }
 
+    /**
+     * Handelt die Kollission zwischen Gegner und Spieler ab
+     */
     private void enemyPlayerColl() {
         for(enemy enem: enemys) {
             if(player.getEntity().getBoundsInParent().intersects(enem.getEntity().getBoundsInParent())) {
@@ -422,6 +472,9 @@ public class gameLoop extends Application implements globals{
         }
     }
 
+    /**
+     * Handelt die Kollission zwischen Gegner und Projektil ab
+     */
     private void enemyProjColl() {
         loop:
         for(enemy enem: enemys) {
@@ -439,6 +492,8 @@ public class gameLoop extends Application implements globals{
 
     
     /** 
+     * Einfache Hilfsfunktion, welche einen zufälligen Wert zwischen den Grenzen zurückgibt
+     * 
      * @param min
      * @param max
      * @return int
@@ -448,12 +503,18 @@ public class gameLoop extends Application implements globals{
         return min + ran.nextInt(max - min);
     }
 
+    /**
+     * Setzt das Spiel zurück wenn der Spiele unten aus dem Bildschirm fällt
+     */
     private void playerDeath() {
         if(player.getY() + player.getHeight() > height) {
             switchState(com.javafwp.game.ownTypes.gameState.death);
         }
     }
 
+    /**
+     * Setzt das Spiel in seinen initilan Spielzustand zurück nach z.B. gescheiterten Versuchen
+     */
     private void resetGame() {
         // what happens player when death
         player.death((width/4) * 3 + 10, height/2 - 50);
@@ -476,10 +537,17 @@ public class gameLoop extends Application implements globals{
         heatbar.reset();
     }
 
+    /**
+     * Updated den Score rechts oben beim Spielen
+     */
     private void updateTexts() {
         scoreText.setText("Score: " + score);
     }
 
+    /**
+     * Methode um Aktionen in zusammenhang mit Tastenanschlägen auf der Tastatur abzuhandeln
+     * Aktionen sind abhänging vom aktuellen Zustand des Spiels und wechseln auch bedingt den Zustand
+     */
     private void keyActions() {
         if(isPressedKey(KeyCode.D)) {
             if(gameState == com.javafwp.game.ownTypes.gameState.playing) {
@@ -528,6 +596,8 @@ public class gameLoop extends Application implements globals{
 
     
     /** 
+     * Input verzögerung für Tastenanschläge von Zustands-Wechseln um Flickern zu vermeiden
+     * 
      * @param delay
      */
     private void synchronousInputDelay(int delay) {
@@ -543,6 +613,9 @@ public class gameLoop extends Application implements globals{
 
     
     /** 
+     * Globale Update Methode um alle Gegenstände, Tastenanschläge und Animationen 
+     * zu aktualisieren
+     * 
      * @param tick
      */
     private void update(long tick) {
@@ -589,6 +662,10 @@ public class gameLoop extends Application implements globals{
 
     
     /** 
+     * Durchschleifen der Main Methode aus der mainStart.java 
+     * Notwendig da mainStart.java nicht von Application erbt und somit keine 
+     * launch(args) Mathode hat
+     * 
      * @param args
      */
     public static void main(String[] args) {

@@ -51,7 +51,7 @@ Das Projekt wurde mit [microsoft visualstudio code](https://code.visualstudio.co
 *Notwendig*:
 - [x] Vererbung
 - [x] Interface
-- [ ] Javadoc Kommentierung
+- [x] Javadoc Kommentierung
 
 *Besondere Herrausforderung*:
 - [x] GUI mit `JavaSwing` oder `JavaFX`

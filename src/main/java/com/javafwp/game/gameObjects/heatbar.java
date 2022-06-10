@@ -4,11 +4,25 @@ import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * Hitzeleisten Objekt 
+ * Erbt von Objekt.java
+ */
 public class heatbar extends object {
     private Color heatColor;
     private Rectangle heat;
     private int currentHeat;
 
+    /**
+     * Konstruktor für Hitzeleiste
+     * 
+     * @param xPos
+     * @param yPos
+     * @param maxHeat
+     * @param height
+     * @param baseColor
+     * @param heatColor
+     */
     public heatbar(double xPos, double yPos, double maxHeat, double height, Color baseColor, Color heatColor) {
         super(xPos, yPos, maxHeat, height, baseColor);
         this.heatColor = heatColor;
@@ -22,6 +36,8 @@ public class heatbar extends object {
 
     
     /** 
+     * Kühlt die Hitzeleiste nach und nach ab
+     * 
      * @param coolSpeed
      */
     public void update(double coolSpeed) {
@@ -37,6 +53,8 @@ public class heatbar extends object {
 
     
     /** 
+     * Fügt Hitze hinzu zur leiste
+     * 
      * @param heat
      * @return boolean
      */
@@ -49,6 +67,9 @@ public class heatbar extends object {
         }
     }
 
+    /**
+     * Setzt die Hitze auf 0 zurück
+     */
     public void reset() {
         currentHeat = 0;
         heat.setWidth(currentHeat);
@@ -56,6 +77,8 @@ public class heatbar extends object {
 
     
     /** 
+     * Gibt das innere JavaFX Objekt der Hitzeleiste zurück
+     * 
      * @return Node
      */
     public Node getHeatbar() {
