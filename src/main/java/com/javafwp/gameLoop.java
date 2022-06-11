@@ -41,6 +41,7 @@ public class gameLoop extends Application implements globals{
     imageLoader imageLoader = new imageLoader();
 
     private int score = 0;
+    private paralellSfxPlayer scoreSfx = new paralellSfxPlayer("score.wav", 0.1, 5);
 
     /**
      * Globals are now in the globals interface
@@ -70,6 +71,7 @@ public class gameLoop extends Application implements globals{
     // enemy stuff
     private ArrayList <enemy> enemys = new ArrayList<enemy>();
     int currentTick = 0;
+    private paralellSfxPlayer enemySfx = new paralellSfxPlayer("enemy.wav", 0.5, 5);
 
     // highscore system
     highscoreSystem highscoreSystem = new highscoreSystem(textXPos, textYPos, maxEntries, maxNameLength);
@@ -372,6 +374,7 @@ public class gameLoop extends Application implements globals{
                 plattforms.add(newPlatt);
                 gameRoot.getChildren().add(newPlatt.getEntity());
                 score++;
+                scoreSfx.play();
             }
         } else {
             plattform firstPlatt = new plattform(width/4 * 3, height/2, plattformWidth, plattformHeight, plattformPaint);
@@ -503,6 +506,8 @@ public class gameLoop extends Application implements globals{
                     projectiles.remove(proj);
                     enemys.remove(enem);
                     score++;
+                    enemySfx.play();
+                    scoreSfx.play();
                     break loop;
                 }
             }

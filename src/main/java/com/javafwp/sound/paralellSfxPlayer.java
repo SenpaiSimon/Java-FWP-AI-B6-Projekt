@@ -39,7 +39,7 @@ public class paralellSfxPlayer {
             currentTime = this.clips[i].getCurrentTime();
 
             // if the current time is at the end of playback
-            if(currentTime.compareTo(this.clips[i].getStopTime()) == 0)  {
+            if(currentTime.compareTo(this.clips[i].getStopTime()) >= 0)  {
                 index = i;
                 break;
             }
