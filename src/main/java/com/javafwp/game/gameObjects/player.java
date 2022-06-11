@@ -2,11 +2,13 @@ package com.javafwp.game.gameObjects;
 
 import java.util.ArrayList;
 
+import com.javafwp.sound.paralellSfxPlayer;
+
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Paint;
 
 /**
- * Spieler Objekt 
+ * Spieler Objekt
  * Erbt von Objekt.java
  */
 public class player extends object{
@@ -18,6 +20,8 @@ public class player extends object{
     Paint[] idleFrames;
     Paint[] runningFrames;
     int animationFrameCounter = 0;
+
+    paralellSfxPlayer jumpSfx;
 
     /**
      * Konstruktor für den Spieler
@@ -38,10 +42,12 @@ public class player extends object{
 
         this.idleFrames = idleFrames;
         this.runningFrames = runningFrames;
+
+        jumpSfx = new paralellSfxPlayer("jump.wav", 0.4, 2);
     }
 
-    
-    /** 
+
+    /**
      * Prüft Kolliossionen des Spielers ab
      * Gibt dem Spieler Schwerkraft
      * Setzt die Animationen des Spielers
@@ -92,8 +98,8 @@ public class player extends object{
 
     }
 
-    
-    /** 
+
+    /**
      * Gibt den Geschwindigkeitsvektor des Spielers an
      * 
      * @return Point2D Geschwindkeitsvektor des Spielers
@@ -102,8 +108,8 @@ public class player extends object{
         return vel;
     }
 
-    
-    /** 
+
+    /**
      * Bewegt den Spieler um einen Vektor
      * 
      * @param dir Bewegungsvektor
@@ -113,8 +119,8 @@ public class player extends object{
         addX(dir.getX());
     }
 
-    
-    /** 
+
+    /**
      * Lässt den Spieler springen mit einer definierten Kraft
      * 
      * @param force Sprungkraft
@@ -125,10 +131,12 @@ public class player extends object{
             addY(-1);
             vel = vel.add(0, -force);
             canJump = false;
+
+            jumpSfx.play();
         }
     }
 
-    
+
     /**
      * Setzt den Spieler nach einen Reset zurück
      *  
@@ -142,8 +150,8 @@ public class player extends object{
         vel = new Point2D(0, 0);
     }
 
-    
-    /** 
+
+    /**
      * Gibt an ob der Spieler zur Zeit springen kann/darf
      * 
      * @return boolean Ob Sprung erfolgen kann

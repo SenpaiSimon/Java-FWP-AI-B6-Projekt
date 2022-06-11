@@ -13,6 +13,7 @@ import com.javafwp.game.highscoreSystem.highscoreSystem;
 import com.javafwp.game.ownTypes.gameState;
 import com.javafwp.sprites.imageLoader;
 import com.javafwp.sound.musicPlayer;
+import com.javafwp.sound.paralellSfxPlayer;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -29,7 +30,7 @@ import javafx.stage.Stage;
 
 /**
  * Hauptklasse des Spieles, hier werden alle anderen Klassen verwaltet
- * Erbt von javafx.application.Application 
+ * Erbt von javafx.application.Application
  * Implementiert globals.java
  */
 public class gameLoop extends Application implements globals{
@@ -40,6 +41,7 @@ public class gameLoop extends Application implements globals{
     imageLoader imageLoader = new imageLoader();
 
     private int score = 0;
+    private paralellSfxPlayer scoreSfx = new paralellSfxPlayer("score.wav", 0.1, 5);
 
     /**
      * Globals are now in the globals interface
@@ -61,6 +63,7 @@ public class gameLoop extends Application implements globals{
     // missle stuff
     private ArrayList <projectile> projectiles = new ArrayList<projectile>();
     private Paint missleColor = imageLoader.loadImage("pizza.png");
+    private paralellSfxPlayer missileSfx = new paralellSfxPlayer("throw.wav", 0.4, 5);
 
     // heatbar stuff
     private heatbar heatbar;
@@ -68,6 +71,7 @@ public class gameLoop extends Application implements globals{
     // enemy stuff
     private ArrayList <enemy> enemys = new ArrayList<enemy>();
     int currentTick = 0;
+    private paralellSfxPlayer enemySfx = new paralellSfxPlayer("enemy.wav", 0.5, 5);
 
     // highscore system
     highscoreSystem highscoreSystem = new highscoreSystem(textXPos, textYPos, maxEntries, maxNameLength);
@@ -100,8 +104,8 @@ public class gameLoop extends Application implements globals{
     private Pane shopRoot = new Pane();
     private Pane deathRoot = new Pane();
 
-    
-    /** 
+
+    /**
      * Initialisiert alle Notwendigen Bestandteile der Anwendung
      * Startet den Timer, welcher unser Spiel periodisch updated -- sollte mit 60 FPS laufen
      * 
@@ -128,8 +132,8 @@ public class gameLoop extends Application implements globals{
         timer.start();
     }
 
-    
-    /** 
+
+    /**
      * Methode um Tastaturanschläge einfach abzufragen
      * 
      * @param key KeyCode zum prüfen
@@ -139,8 +143,8 @@ public class gameLoop extends Application implements globals{
         return keys.getOrDefault(key, false);
     }
 
-    
-    /** 
+
+    /**
      * Initialisiert alle Bestandteile der Hauptszene
      * Ruft die Init Funktionen der anderen Teile auf
      * 
@@ -192,7 +196,7 @@ public class gameLoop extends Application implements globals{
 
     /**
      * Initialisiert die Shop Seite und dessen Bestandteile
-     */ 
+     */
     private void initShopState() {
         // background
         shopBackground = new Rectangle(width, height);
@@ -213,7 +217,7 @@ public class gameLoop extends Application implements globals{
 
     /**
      * Initialisiert die Menu Seite und dessen Bestandteile
-     */ 
+     */
     private void initMenuState() {
         // background Image
         menuBackground = new Rectangle(width, height);
@@ -238,7 +242,7 @@ public class gameLoop extends Application implements globals{
 
     /**
      * Initialisiert den Spielzustand und dessen Bestandteile
-     */ 
+     */
     private void initPlayState() {
         // background
         playingBackground = new Rectangle(width, height);
@@ -276,7 +280,7 @@ public class gameLoop extends Application implements globals{
 
     /**
      * Initialisiert den Todes Screen und dessen Bestandteile
-     */ 
+     */
     private void initDeathScreen() {
         // text
         deathMessage = new Text();
@@ -291,9 +295,9 @@ public class gameLoop extends Application implements globals{
         deathRoot.getChildren().addAll(highscoreSystem.getEntities());
     }
 
-    
-    /** 
-     * State Machine - Wechselt in den Zustand der Andwendung und lädt bzw entlädt 
+
+    /**
+     * State Machine - Wechselt in den Zustand der Andwendung und lädt bzw entlädt
      * die jeweiligen Teile
      * 
      * @param newState Wechselt in den gegebene State
@@ -370,6 +374,7 @@ public class gameLoop extends Application implements globals{
                 plattforms.add(newPlatt);
                 gameRoot.getChildren().add(newPlatt.getEntity());
                 score++;
+                scoreSfx.play();
             }
         } else {
             plattform firstPlatt = new plattform(width/4 * 3, height/2, plattformWidth, plattformHeight, plattformPaint);
@@ -390,8 +395,8 @@ public class gameLoop extends Application implements globals{
         }
     }
 
-    
-    /** 
+
+    /**
      * Wird durch das OnClick Event in der Hauptszene aufgerufen
      * Fügt ein neues Projektil hinzu
      * Die Richtung wird durch den Vektor zwischen Spieler und Maus angegeben
@@ -407,6 +412,8 @@ public class gameLoop extends Application implements globals{
 
         // retain a bit of the players velocity
         dir = dir.add(player.getVel().multiply(0.5));
+
+        missileSfx.play();
 
         projectile newProj = new projectile(
             player.getX() + player.getWidth() / 2.0,
@@ -462,9 +469,11 @@ public class gameLoop extends Application implements globals{
                     yPos = (int)(player.getY() + minEnemyDistanceY);
                 break;
             }
-            Paint[] enemyFrames = new Paint[2];
+            Paint[] enemyFrames = new Paint[4];
             enemyFrames[0] = imageLoader.loadImage("dominos1.png");
             enemyFrames[1] = imageLoader.loadImage("dominos2.png");
+            enemyFrames[2] = imageLoader.loadImage("dominos3.png");
+            enemyFrames[3] = imageLoader.loadImage("dominos4.png");
             enemy enem = new enemy(xPos, yPos, enemyLength, enemyHeight, enemyFrames);
             enemys.add(enem);
             gameRoot.getChildren().add(enem.getEntity());
@@ -497,14 +506,16 @@ public class gameLoop extends Application implements globals{
                     projectiles.remove(proj);
                     enemys.remove(enem);
                     score++;
+                    enemySfx.play();
+                    scoreSfx.play();
                     break loop;
                 }
             }
         }
     }
 
-    
-    /** 
+
+    /**
      * Einfache Hilfsfunktion, welche einen zufälligen Wert zwischen den Grenzen zurückgibt
      * 
      * @param min Minimaler Zufallswert
@@ -577,6 +588,9 @@ public class gameLoop extends Application implements globals{
                 player.jump(jumpForce);
             } else if (gameState == com.javafwp.game.ownTypes.gameState.death) {
                 switchState(com.javafwp.game.ownTypes.gameState.playing);
+            } else if(gameState == com.javafwp.game.ownTypes.gameState.mainMenu) {
+                switchState(com.javafwp.game.ownTypes.gameState.playing);
+                synchronousInputDelay(100);
             }
         }
         if(isPressedKey(KeyCode.ESCAPE)) {
@@ -607,8 +621,8 @@ public class gameLoop extends Application implements globals{
         }
     }
 
-    
-    /** 
+
+    /**
      * Input verzögerung für Tastenanschläge von Zustands-Wechseln um Flickern zu vermeiden
      * 
      * @param delay Wartezeit
@@ -624,9 +638,9 @@ public class gameLoop extends Application implements globals{
         };
     }
 
-    
-    /** 
-     * Globale Update Methode um alle Gegenstände, Tastenanschläge und Animationen 
+
+    /**
+     * Globale Update Methode um alle Gegenstände, Tastenanschläge und Animationen
      * zu aktualisieren
      * 
      * @param tick Interner Systemtick
@@ -674,10 +688,10 @@ public class gameLoop extends Application implements globals{
         }
     }
 
-    
-    /** 
-     * Durchschleifen der Main Methode aus der mainStart.java 
-     * Notwendig da mainStart.java nicht von Application erbt und somit keine 
+
+    /**
+     * Durchschleifen der Main Methode aus der mainStart.java
+     * Notwendig da mainStart.java nicht von Application erbt und somit keine
      * launch(args) Mathode hat
      * 
      * @param args Argumente aus der commandozeile, werden automatisch gesetzt
