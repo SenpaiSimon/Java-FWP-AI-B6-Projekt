@@ -29,7 +29,7 @@ import javafx.stage.Stage;
 
 /**
  * Hauptklasse des Spieles, hier werden alle anderen Klassen verwaltet
- * Erbt von javafx.application.Application 
+ * Erbt von javafx.application.Application
  * Implementiert globals.java
  */
 public class gameLoop extends Application implements globals{
@@ -100,11 +100,11 @@ public class gameLoop extends Application implements globals{
     private Pane shopRoot = new Pane();
     private Pane deathRoot = new Pane();
 
-    
-    /** 
+
+    /**
      * Initialisiert alle Notwendigen Bestandteile der Anwendung
      * Startet den Timer, welcher unser Spiel periodisch updated -- sollte mit 60 FPS laufen
-     * 
+     *
      * @param primaryStage
      * @throws Exception
      */
@@ -128,10 +128,10 @@ public class gameLoop extends Application implements globals{
         timer.start();
     }
 
-    
-    /** 
+
+    /**
      * Methode um Tastaturanschläge einfach abzufragen
-     * 
+     *
      * @param key
      * @return boolean
      */
@@ -139,11 +139,11 @@ public class gameLoop extends Application implements globals{
         return keys.getOrDefault(key, false);
     }
 
-    
-    /** 
+
+    /**
      * Initialisiert alle Bestandteile der Hauptszene
      * Ruft die Init Funktionen der anderen Teile auf
-     * 
+     *
      * @param primaryStage
      */
     private void init(Stage primaryStage) {
@@ -192,7 +192,7 @@ public class gameLoop extends Application implements globals{
 
     /**
      * Initialisiert die Shop Seite und dessen Bestandteile
-     */ 
+     */
     private void initShopState() {
         // background
         shopBackground = new Rectangle(width, height);
@@ -213,7 +213,7 @@ public class gameLoop extends Application implements globals{
 
     /**
      * Initialisiert die Menu Seite und dessen Bestandteile
-     */ 
+     */
     private void initMenuState() {
         // background Image
         menuBackground = new Rectangle(width, height);
@@ -238,7 +238,7 @@ public class gameLoop extends Application implements globals{
 
     /**
      * Initialisiert den Spielzustand und dessen Bestandteile
-     */ 
+     */
     private void initPlayState() {
         // background
         playingBackground = new Rectangle(width, height);
@@ -276,7 +276,7 @@ public class gameLoop extends Application implements globals{
 
     /**
      * Initialisiert den Todes Screen und dessen Bestandteile
-     */ 
+     */
     private void initDeathScreen() {
         // text
         deathMessage = new Text();
@@ -291,11 +291,11 @@ public class gameLoop extends Application implements globals{
         deathRoot.getChildren().addAll(highscoreSystem.getEntities());
     }
 
-    
-    /** 
-     * State Machine - Wechselt in den Zustand der Andwendung und lädt bzw entlädt 
+
+    /**
+     * State Machine - Wechselt in den Zustand der Andwendung und lädt bzw entlädt
      * die jeweiligen Teile
-     * 
+     *
      * @param newState
      */
     private void switchState(gameState newState) {
@@ -390,12 +390,12 @@ public class gameLoop extends Application implements globals{
         }
     }
 
-    
-    /** 
+
+    /**
      * Wird durch das OnClick Event in der Hauptszene aufgerufen
      * Fügt ein neues Projektil hinzu
      * Die Richtung wird durch den Vektor zwischen Spieler und Maus angegeben
-     * 
+     *
      * @param mousePos
      */
     private void addMissle(MouseEvent mousePos) {
@@ -462,9 +462,11 @@ public class gameLoop extends Application implements globals{
                     yPos = (int)(player.getY() + minEnemyDistanceY);
                 break;
             }
-            Paint[] enemyFrames = new Paint[2];
+            Paint[] enemyFrames = new Paint[4];
             enemyFrames[0] = imageLoader.loadImage("dominos1.png");
             enemyFrames[1] = imageLoader.loadImage("dominos2.png");
+            enemyFrames[2] = imageLoader.loadImage("dominos3.png");
+            enemyFrames[3] = imageLoader.loadImage("dominos4.png");
             enemy enem = new enemy(xPos, yPos, enemyLength, enemyHeight, enemyFrames);
             enemys.add(enem);
             gameRoot.getChildren().add(enem.getEntity());
@@ -503,10 +505,10 @@ public class gameLoop extends Application implements globals{
         }
     }
 
-    
-    /** 
+
+    /**
      * Einfache Hilfsfunktion, welche einen zufälligen Wert zwischen den Grenzen zurückgibt
-     * 
+     *
      * @param min
      * @param max
      * @return int
@@ -607,10 +609,10 @@ public class gameLoop extends Application implements globals{
         }
     }
 
-    
-    /** 
+
+    /**
      * Input verzögerung für Tastenanschläge von Zustands-Wechseln um Flickern zu vermeiden
-     * 
+     *
      * @param delay
      */
     private void synchronousInputDelay(int delay) {
@@ -624,11 +626,11 @@ public class gameLoop extends Application implements globals{
         };
     }
 
-    
-    /** 
-     * Globale Update Methode um alle Gegenstände, Tastenanschläge und Animationen 
+
+    /**
+     * Globale Update Methode um alle Gegenstände, Tastenanschläge und Animationen
      * zu aktualisieren
-     * 
+     *
      * @param tick
      */
     private void update(long tick) {
@@ -674,12 +676,12 @@ public class gameLoop extends Application implements globals{
         }
     }
 
-    
-    /** 
-     * Durchschleifen der Main Methode aus der mainStart.java 
-     * Notwendig da mainStart.java nicht von Application erbt und somit keine 
+
+    /**
+     * Durchschleifen der Main Methode aus der mainStart.java
+     * Notwendig da mainStart.java nicht von Application erbt und somit keine
      * launch(args) Mathode hat
-     * 
+     *
      * @param args
      */
     public static void main(String[] args) {
