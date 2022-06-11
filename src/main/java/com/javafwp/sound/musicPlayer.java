@@ -11,7 +11,7 @@ import javafx.scene.media.MediaPlayer;
  * Eigener Musik Player zum behandeln von Hintergrund Musik im Spiel
  */
 public class musicPlayer {
-    
+
     private MediaPlayer   menuLoop;
     private MediaPlayer   start;
     private MediaPlayer   gameLoop;
@@ -27,10 +27,10 @@ public class musicPlayer {
      * Lädt die Sound Dateien vor
      */
     public musicPlayer()   {
-        this.menuLoop   = this.loadAudioClip("intro.wav"); 
-        this.start      = this.loadAudioClip("start.wav"); 
-        this.gameLoop   = this.loadAudioClip("game.wav"); 
-        this.end        = this.loadAudioClip("end.wav"); 
+        this.menuLoop   = this.loadAudioClip("intro.wav");
+        this.start      = this.loadAudioClip("start.wav");
+        this.gameLoop   = this.loadAudioClip("game.wav");
+        this.end        = this.loadAudioClip("end.wav");
 
         this.menuLoop.setCycleCount(AudioClip.INDEFINITE);
         this.gameLoop.setCycleCount(AudioClip.INDEFINITE);
@@ -38,7 +38,7 @@ public class musicPlayer {
 
     /**
      * Lädt .wav Datei aus einer Datei als Media Player Objekt
-     * 
+     *
      * @param filename
      * @return
      */
@@ -47,15 +47,8 @@ public class musicPlayer {
     }
 
     /**
-     * TBD
-     */
-    private void updateCued()   {
-
-    }
-
-    /**
      * Wechselt die Musik und Übergänge je nach Zustand des Spiels
-     * 
+     *
      * @param gameState
      */
     public void updateMusic(gameState gameState)  {
@@ -74,7 +67,7 @@ public class musicPlayer {
                     currentClip = cuedClip;
                     currentClip.play();
                 }
-        
+
         }   else    {
             // we've transistioned from a state
             // cue the appropriate clip
