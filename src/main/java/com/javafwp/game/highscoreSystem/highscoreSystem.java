@@ -29,7 +29,10 @@ public class highscoreSystem {
     /**
      * Kontruktor für das Highscore System
      * 
-     * @param maxEntries
+     * @param textXPos Obere Linke Ecke des Texts
+     * @param textYPos Obere Linke Ecke des Texts
+     * @param maxEntries Maximale Anzahl an Einträgen
+     * @param maxNameLength Maximale Namenslänge
      */
     public highscoreSystem(int textXPos, int textYPos, int maxEntries, int maxNameLength) {
         this.textXPos = textXPos;
@@ -92,7 +95,7 @@ public class highscoreSystem {
     /** 
      * Gibt die Möglichkeit frei einen neuen Eintrag hhinzuzufügen wenn dieser noch Platz hat oder besser ist als der letzte
      * 
-     * @param newScore
+     * @param newScore neue erreichte Punktezahl nach Tod
      */
     public void addEntry(int newScore) {
         sort();
@@ -164,7 +167,7 @@ public class highscoreSystem {
     /** 
      * Gibt alle Nodes des Systems zurück
      * 
-     * @return Node[]
+     * @return Node[] Node Array um diese zum Pane hinzuzufügen
      */
     public Node[] getEntities() {
         return new Node[]{displayText, inputName, infoDisplay, congrats};

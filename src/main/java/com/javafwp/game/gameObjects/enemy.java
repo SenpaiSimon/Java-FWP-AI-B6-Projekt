@@ -15,11 +15,11 @@ public class enemy extends object{
     /**
      * Konstruktor für Gegner
      * 
-     * @param xPos
-     * @param yPos
-     * @param length
-     * @param height
-     * @param frames
+     * @param xPos Obere Linke Ecke des Objekts
+     * @param yPos Obere Linke Ecke des Objekts
+     * @param length X-Länge des Objekts
+     * @param height Y-Länge des Objekts
+     * @param frames Animations Frames des Objekts
      */
     public enemy(double xPos, double yPos, double length, double height, Paint[] frames) {
         super(xPos, yPos, length, height, frames[0]);
@@ -32,9 +32,9 @@ public class enemy extends object{
     /** 
      * Bewegt Gegner genau auf de Spieler zu mit definierter Geschwindigkeit
      * 
-     * @param tick
-     * @param playerPos
-     * @param speed
+     * @param tick Interner System tick
+     * @param playerPos Aktuelle Position de Spielers
+     * @param speed Bewegungsgeschwindigkeit zum Spieler
      */
     public void update(long tick, Point2D playerPos, double speed) {
         Point2D dir = new Point2D(

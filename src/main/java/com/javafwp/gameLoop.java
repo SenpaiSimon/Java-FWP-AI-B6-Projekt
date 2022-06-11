@@ -105,7 +105,7 @@ public class gameLoop extends Application implements globals{
      * Initialisiert alle Notwendigen Bestandteile der Anwendung
      * Startet den Timer, welcher unser Spiel periodisch updated -- sollte mit 60 FPS laufen
      * 
-     * @param primaryStage
+     * @param primaryStage Hauptanzeige, wird mit launch automatisch gesetzt
      * @throws Exception
      */
     @Override
@@ -132,8 +132,8 @@ public class gameLoop extends Application implements globals{
     /** 
      * Methode um Tastaturanschläge einfach abzufragen
      * 
-     * @param key
-     * @return boolean
+     * @param key KeyCode zum prüfen
+     * @return boolean Ob Key gedrückt ist
      */
     private boolean isPressedKey(KeyCode key) {
         return keys.getOrDefault(key, false);
@@ -144,7 +144,7 @@ public class gameLoop extends Application implements globals{
      * Initialisiert alle Bestandteile der Hauptszene
      * Ruft die Init Funktionen der anderen Teile auf
      * 
-     * @param primaryStage
+     * @param primaryStage Hauptanzeige, wird mit launch automatisch gesetzt
      */
     private void init(Stage primaryStage) {
         // setup the main scene
@@ -296,7 +296,7 @@ public class gameLoop extends Application implements globals{
      * State Machine - Wechselt in den Zustand der Andwendung und lädt bzw entlädt 
      * die jeweiligen Teile
      * 
-     * @param newState
+     * @param newState Wechselt in den gegebene State
      */
     private void switchState(gameState newState) {
         if(gameState == newState)   {
@@ -396,7 +396,7 @@ public class gameLoop extends Application implements globals{
      * Fügt ein neues Projektil hinzu
      * Die Richtung wird durch den Vektor zwischen Spieler und Maus angegeben
      * 
-     * @param mousePos
+     * @param mousePos Wird automatisch beim Event Listener gesetzt
      */
     private void addMissle(MouseEvent mousePos) {
         //shoot me baby
@@ -507,9 +507,9 @@ public class gameLoop extends Application implements globals{
     /** 
      * Einfache Hilfsfunktion, welche einen zufälligen Wert zwischen den Grenzen zurückgibt
      * 
-     * @param min
-     * @param max
-     * @return int
+     * @param min Minimaler Zufallswert
+     * @param max Maximaler Zufallswert
+     * @return int Zufallswert
      */
     private int randomBetweenBounds(int min, int max) {
         Random ran = new Random();
@@ -611,7 +611,7 @@ public class gameLoop extends Application implements globals{
     /** 
      * Input verzögerung für Tastenanschläge von Zustands-Wechseln um Flickern zu vermeiden
      * 
-     * @param delay
+     * @param delay Wartezeit
      */
     private void synchronousInputDelay(int delay) {
         if(gameState != com.javafwp.game.ownTypes.gameState.playing) {
@@ -629,7 +629,7 @@ public class gameLoop extends Application implements globals{
      * Globale Update Methode um alle Gegenstände, Tastenanschläge und Animationen 
      * zu aktualisieren
      * 
-     * @param tick
+     * @param tick Interner Systemtick
      */
     private void update(long tick) {
         keyActions();
@@ -680,7 +680,7 @@ public class gameLoop extends Application implements globals{
      * Notwendig da mainStart.java nicht von Application erbt und somit keine 
      * launch(args) Mathode hat
      * 
-     * @param args
+     * @param args Argumente aus der commandozeile, werden automatisch gesetzt
      */
     public static void main(String[] args) {
         launch(args);

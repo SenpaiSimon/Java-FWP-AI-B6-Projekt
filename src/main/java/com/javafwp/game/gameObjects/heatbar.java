@@ -16,12 +16,12 @@ public class heatbar extends object {
     /**
      * Konstruktor für Hitzeleiste
      * 
-     * @param xPos
-     * @param yPos
-     * @param maxHeat
-     * @param height
-     * @param baseColor
-     * @param heatColor
+     * @param xPos Obere Linke Ecke des Objekts
+     * @param yPos Obere Linke Ecke des Objekts
+     * @param maxHeat Maximale Hitze, gleichzeitig Breite
+     * @param height Y-Länge des Objekts
+     * @param baseColor Hintergrundfarbe der Leiste
+     * @param heatColor Farbe des Hitzebalkens
      */
     public heatbar(double xPos, double yPos, double maxHeat, double height, Color baseColor, Color heatColor) {
         super(xPos, yPos, maxHeat, height, baseColor);
@@ -38,7 +38,7 @@ public class heatbar extends object {
     /** 
      * Kühlt die Hitzeleiste nach und nach ab
      * 
-     * @param coolSpeed
+     * @param coolSpeed Schnelligkeit des Abkühlens
      */
     public void update(double coolSpeed) {
         if(currentHeat >= 0) {
@@ -55,8 +55,8 @@ public class heatbar extends object {
     /** 
      * Fügt Hitze hinzu zur leiste
      * 
-     * @param heat
-     * @return boolean
+     * @param heat Wie viel Hitze aufgebaut wird pro Schuss
+     * @return boolean Ob ein Schuss erfolgen kann
      */
     public boolean addHeat(int heat) {
         if(currentHeat + heat <= entity.getWidth()) {
@@ -79,7 +79,7 @@ public class heatbar extends object {
     /** 
      * Gibt die inneren Node Objekte zurück
      * 
-     * @return Node[]
+     * @return Node[] Node Array um diese zum Pane hinzuzufügen
      */
     public Node[] getEntities() {
         return new Node[]{entity, heat};

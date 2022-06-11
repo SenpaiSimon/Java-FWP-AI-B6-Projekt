@@ -39,8 +39,8 @@ public class musicPlayer {
     /**
      * Lädt .wav Datei aus einer Datei als Media Player Objekt
      * 
-     * @param filename
-     * @return
+     * @param filename Name der zu ladenden Datei mit Endung
+     * @return Mediaplayer Mediaplayer Objekt zum abspielen im Spiel
      */
     private MediaPlayer loadAudioClip(String filename) {
         return new MediaPlayer(new Media(getClass().getResource(filename).toExternalForm()));
@@ -56,7 +56,7 @@ public class musicPlayer {
     /**
      * Wechselt die Musik und Übergänge je nach Zustand des Spiels
      * 
-     * @param gameState
+     * @param gameState Aktueller Status des Spiels
      */
     public void updateMusic(gameState gameState)  {
 

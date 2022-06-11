@@ -13,12 +13,12 @@ public class projectile extends object {
     /**
      * Konstruktor für Projektile
      * 
-     * @param xPos
-     * @param yPos
-     * @param length
-     * @param height
-     * @param dir
-     * @param paint
+     * @param xPos Obere Linke Ecke des Objekts
+     * @param yPos Obere Linke Ecke des Objekts
+     * @param length X-Länge des Objekts
+     * @param height Y-Länge des Objekts
+     * @param dir Bewegungsrichtung
+     * @param paint Farbe des Objekts
      */
     public projectile(double xPos, double yPos, double length, double height, Point2D dir, Paint paint) {
         super(xPos, yPos, length, height, paint);
@@ -30,7 +30,7 @@ public class projectile extends object {
     /** 
      * Bewegt die Projektile in den festgelekten Richtungsvektor
      * 
-     * @param speed
+     * @param speed Schnelligkeit in Richtungsvektor
      */
     public void update(double speed) {
         setX(getX() + speed * dir.getX());

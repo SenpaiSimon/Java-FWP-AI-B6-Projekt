@@ -22,13 +22,13 @@ public class player extends object{
     /**
      * Konstruktor für den Spieler
      * 
-     * @param xPos
-     * @param yPos
-     * @param length
-     * @param height
-     * @param acc
-     * @param idleFrames
-     * @param runningFrames
+     * @param xPos Obere Linke Ecke des Objekts
+     * @param yPos Obere Linke Ecke des Objekts
+     * @param length X-Länge des Objekts
+     * @param height Y-Länge des Objekts
+     * @param acc Erdbeschleunigung
+     * @param idleFrames Animationframes beim Stillstand
+     * @param runningFrames Animationframes beim Bewegen
      */
     public player(double xPos, double yPos, double length, double height, double acc, Paint[] idleFrames, Paint[] runningFrames) {
         super(xPos, yPos, length, height, idleFrames[0]);
@@ -46,9 +46,9 @@ public class player extends object{
      * Gibt dem Spieler Schwerkraft
      * Setzt die Animationen des Spielers
      * 
-     * @param tick
-     * @param plattforms
-     * @param scrollSpeed
+     * @param tick Interner Spieltick
+     * @param plattforms Array der Akutellen Plattformen
+     * @param scrollSpeed Geschwindigkeit der Plattformen
      */
     // Applys Gravity and Handles Collissions
     public void update(long tick, ArrayList<plattform> plattforms, double scrollSpeed) {
@@ -96,7 +96,7 @@ public class player extends object{
     /** 
      * Gibt den Geschwindigkeitsvektor des Spielers an
      * 
-     * @return Point2D
+     * @return Point2D Geschwindkeitsvektor des Spielers
      */
     public Point2D getVel() {
         return vel;
@@ -106,7 +106,7 @@ public class player extends object{
     /** 
      * Bewegt den Spieler um einen Vektor
      * 
-     * @param dir
+     * @param dir Bewegungsvektor
      */
     // moves in x Dir
     public void move(Point2D dir) {
@@ -117,7 +117,7 @@ public class player extends object{
     /** 
      * Lässt den Spieler springen mit einer definierten Kraft
      * 
-     * @param force
+     * @param force Sprungkraft
      */
     // jumping
     public void jump(double force) {
@@ -132,8 +132,8 @@ public class player extends object{
     /**
      * Setzt den Spieler nach einen Reset zurück
      *  
-     * @param spawnX
-     * @param spawnY
+     * @param spawnX X-Pos des Spielers nach Tod
+     * @param spawnY Y-Pos des Spielers nach Tod
      */
     // dying
     public void death(double spawnX, double spawnY) {
@@ -146,7 +146,7 @@ public class player extends object{
     /** 
      * Gibt an ob der Spieler zur Zeit springen kann/darf
      * 
-     * @return boolean
+     * @return boolean Ob Sprung erfolgen kann
      */
     public boolean getCanJump() {
         return canJump;

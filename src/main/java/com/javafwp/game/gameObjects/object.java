@@ -17,11 +17,11 @@ public class object implements objectInterface {
     /**
      * Konstruktor für Spielobjekte
      * 
-     * @param xPos
-     * @param yPos
-     * @param length
-     * @param height
-     * @param paint
+     * @param xPos Obere Linke Ecke des Objekts
+     * @param yPos Obere Linke Ecke des Objekts
+     * @param length X-Länge des Objekts
+     * @param height Y-Länge des Objekts
+     * @param paint Farbe des Objekts
      */
     public object(double xPos, double yPos, double length, double height, Paint paint) {
         entity = new Rectangle(length, height);
@@ -34,7 +34,7 @@ public class object implements objectInterface {
     /** 
      * Liefert den Zugriff auf das innere JavaFX Object 
      * 
-     * @return Node
+     * @return Node Node um diese zum Pane hinzuzufügen
      */
     public Node getEntity() {
         return entity;
@@ -44,7 +44,7 @@ public class object implements objectInterface {
     /** 
      * Gibt die Dicke des Objekts zurück
      * 
-     * @return double
+     * @return double Dicke des Objekts
      */
     public double getWidth () {
         return entity.getWidth();
@@ -54,7 +54,7 @@ public class object implements objectInterface {
     /** 
      * Gibt die Höhe des Objekts zurück
      * 
-     * @return double
+     * @return double Höhe des Objekts
      */
     public double getHeight () {
         return entity.getHeight();
@@ -64,7 +64,7 @@ public class object implements objectInterface {
     /** 
      * Gibt den Typ des Objekts zurück
      * 
-     * @return type
+     * @return type Typ des Objekts
      */
     public type getType() {
         return type;
@@ -74,7 +74,7 @@ public class object implements objectInterface {
     /** 
      * Gibt die X-Position des Objekts zurück
      * 
-     * @return double
+     * @return double X-Pos des Objekts
      */
     public double getX() {
         return entity.getTranslateX();
@@ -83,7 +83,7 @@ public class object implements objectInterface {
     /** 
      * Gibt die Y-Position des Objekts zurück
      * 
-     * @return double
+     * @return double Y-Pos des Objekts
      */
     public double getY() {
         return entity.getTranslateY();
@@ -93,7 +93,7 @@ public class object implements objectInterface {
     /** 
      * Setzt die Füllfarbe des Objekts
      * 
-     * @param paint
+     * @param paint neue Farbe 
      */
     public void setFill(Paint paint) {
         entity.setFill(paint);
@@ -103,7 +103,7 @@ public class object implements objectInterface {
     /** 
      * Setzt die X-Position des Objekts
      * 
-     * @param x
+     * @param x Neue X-Pos
      */
     public void setX(double x) {
         entity.setTranslateX(x);
@@ -113,7 +113,7 @@ public class object implements objectInterface {
     /** 
      * Setzt die Y-Position des Objekts
      * 
-     * @param y
+     * @param y Neue Y-Pos
      */
     public void setY(double y) {
         entity.setTranslateY(y);
@@ -123,7 +123,7 @@ public class object implements objectInterface {
     /** 
      * Verschiebt die X-Position des Objekts um den Wert
      * 
-     * @param x
+     * @param x Addition zur X-Pos
      */
     public void addX(double x) {
         setX(getX() + x);
@@ -133,7 +133,7 @@ public class object implements objectInterface {
     /** 
      * Verschiebt die Y-Position des Objekts um den Wert
      * 
-     * @param y
+     * @param y Addition zur Y-Pos
      */
     public void addY(double y) {
         setY(getY() + y);

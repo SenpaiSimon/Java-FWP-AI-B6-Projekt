@@ -21,8 +21,8 @@ public class imageLoader {
      * imageLoader imagaLoader = new imageLoader();
      * rect.setFill(imageLoader.loadImage("filename.fileextension"));
      * 
-     * @param fileName
-     * @return ImagePattern
+     * @param fileName Name der zu ladenden Datei mit Endung
+     * @return ImagePattern Zum setzen der Fill Color eines Rechtecks
      */
     public ImagePattern loadImage(String fileName) {
         Image image = new Image(getClass().getResourceAsStream(fileName), 1024, 1024, true, false);

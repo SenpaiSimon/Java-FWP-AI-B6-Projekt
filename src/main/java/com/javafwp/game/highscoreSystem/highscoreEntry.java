@@ -10,8 +10,8 @@ public class highscoreEntry {
     /**
      * Kontruktor für einen Highscore Eintrag
      * 
-     * @param name
-     * @param score
+     * @param name Name des Eintrags
+     * @param score Erreichte Punkte
      */
     public highscoreEntry(String name, int score) {
         this.name = name;
@@ -22,7 +22,7 @@ public class highscoreEntry {
     /** 
      * Gibt den Score des Eintrags zurück
      * 
-     * @return int
+     * @return int Punkte des Eintrags
      */
     public int getScore() {
         return score;
@@ -32,7 +32,7 @@ public class highscoreEntry {
     /** 
      * Gibt den Namen des Eintrags zurück
      * 
-     * @return String
+     * @return String Name des Eintrags
      */
     public String getName() {
         return name;
