@@ -2,11 +2,13 @@ package com.javafwp.game.gameObjects;
 
 import java.util.ArrayList;
 
+import com.javafwp.sound.paralellSfxPlayer;
+
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Paint;
 
 /**
- * Spieler Objekt 
+ * Spieler Objekt
  * Erbt von Objekt.java
  */
 public class player extends object{
@@ -19,9 +21,11 @@ public class player extends object{
     Paint[] runningFrames;
     int animationFrameCounter = 0;
 
+    paralellSfxPlayer jumpSfx;
+
     /**
      * Konstruktor für den Spieler
-     * 
+     *
      * @param xPos
      * @param yPos
      * @param length
@@ -38,14 +42,16 @@ public class player extends object{
 
         this.idleFrames = idleFrames;
         this.runningFrames = runningFrames;
+
+        jumpSfx = new paralellSfxPlayer("jump.wav", 0.4, 2);
     }
 
-    
-    /** 
+
+    /**
      * Prüft Kolliossionen des Spielers ab
      * Gibt dem Spieler Schwerkraft
      * Setzt die Animationen des Spielers
-     * 
+     *
      * @param tick
      * @param plattforms
      * @param scrollSpeed
@@ -92,20 +98,20 @@ public class player extends object{
 
     }
 
-    
-    /** 
+
+    /**
      * Gibt den Geschwindigkeitsvektor des Spielers an
-     * 
+     *
      * @return Point2D
      */
     public Point2D getVel() {
         return vel;
     }
 
-    
-    /** 
+
+    /**
      * Bewegt den Spieler um einen Vektor
-     * 
+     *
      * @param dir
      */
     // moves in x Dir
@@ -113,10 +119,10 @@ public class player extends object{
         addX(dir.getX());
     }
 
-    
-    /** 
+
+    /**
      * Lässt den Spieler springen mit einer definierten Kraft
-     * 
+     *
      * @param force
      */
     // jumping
@@ -125,13 +131,15 @@ public class player extends object{
             addY(-1);
             vel = vel.add(0, -force);
             canJump = false;
+
+            jumpSfx.play();
         }
     }
 
-    
+
     /**
      * Setzt den Spieler nach einen Reset zurück
-     *  
+     *
      * @param spawnX
      * @param spawnY
      */
@@ -142,10 +150,10 @@ public class player extends object{
         vel = new Point2D(0, 0);
     }
 
-    
-    /** 
+
+    /**
      * Gibt an ob der Spieler zur Zeit springen kann/darf
-     * 
+     *
      * @return boolean
      */
     public boolean getCanJump() {

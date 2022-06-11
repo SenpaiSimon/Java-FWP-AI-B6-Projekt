@@ -13,6 +13,7 @@ import com.javafwp.game.highscoreSystem.highscoreSystem;
 import com.javafwp.game.ownTypes.gameState;
 import com.javafwp.sprites.imageLoader;
 import com.javafwp.sound.musicPlayer;
+import com.javafwp.sound.paralellSfxPlayer;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -61,6 +62,7 @@ public class gameLoop extends Application implements globals{
     // missle stuff
     private ArrayList <projectile> projectiles = new ArrayList<projectile>();
     private Paint missleColor = imageLoader.loadImage("pizza.png");
+    private paralellSfxPlayer missileSfx = new paralellSfxPlayer("throw.wav", 0.4, 5);
 
     // heatbar stuff
     private heatbar heatbar;
@@ -408,6 +410,8 @@ public class gameLoop extends Application implements globals{
         // retain a bit of the players velocity
         dir = dir.add(player.getVel().multiply(0.5));
 
+        missileSfx.play();
+
         projectile newProj = new projectile(
             player.getX() + player.getWidth() / 2.0,
             player.getY(),
@@ -579,6 +583,9 @@ public class gameLoop extends Application implements globals{
                 player.jump(jumpForce);
             } else if (gameState == com.javafwp.game.ownTypes.gameState.death) {
                 switchState(com.javafwp.game.ownTypes.gameState.playing);
+            } else if(gameState == com.javafwp.game.ownTypes.gameState.mainMenu) {
+                switchState(com.javafwp.game.ownTypes.gameState.playing);
+                synchronousInputDelay(100);
             }
         }
         if(isPressedKey(KeyCode.ESCAPE)) {
