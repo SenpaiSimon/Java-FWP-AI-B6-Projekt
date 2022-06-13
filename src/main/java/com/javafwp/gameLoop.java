@@ -19,6 +19,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -350,6 +351,10 @@ public class gameLoop extends Application implements globals{
                 if(gameState == com.javafwp.game.ownTypes.gameState.playing) {
                     // nothing to unload yet
                 }
+
+                gameRoot.setEffect(new GaussianBlur());
+                scoreRoot.setEffect(new GaussianBlur());
+
                 appRoot.getChildren().addAll(deathRoot);
                 highscoreSystem.generateText();
                 highscoreSystem.addEntry(score);
@@ -559,6 +564,9 @@ public class gameLoop extends Application implements globals{
         enemys.clear();
         plattforms.clear();
         heatbar.reset();
+
+        scoreRoot.setEffect(null);
+        gameRoot.setEffect(null);
     }
 
     /**
