@@ -120,14 +120,19 @@ public class gameLoop extends Application implements globals{
 
         // this will run at 60 fps
         timer = new AnimationTimer() {
-            @Override
+            private long last_updated;
+
             // Game Loop
+            @Override
             public void handle(long now) {
                 if(debug) {
                     System.out.println(keys.toString());
                     System.out.println("Player X: " + player.getX() + "Player Y: " + player.getY());
                 }
-                update(now);
+                if(now - last_updated >= 16_666_667)    {
+                    last_updated = now;
+                    update(now);
+                }
             }
         };
         timer.start();
@@ -702,6 +707,7 @@ public class gameLoop extends Application implements globals{
      * Notwendig da mainStart.java nicht von Application erbt und somit keine
      * launch(args) Mathode hat
      * 
+     *
      * @param args Argumente aus der commandozeile, werden automatisch gesetzt
      */
     public static void main(String[] args) {
