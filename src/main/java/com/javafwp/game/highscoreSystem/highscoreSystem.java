@@ -9,7 +9,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-
 /**
  * Einfaches Highscore Sytem zum hinzufügen von Highscores und auch verwalten
  */
@@ -20,7 +19,7 @@ public class highscoreSystem {
     private TextField inputName;
     private ArrayList<highscoreEntry> entries;
     private int tempScoreEntry;
-    
+
     private int maxEntries;
     private int maxNameLength;
     private int textXPos;
@@ -28,7 +27,7 @@ public class highscoreSystem {
 
     /**
      * Kontruktor für das Highscore System
-     * 
+     *
      * @param textXPos Obere Linke Ecke des Texts
      * @param textYPos Obere Linke Ecke des Texts
      * @param maxEntries Maximale Anzahl an Einträgen
@@ -73,9 +72,9 @@ public class highscoreSystem {
         tempScoreEntry = 0;
 
         // if user pressed "ENTER" complete addition
-        inputName.setOnAction(event -> { 
-            completeAddingNewEntry();  
-        }); 
+        inputName.setOnAction(event -> {
+            completeAddingNewEntry();
+        });
 
         // automatically shorten name when to long
         inputName.setOnKeyTyped(even -> {
@@ -91,10 +90,10 @@ public class highscoreSystem {
         });
     }
 
-    
-    /** 
+
+    /**
      * Gibt die Möglichkeit frei einen neuen Eintrag hhinzuzufügen wenn dieser noch Platz hat oder besser ist als der letzte
-     * 
+     *
      * @param newScore neue erreichte Punktezahl nach Tod
      */
     public void addEntry(int newScore) {
@@ -121,7 +120,9 @@ public class highscoreSystem {
     private void completeAddingNewEntry() {
         if(!inputName.getText().isEmpty()) {
             // longest name is 10 letters
-            entries.add(new highscoreEntry(inputName.getText(), tempScoreEntry));
+            highscoreEntry entry = new highscoreEntry(inputName.getText(), tempScoreEntry);
+            entries.add(entry);
+            dbc.writeToDatabase(entry);
 
             sort(); // sort again to get rid of lowest score in the next step
 
@@ -156,6 +157,7 @@ public class highscoreSystem {
      * Generiert den Text der den Highscore anzeigt
      */
     public void generateText() {
+        entries = dbc.getFromDatabase();
         sort();
         String tempText = "Top " + maxEntries + " Highscores:\n";
         for(highscoreEntry entry: entries) {
@@ -163,10 +165,10 @@ public class highscoreSystem {
         }
         displayText.setText(tempText);
     }
-    
-    /** 
+
+    /**
      * Gibt alle Nodes des Systems zurück
-     * 
+     *
      * @return Node[] Node Array um diese zum Pane hinzuzufügen
      */
     public Node[] getEntities() {
