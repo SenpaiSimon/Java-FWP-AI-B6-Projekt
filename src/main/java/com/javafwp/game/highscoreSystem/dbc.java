@@ -10,8 +10,8 @@ import java.sql.ResultSet;
 
 final class dbc {
     static final String DB_URL = "jdbc:mysql://db.robin-prillwitz.de/k122486_javafwp";
-    static final String USER = "k122486_java_admin";
-    static final String PASS = "Alpine123!";
+    static final String USER = "k122486_java_user";
+    static final String PASS = "JavaFWP123!";
 
     static final String INSERT_QUERY = "INSERT INTO Highscores(Name, Score) VALUES (?, ?);";
     static final String SELECTION_QUERY = "SELECT Name, Score FROM Highscores ORDER BY Score DESC LIMIT 10;";

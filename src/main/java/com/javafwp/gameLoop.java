@@ -109,7 +109,7 @@ public class gameLoop extends Application implements globals{
     /**
      * Initialisiert alle Notwendigen Bestandteile der Anwendung
      * Startet den Timer, welcher unser Spiel periodisch updated -- sollte mit 60 FPS laufen
-     * 
+     *
      * @param primaryStage Hauptanzeige, wird mit launch automatisch gesetzt
      * @throws Exception
      */
@@ -129,10 +129,10 @@ public class gameLoop extends Application implements globals{
                     System.out.println(keys.toString());
                     System.out.println("Player X: " + player.getX() + "Player Y: " + player.getY());
                 }
-                if(now - last_updated >= 16_666_667)    {
+                // if(now - last_updated >= 16_666_667)    {
                     last_updated = now;
                     update(now);
-                }
+                // }
             }
         };
         timer.start();
@@ -141,7 +141,7 @@ public class gameLoop extends Application implements globals{
 
     /**
      * Methode um Tastaturanschläge einfach abzufragen
-     * 
+     *
      * @param key KeyCode zum prüfen
      * @return boolean Ob Key gedrückt ist
      */
@@ -153,7 +153,7 @@ public class gameLoop extends Application implements globals{
     /**
      * Initialisiert alle Bestandteile der Hauptszene
      * Ruft die Init Funktionen der anderen Teile auf
-     * 
+     *
      * @param primaryStage Hauptanzeige, wird mit launch automatisch gesetzt
      */
     private void init(Stage primaryStage) {
@@ -305,7 +305,7 @@ public class gameLoop extends Application implements globals{
     /**
      * State Machine - Wechselt in den Zustand der Andwendung und lädt bzw entlädt
      * die jeweiligen Teile
-     * 
+     *
      * @param newState Wechselt in den gegebene State
      */
     private void switchState(gameState newState) {
@@ -410,7 +410,7 @@ public class gameLoop extends Application implements globals{
      * Wird durch das OnClick Event in der Hauptszene aufgerufen
      * Fügt ein neues Projektil hinzu
      * Die Richtung wird durch den Vektor zwischen Spieler und Maus angegeben
-     * 
+     *
      * @param mousePos Wird automatisch beim Event Listener gesetzt
      */
     private void addMissle(MouseEvent mousePos) {
@@ -527,7 +527,7 @@ public class gameLoop extends Application implements globals{
 
     /**
      * Einfache Hilfsfunktion, welche einen zufälligen Wert zwischen den Grenzen zurückgibt
-     * 
+     *
      * @param min Minimaler Zufallswert
      * @param max Maximaler Zufallswert
      * @return int Zufallswert
@@ -637,7 +637,7 @@ public class gameLoop extends Application implements globals{
 
     /**
      * Input verzögerung für Tastenanschläge von Zustands-Wechseln um Flickern zu vermeiden
-     * 
+     *
      * @param delay Wartezeit
      */
     private void synchronousInputDelay(int delay) {
@@ -655,7 +655,7 @@ public class gameLoop extends Application implements globals{
     /**
      * Globale Update Methode um alle Gegenstände, Tastenanschläge und Animationen
      * zu aktualisieren
-     * 
+     *
      * @param tick Interner Systemtick
      */
     private void update(long tick) {
@@ -706,7 +706,6 @@ public class gameLoop extends Application implements globals{
      * Durchschleifen der Main Methode aus der mainStart.java
      * Notwendig da mainStart.java nicht von Application erbt und somit keine
      * launch(args) Mathode hat
-     * 
      *
      * @param args Argumente aus der commandozeile, werden automatisch gesetzt
      */
