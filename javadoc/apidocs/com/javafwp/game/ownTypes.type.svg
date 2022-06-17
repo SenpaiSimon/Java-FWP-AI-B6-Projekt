@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="259px" preserveAspectRatio="none" style="width:190px;height:259px;background:#FFFFFF;" version="1.1" viewBox="0 0 190 259" width="190px" zoomAndPan="magnify"><defs/><g><!--MD5=[9d03aacf66eed608561496e864e4daab]
+class com.javafwp.game.ownTypes.type--><a href="ownTypes.type.html" target="_top" title="ownTypes.type.html" xlink:actuate="onRequest" xlink:href="ownTypes.type.html" xlink:show="new" xlink:title="ownTypes.type.html" xlink:type="simple"><g id="elem_com.javafwp.game.ownTypes.type"><rect codeLine="5" fill="#F1F1F1" height="128.707" id="com.javafwp.game.ownTypes.type" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="134" x="31" y="105"/><ellipse cx="46" cy="124.1328" fill="#EB937F" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M49.6143,130.6328 L41.8945,130.6328 L41.8945,118.2397 L49.6143,118.2397 L49.6143,120.3979 L44.3433,120.3979 L44.3433,123.0708 L49.1162,123.0708 L49.1162,125.229 L44.3433,125.229 L44.3433,128.4746 L49.6143,128.4746 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="102" x="60" y="123.5352">ownTypes.type</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="91" x="65.5" y="136.1563">com.javafwp.game</text><line style="stroke:#181818;stroke-width:0.5;" x1="32" x2="164" y1="143.2656" y2="143.2656"/><ellipse cx="42" cy="154.2656" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="45" x="51" y="160.8008">enemy</text><ellipse cx="42" cy="170.7539" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="64" x="51" y="177.2891">plattform</text><ellipse cx="42" cy="187.2422" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="42" x="51" y="193.7773">player</text><ellipse cx="42" cy="203.7305" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="64" x="51" y="210.2656">projectile</text><ellipse cx="42" cy="220.2188" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="53" x="51" y="226.7539">heatbar</text></g></a><!--MD5=[e174b7214f093818a5bdbd373e689567]
+class com.javafwp.game.ownTypes--><a href="ownTypes.html" target="_top" title="ownTypes.html" xlink:actuate="onRequest" xlink:href="ownTypes.html" xlink:show="new" xlink:title="ownTypes.html" xlink:type="simple"><g id="elem_com.javafwp.game.ownTypes"><rect codeLine="13" fill="#F1F1F1" height="38.2656" id="com.javafwp.game.ownTypes" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="123" x="36.5" y="7"/><ellipse cx="51.5" cy="26.1328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M53.9731,32.2759 Q53.3921,32.5747 52.7529,32.7241 Q52.1138,32.8735 51.4082,32.8735 Q48.9014,32.8735 47.5815,31.2217 Q46.2617,29.5698 46.2617,26.4487 Q46.2617,23.3193 47.5815,21.6675 Q48.9014,20.0156 51.4082,20.0156 Q52.1138,20.0156 52.7612,20.165 Q53.4087,20.3145 53.9731,20.6133 L53.9731,23.3359 Q53.3423,22.7549 52.7488,22.4851 Q52.1553,22.2153 51.5244,22.2153 Q50.1797,22.2153 49.4949,23.282 Q48.8101,24.3486 48.8101,26.4487 Q48.8101,28.5405 49.4949,29.6072 Q50.1797,30.6738 51.5244,30.6738 Q52.1553,30.6738 52.7488,30.4041 Q53.3423,30.1343 53.9731,29.5532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="69" x="76.5" y="25.5352">ownTypes</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="91" x="65.5" y="38.1563">com.javafwp.game</text></g></a><!--MD5=[5a7be986edb8b6e9daf78ced986947e2]
+reverse link com.javafwp.game.ownTypes to com.javafwp.game.ownTypes.type--><g id="link_com.javafwp.game.ownTypes_com.javafwp.game.ownTypes.type"><path codeLine="15" d="M98,60.52 C98,73.81 98,89.56 98,104.86 " fill="none" id="com.javafwp.game.ownTypes-backto-com.javafwp.game.ownTypes.type" style="stroke:#181818;stroke-width:1.0;"/><ellipse cx="98" cy="53.21" fill="#FFFFFF" rx="8" ry="8" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="98" x2="98" y1="61.21" y2="45.21"/><line style="stroke:#181818;stroke-width:1.0;" x1="90" x2="106" y1="53.21" y2="53.21"/></g><rect height="11.7773" style="stroke:#00000000;stroke-width:1.0;fill:none;" width="182" x="0" y="239.707"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="182" x="0" y="249.375">UMLDoclet 2.0.17, PlantUML 1.2022.5</text><!--MD5=[9f0bc06f82ac80c3e70d3c76966acb86]
+@startuml
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    enum "<size:14>ownTypes.type\n<size:10>com.javafwp.game" as com.javafwp.game.ownTypes.type [[ownTypes.type.html]] {
+        {static} +enemy
+        {static} +plattform
+        {static} +player
+        {static} +projectile
+        {static} +heatbar
+    }
+
+    class "<size:14>ownTypes\n<size:10>com.javafwp.game" as com.javafwp.game.ownTypes [[ownTypes.html]]
+
+    com.javafwp.game.ownTypes +- - com.javafwp.game.ownTypes.type
+
+    center footer UMLDoclet 2.0.17, PlantUML 1.2022.5
+@enduml
+
+PlantUML version 1.2022.5(Sat Apr 30 12:55:52 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: DE
+--></g></svg>

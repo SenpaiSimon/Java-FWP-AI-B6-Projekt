@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="236px" preserveAspectRatio="none" style="width:286px;height:236px;background:#FFFFFF;" version="1.1" viewBox="0 0 286 236" width="286px" zoomAndPan="magnify"><defs/><g><!--MD5=[749aa54c611025f624e0547669bb6287]
+class com.javafwp.sound.musicPlayer--><a href="musicPlayer.html" target="_top" title="musicPlayer.html" xlink:actuate="onRequest" xlink:href="musicPlayer.html" xlink:show="new" xlink:title="musicPlayer.html" xlink:type="simple"><g id="elem_com.javafwp.sound.musicPlayer"><rect codeLine="5" fill="#F1F1F1" height="202.6602" id="com.javafwp.sound.musicPlayer" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="265" x="7" y="7"/><ellipse cx="88.75" cy="26.1328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M91.2231,32.2759 Q90.6421,32.5747 90.0029,32.7241 Q89.3638,32.8735 88.6582,32.8735 Q86.1514,32.8735 84.8315,31.2217 Q83.5117,29.5698 83.5117,26.4487 Q83.5117,23.3193 84.8315,21.6675 Q86.1514,20.0156 88.6582,20.0156 Q89.3638,20.0156 90.0112,20.165 Q90.6587,20.3145 91.2231,20.6133 L91.2231,23.3359 Q90.5923,22.7549 89.9988,22.4851 Q89.4053,22.2153 88.7744,22.2153 Q87.4297,22.2153 86.7449,23.282 Q86.0601,24.3486 86.0601,26.4487 Q86.0601,28.5405 86.7449,29.6072 Q87.4297,30.6738 88.7744,30.6738 Q89.4053,30.6738 89.9988,30.4041 Q90.5923,30.1343 91.2231,29.5532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="81" x="115.25" y="25.5352">musicPlayer</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="93" x="109.25" y="38.1563">com.javafwp.sound</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="271" y1="45.2656" y2="45.2656"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="53.2656"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="163" x="27" y="62.8008">menuLoop: MediaPlayer</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="69.7539"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="121" x="27" y="79.2891">start: MediaPlayer</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="86.2422"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="162" x="27" y="95.7773">gameLoop: MediaPlayer</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="102.7305"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="116" x="27" y="112.2656">end: MediaPlayer</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="119.2188"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="150" x="27" y="128.7539">cuedClip: MediaPlayer</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="135.707"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="167" x="27" y="145.2422">currentClip: MediaPlayer</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="152.1953"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="176" x="27" y="161.7305">lastGamestate: gameState</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="271" y1="168.6836" y2="168.6836"/><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="176.6836"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="239" x="27" y="186.2188">loadAudioClip(String): MediaPlayer</text><ellipse cx="18" cy="196.1719" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="206" x="27" y="202.707">updateMusic(gameState): void</text></g></a><rect height="11.7773" style="stroke:#00000000;stroke-width:1.0;fill:none;" width="182" x="48" y="216.6602"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="182" x="48" y="226.3281">UMLDoclet 2.0.17, PlantUML 1.2022.5</text><!--MD5=[1e83bf8b33ce177a9e2f6fb66155a41d]
+@startuml
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>musicPlayer\n<size:10>com.javafwp.sound" as com.javafwp.sound.musicPlayer [[musicPlayer.html]] {
+        -menuLoop: MediaPlayer
+        -start: MediaPlayer
+        -gameLoop: MediaPlayer
+        -end: MediaPlayer
+        -cuedClip: MediaPlayer
+        -currentClip: MediaPlayer
+        -lastGamestate: gameState
+        -loadAudioClip(String): MediaPlayer
+        +updateMusic(gameState): void
+    }
+
+    center footer UMLDoclet 2.0.17, PlantUML 1.2022.5
+@enduml
+
+PlantUML version 1.2022.5(Sat Apr 30 12:55:52 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: DE
+--></g></svg>

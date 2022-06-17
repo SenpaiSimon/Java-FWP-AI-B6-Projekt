@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="96px" preserveAspectRatio="none" style="width:190px;height:96px;background:#FFFFFF;" version="1.1" viewBox="0 0 190 96" width="190px" zoomAndPan="magnify"><defs/><g><!--MD5=[94047e23e1129bb13f7a5bf152a2df03]
+class com.javafwp.mainStart--><a href="mainStart.html" target="_top" title="mainStart.html" xlink:actuate="onRequest" xlink:href="mainStart.html" xlink:show="new" xlink:title="mainStart.html" xlink:type="simple"><g id="elem_com.javafwp.mainStart"><rect codeLine="5" fill="#F1F1F1" height="62.7539" id="com.javafwp.mainStart" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="158" x="12.5" y="7"/><ellipse cx="54.5" cy="26.1328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M56.9731,32.2759 Q56.3921,32.5747 55.7529,32.7241 Q55.1138,32.8735 54.4082,32.8735 Q51.9014,32.8735 50.5815,31.2217 Q49.2617,29.5698 49.2617,26.4487 Q49.2617,23.3193 50.5815,21.6675 Q51.9014,20.0156 54.4082,20.0156 Q55.1138,20.0156 55.7612,20.165 Q56.4087,20.3145 56.9731,20.6133 L56.9731,23.3359 Q56.3423,22.7549 55.7488,22.4851 Q55.1553,22.2153 54.5244,22.2153 Q53.1797,22.2153 52.4949,23.282 Q51.8101,24.3486 51.8101,26.4487 Q51.8101,28.5405 52.4949,29.6072 Q53.1797,30.6738 54.5244,30.6738 Q55.1553,30.6738 55.7488,30.4041 Q56.3423,30.1343 56.9731,29.5532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="66" x="74.5" y="25.5352">mainStart</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="61" x="77" y="38.1563">com.javafwp</text><line style="stroke:#181818;stroke-width:0.5;" x1="13.5" x2="169.5" y1="45.2656" y2="45.2656"/><ellipse cx="23.5" cy="56.2656" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="132" x="32.5" y="62.8008">main(String[]): void</text></g></a><rect height="11.7773" style="stroke:#00000000;stroke-width:1.0;fill:none;" width="182" x="0" y="76.7539"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="182" x="0" y="86.4219">UMLDoclet 2.0.17, PlantUML 1.2022.5</text><!--MD5=[e3b032925ad721134066afa4e4325d75]
+@startuml
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>mainStart\n<size:10>com.javafwp" as com.javafwp.mainStart [[mainStart.html]] {
+        {static} +main(String[]): void
+    }
+
+    center footer UMLDoclet 2.0.17, PlantUML 1.2022.5
+@enduml
+
+PlantUML version 1.2022.5(Sat Apr 30 12:55:52 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: DE
+--></g></svg>

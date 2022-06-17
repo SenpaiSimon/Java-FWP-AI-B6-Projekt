@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-
+/*
+ * Klasse zur Kommunikation mit einer Datenbank
+ */
 final class dbc {
     static final String DB_URL = "jdbc:mysql://db.robin-prillwitz.de/k122486_javafwp";
     static final String USER = "k122486_java_user";
@@ -16,6 +18,11 @@ final class dbc {
     static final String INSERT_QUERY = "INSERT INTO Highscores(Name, Score) VALUES (?, ?);";
     static final String SELECTION_QUERY = "SELECT Name, Score FROM Highscores ORDER BY Score DESC LIMIT 10;";
 
+    /*
+     * Schreibt einen highscoreEntry durch den INSERT_QUERY in die Datenbank
+     *
+     * @param entry highscoreEntry der geschrieben werden soll
+     */
     public static void writeToDatabase(highscoreEntry entry)  {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -32,6 +39,11 @@ final class dbc {
         }
     }
 
+    /*
+     * Führt den SELECTION_QUERY aus und gibt die resultate zurück
+     *
+     * @return Array list an highscoreEntry aus dem result set der Abfrage
+     */
     public static ArrayList<highscoreEntry> getFromDatabase()  {
         ArrayList<highscoreEntry> entries = new ArrayList<highscoreEntry>();
 

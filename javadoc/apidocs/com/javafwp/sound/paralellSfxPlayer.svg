@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="137px" preserveAspectRatio="none" style="width:294px;height:137px;background:#FFFFFF;" version="1.1" viewBox="0 0 294 137" width="294px" zoomAndPan="magnify"><defs/><g><!--MD5=[7f4bfa08361df12c7f693779c33c25f2]
+class com.javafwp.sound.paralellSfxPlayer--><a href="paralellSfxPlayer.html" target="_top" title="paralellSfxPlayer.html" xlink:actuate="onRequest" xlink:href="paralellSfxPlayer.html" xlink:show="new" xlink:title="paralellSfxPlayer.html" xlink:type="simple"><g id="elem_com.javafwp.sound.paralellSfxPlayer"><rect codeLine="5" fill="#F1F1F1" height="103.7305" id="com.javafwp.sound.paralellSfxPlayer" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="273" x="7" y="7"/><ellipse cx="82.25" cy="26.1328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M84.7231,32.2759 Q84.1421,32.5747 83.5029,32.7241 Q82.8638,32.8735 82.1582,32.8735 Q79.6514,32.8735 78.3315,31.2217 Q77.0117,29.5698 77.0117,26.4487 Q77.0117,23.3193 78.3315,21.6675 Q79.6514,20.0156 82.1582,20.0156 Q82.8638,20.0156 83.5112,20.165 Q84.1587,20.3145 84.7231,20.6133 L84.7231,23.3359 Q84.0923,22.7549 83.4988,22.4851 Q82.9053,22.2153 82.2744,22.2153 Q80.9297,22.2153 80.2449,23.282 Q79.5601,24.3486 79.5601,26.4487 Q79.5601,28.5405 80.2449,29.6072 Q80.9297,30.6738 82.2744,30.6738 Q82.9053,30.6738 83.4988,30.4041 Q84.0923,30.1343 84.7231,29.5532 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="114" x="102.75" y="25.5352">paralellSfxPlayer</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="93" x="113.25" y="38.1563">com.javafwp.sound</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="279" y1="45.2656" y2="45.2656"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="53.2656"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="131" x="27" y="62.8008">clips: MediaPlayer[]</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="279" y1="69.7539" y2="69.7539"/><ellipse cx="18" cy="80.7539" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="247" x="27" y="87.2891">paralellSfxPlayer(String, double, int)</text><ellipse cx="18" cy="97.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="75" x="27" y="103.7773">play(): void</text></g></a><rect height="11.7773" style="stroke:#00000000;stroke-width:1.0;fill:none;" width="182" x="52" y="117.7305"/><text fill="#888888" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="182" x="52" y="127.3984">UMLDoclet 2.0.17, PlantUML 1.2022.5</text><!--MD5=[2ea46f764b14e6bfb8f200662c2b4430]
+@startuml
+    set namespaceSeparator none
+    hide empty fields
+    hide empty methods
+
+    class "<size:14>paralellSfxPlayer\n<size:10>com.javafwp.sound" as com.javafwp.sound.paralellSfxPlayer [[paralellSfxPlayer.html]] {
+        -clips: MediaPlayer[]
+        +paralellSfxPlayer(String, double, int)
+        +play(): void
+    }
+
+    center footer UMLDoclet 2.0.17, PlantUML 1.2022.5
+@enduml
+
+PlantUML version 1.2022.5(Sat Apr 30 12:55:52 CEST 2022)
+(APACHE source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: DE
+--></g></svg>
