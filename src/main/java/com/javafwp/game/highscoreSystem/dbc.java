@@ -14,9 +14,11 @@ final class dbc {
     static final String DB_URL = "jdbc:mysql://db.robin-prillwitz.de/k122486_javafwp";
     static final String USER = "k122486_java_user";
     static final String PASS = "JavaFWP123!";
+    static final String ADMIN_USER = "k122486_java_admin";
 
     static final String INSERT_QUERY = "INSERT INTO Highscores(Name, Score) VALUES (?, ?);";
     static final String SELECTION_QUERY = "SELECT Name, Score FROM Highscores ORDER BY Score DESC LIMIT 10;";
+    static final String DELETE_QUERY = "DELETE FROM Highscores;";
 
     /*
      * Schreibt einen highscoreEntry durch den INSERT_QUERY in die Datenbank
@@ -33,9 +35,35 @@ final class dbc {
             statement.execute();
 
         } catch (ClassNotFoundException e) {
+            //e.printStackTrace();
+        } catch (SQLException throwables) {
+            //throwables.printStackTrace();
+        }
+    }
+
+    /**
+     * Löscht ALLE Highscore Einträge nach Eingabe des Passworts
+     * 
+     * @param pass
+     * @return boolean True wenn es erfolgreich war
+     */
+    public static boolean resetScore(String pass) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(DB_URL, ADMIN_USER, pass);
+            if(connection != null) {
+                PreparedStatement statement = connection.prepareStatement(DELETE_QUERY);
+                statement.execute();
+                return true;
+            } else {
+                return false;
+            }
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            return false;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            return false;
         }
     }
 

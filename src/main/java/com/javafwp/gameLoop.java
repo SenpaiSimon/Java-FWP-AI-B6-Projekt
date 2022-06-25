@@ -19,6 +19,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -86,9 +87,11 @@ public class gameLoop extends Application implements globals{
     private int menuFrameCounter;
     private Paint[] menuFrames;
 
-    // shop stuff
+    // misc stuff
     private Rectangle shopBackground;
     private Text shopText;
+    private Text resetText;
+    private TextField password;
 
     // sound stuff
     private musicPlayer musicPlayer;
@@ -164,7 +167,7 @@ public class gameLoop extends Application implements globals{
         scene.setFill(Color.BLACK);
 
         // setup the primary stage order has to be like this
-        primaryStage.setTitle("Simple Sidescroller");
+        primaryStage.setTitle("Pizza Hut 2077");
         primaryStage.setScene(scene);
         scene.getWindow().setHeight(height);
         scene.getWindow().setWidth(width);
@@ -218,7 +221,31 @@ public class gameLoop extends Application implements globals{
         shopText.setStyle("-fx-font: 50 arial;");
         shopText.setFill(Color.WHITE);
 
-        shopRoot.getChildren().addAll(shopBackground, shopText);
+        // resetText
+        resetText = new Text();
+        resetText.setText("Reset ALL Scores globally!");
+        resetText.setTranslateX(width/32 * 24);
+        resetText.setTranslateY(height/8 * 7);
+        resetText.setStyle("-fx-font: 25 arial;");
+        resetText.setFill(Color.RED);
+
+        // textbox
+        password = new TextField();
+        password.setTranslateY(resetText.getBoundsInParent().getMinY() + resetText.getBoundsInParent().getHeight() + 10);
+        password.setTranslateX(width/32 * 24);
+        password.setPromptText("Admin Pass");
+        password.setFocusTraversable(false);
+        password.setOnAction(event -> {
+            boolean success = highscoreSystem.resetScore(password.getText());
+            if(success) {
+                resetText.setText("Success!");
+            } else {
+                resetText.setText("Wrong Password!");
+            }
+        });
+        
+        // add them to the screen
+        shopRoot.getChildren().addAll(shopBackground, shopText, resetText, password);
     }
 
     /**
@@ -343,6 +370,8 @@ public class gameLoop extends Application implements globals{
                 if(gameState == com.javafwp.game.ownTypes.gameState.mainMenu) {
                     appRoot.getChildren().removeAll(menuRoot);
                 }
+                resetText.setText("Reset ALL Scores globally!");
+                password.clear();
                 appRoot.getChildren().addAll(shopRoot);
             break;
 

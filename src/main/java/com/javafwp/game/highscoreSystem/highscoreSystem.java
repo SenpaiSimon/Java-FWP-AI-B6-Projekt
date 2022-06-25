@@ -66,6 +66,8 @@ public class highscoreSystem {
         inputName.setVisible(false);
         inputName.setStyle("-fx-font: 15 arial;");
         inputName.setMaxHeight(50);
+        inputName.setPromptText("Enter Name");
+        inputName.setFocusTraversable(false);
 
         // other vars
         entries = new ArrayList<highscoreEntry>();
@@ -165,6 +167,16 @@ public class highscoreSystem {
             tempText += entry.getName() + ":\t" + entry.getScore() + "\n";
         }
         displayText.setText(tempText);
+    }
+
+    /**
+     * Gibt die Anfrage die Datenbank zurückzusetzen an die Datenbank weiter
+     * 
+     * @param pass
+     * @return
+     */
+    public boolean resetScore(String pass) {
+        return dbc.resetScore(pass);
     }
 
     /**

@@ -62,7 +62,7 @@ Das Projekt wurde mit [microsoft visualstudio code](https://code.visualstudio.co
 *Besondere Herrausforderung*:
 - [x] GUI mit `JavaSwing` oder `JavaFX`
 - [x] Lauffähge `JAR` Datei
-- [ ] relationale Datenbank (Gewünscht)
+- [x] relationale Datenbank (Gewünscht)
 
 ---
 
