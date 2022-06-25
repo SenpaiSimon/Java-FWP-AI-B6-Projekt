@@ -54,7 +54,7 @@ final class dbc {
             ResultSet rs = statement.executeQuery();
 
             while(rs.next())    {
-                System.out.println(rs.getInt("Score"));
+                //System.out.println(rs.getInt("Score"));
                 entries.add(new highscoreEntry(rs.getString("Name"), rs.getInt("Score")));
             }
 

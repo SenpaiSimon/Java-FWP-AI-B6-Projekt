@@ -97,6 +97,7 @@ public class highscoreSystem {
      * @param newScore neue erreichte Punktezahl nach Tod
      */
     public void addEntry(int newScore) {
+        entries = dbc.getFromDatabase();
         sort();
         if(entries.isEmpty() || entries.size() < maxEntries || newScore > entries.get(entries.size() - 1).getScore()) {
             // make user able to type in text

@@ -212,11 +212,11 @@ public class gameLoop extends Application implements globals{
 
         // setup shop state
         shopText = new Text();
-        shopText.setText("this is shop");
-        shopText.setTranslateX(width/2);
-        shopText.setTranslateY(height/4);
+        shopText.setText("Developers: \n\nRobin Prillwitz\t\t-\t00805291 \nSimon Obermeier\t-\t00800498 \nAnton Kraus\t\t-\t00804697");
+        shopText.setTranslateX(width/32);
+        shopText.setTranslateY(height/8);
         shopText.setStyle("-fx-font: 50 arial;");
-        shopText.setFill(Color.GOLD);
+        shopText.setFill(Color.WHITE);
 
         shopRoot.getChildren().addAll(shopBackground, shopText);
     }

@@ -33,7 +33,7 @@ Das Projekt wurde mit [microsoft visualstudio code](https://code.visualstudio.co
 | Taste | Funktion |
 | --- | --- |
 | `Q` | Spiel Starten |
-| `E` | Shop betreten/verlassen |
+| `E` | Programmierer anzeigen |
 | `esc` | Spiel schließen |
 | `A` | Links bewegen |
 | `D` | Rechts bewegen |
