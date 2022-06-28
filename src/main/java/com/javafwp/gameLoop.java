@@ -121,6 +121,15 @@ public class gameLoop extends Application implements globals{
         this.primaryStage = primaryStage;
         init(primaryStage);
 
+        System.out.println(System.getProperty("os.name"));
+
+        final long delay;
+        if(System.getProperty("os.name").contains("Mac OS X"))  {
+            delay = 8_333_334;
+        }   else    {
+            delay = 0;
+        }
+
         // this will run at 60 fps
         timer = new AnimationTimer() {
             private long last_updated;
@@ -132,10 +141,11 @@ public class gameLoop extends Application implements globals{
                     System.out.println(keys.toString());
                     System.out.println("Player X: " + player.getX() + "Player Y: " + player.getY());
                 }
-                // if(now - last_updated >= 16_666_667)    {
+
+                if(now - last_updated >= delay)    {
                     last_updated = now;
                     update(now);
-                // }
+                }
             }
         };
         timer.start();
@@ -243,7 +253,7 @@ public class gameLoop extends Application implements globals{
                 resetText.setText("Wrong Password!");
             }
         });
-        
+
         // add them to the screen
         shopRoot.getChildren().addAll(shopBackground, shopText, resetText, password);
     }
