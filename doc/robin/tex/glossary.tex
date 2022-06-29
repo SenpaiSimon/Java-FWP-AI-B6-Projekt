@@ -1,0 +1,22 @@
+% Robin Prillwitz 2020
+
+\usepackage[acronym, toc]{glossaries}
+\usepackage[automake, nonumberlist, nogroupskip]{glossaries-extra}
+\makeglossaries
+\setabbreviationstyle[acronym]{long-short}
+
+\newacronym{jre}{JRE}{Java Runtime Enviornment}
+\newacronym{uml}{UML}{Unified Modelling Language}
+\newacronym{jar}{JAR}{Java Archive}
+
+\newglossaryentry{jfx}{name={JavaFX}, description={Java Graphikbibliothek}}
+\newglossaryentry{mysql}{name={MySQL}, description={Relationale Datenbank}}
+\newglossaryentry{javadoc}{name={Javadoc}, description={Java's standard Dokumentationsmethode}}
+\newglossaryentry{maven}{name={Maven}, description={Build System}}
+
+% cursive acronyms
+\renewcommand*{\glstextformat}[1]{\textit{#1}}
+% glossary spacing
+\renewcommand\glstreepredesc{\tabto{4cm}}
+
+\makeglossaries

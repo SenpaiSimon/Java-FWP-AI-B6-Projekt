@@ -1,0 +1,87 @@
+% Robin Prillwitz 2021
+\documentclass[12pt,a4paper]{scrartcl}
+
+\input{./tex/preamble}
+\input{./tex/glossary}
+
+\def \faculty   {Angewandte Informatik}
+\def \degree    {Angewandte Informatik}
+\def \title     {JAVA Programmierung FWP - 2D Plattformer}
+\def \type      {Projektarbeit}
+\def \class     {Javaprogrammierung AI-B6-FWP}
+\def \semester  {SS2022}
+
+\def \auditor   {Nicki Bodenschatz}
+
+\def \authorA    {Robin Prillwitz}
+\def \matrnrA    {00805291}
+\def \zipA       {84326}
+\def \locationA  {Falkenberg}
+\def \signatureA {./img/signature.png}
+
+\def \date      {\today}
+
+\def \stretch {1}
+
+\begin{document}
+\setstretch{1.0}
+
+% HEADING
+\setcounter{page}{0}
+\pagenumbering{roman}
+
+\include{./tex/titlepage}
+
+% TOC
+% \addcontentsline{toc}{section}{Inhaltsverzeichnis}%
+\thispagestyle{fancy}
+\tableofcontents
+\thispagestyle{fancy}
+
+% % TABLES
+% \addcontentsline{toc}{section}{Tabellenverzeichnis}%
+% \listoftables
+% \thispagestyle{fancy}
+
+% % FIGURES
+% \addcontentsline{toc}{section}{Abbildungsverzeichnis}%
+% \listoffigures
+% \thispagestyle{fancy}
+
+% ACRONYMS
+\setglossarystyle{listdotted}
+\setglossarystyle{tree}
+% \printacronyms[]
+\printglossary[type=\acronymtype, title=Abkürzungsverzeichnis]
+\thispagestyle{fancy}
+
+% GLOSSARY
+\printglossary
+\thispagestyle{fancy}
+
+\newpage
+\setcounter{page}{1}
+\pagenumbering{arabic}
+\pagestyle{fancy}
+\setstretch{\stretch}
+
+% ----------------------
+
+\input{text/overview}
+\clearpage
+\input{text/contributions}
+
+% ----------------------
+
+\clearpage
+\newpage
+
+\begin{samepage}
+% EIDENSTAT
+\input{./tex/eidesstatt}
+
+% COLOPHON
+\input{./tex/colophon}
+\end{samepage}
+
+\end{document}
