@@ -139,6 +139,16 @@ public interface globals {
     // Highscore Stuff
 
     /**
+     * Online Modus für Datenbank
+     */
+    boolean onlineMode = false;
+
+    /**
+     * Offline Passwort zum Daten zurücksetzen
+     */
+    String defaultPassword = "123456";
+
+    /**
      * Maximale Anzahl an Einträgen
      */
     int maxEntries = 10;

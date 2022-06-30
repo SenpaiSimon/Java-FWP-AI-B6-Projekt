@@ -25,6 +25,8 @@ public class highscoreSystem {
     private int textXPos;
     private int textYPos;
 
+    private boolean onlineMode;
+
     /**
      * Kontruktor für das Highscore System
      *
@@ -33,11 +35,12 @@ public class highscoreSystem {
      * @param maxEntries Maximale Anzahl an Einträgen
      * @param maxNameLength Maximale Namenslänge
      */
-    public highscoreSystem(int textXPos, int textYPos, int maxEntries, int maxNameLength) {
+    public highscoreSystem(int textXPos, int textYPos, int maxEntries, int maxNameLength, boolean onlineMode) {
         this.textXPos = textXPos;
         this.textYPos = textYPos;
         this.maxNameLength = maxNameLength;
         this.maxEntries = maxEntries;
+        this.onlineMode = onlineMode;
 
         // display
         displayText = new Text();
@@ -99,7 +102,7 @@ public class highscoreSystem {
      * @param newScore neue erreichte Punktezahl nach Tod
      */
     public void addEntry(int newScore) {
-        entries = dbc.getFromDatabase();
+        entries = dbc.getFromDatabase(onlineMode);
         sort();
         if(entries.isEmpty() || entries.size() < maxEntries || newScore > entries.get(entries.size() - 1).getScore()) {
             // make user able to type in text
@@ -125,7 +128,7 @@ public class highscoreSystem {
             // longest name is 10 letters
             highscoreEntry entry = new highscoreEntry(inputName.getText(), tempScoreEntry);
             entries.add(entry);
-            dbc.writeToDatabase(entry);
+            dbc.writeToDatabase(entry, onlineMode);
 
             sort(); // sort again to get rid of lowest score in the next step
 
@@ -160,7 +163,7 @@ public class highscoreSystem {
      * Generiert den Text der den Highscore anzeigt
      */
     public void generateText() {
-        entries = dbc.getFromDatabase();
+        entries = dbc.getFromDatabase(onlineMode);
         sort();
         String tempText = "Top " + maxEntries + " Highscores:\n";
         for(highscoreEntry entry: entries) {
@@ -175,8 +178,8 @@ public class highscoreSystem {
      * @param pass
      * @return
      */
-    public boolean resetScore(String pass) {
-        return dbc.resetScore(pass);
+    public boolean resetScore(String pass, String defaultPassword) {
+        return dbc.resetScore(pass, onlineMode, defaultPassword);
     }
 
     /**

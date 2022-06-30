@@ -76,7 +76,7 @@ public class gameLoop extends Application implements globals{
     private paralellSfxPlayer enemySfx = new paralellSfxPlayer("enemy.wav", 0.5, 5);
 
     // highscore system
-    highscoreSystem highscoreSystem = new highscoreSystem(textXPos, textYPos, maxEntries, maxNameLength);
+    highscoreSystem highscoreSystem = new highscoreSystem(textXPos, textYPos, maxEntries, maxNameLength, onlineMode);
 
     // death screen stuff
     private Text deathMessage;
@@ -246,7 +246,7 @@ public class gameLoop extends Application implements globals{
         password.setPromptText("Admin Pass");
         password.setFocusTraversable(false);
         password.setOnAction(event -> {
-            boolean success = highscoreSystem.resetScore(password.getText());
+            boolean success = highscoreSystem.resetScore(password.getText(), defaultPassword);
             if(success) {
                 resetText.setText("Success!");
             } else {
