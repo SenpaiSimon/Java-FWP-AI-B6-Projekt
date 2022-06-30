@@ -7,7 +7,7 @@ import javafx.scene.paint.Paint;
  * Schießbare Projektile 
  * Erbt von Objekt.java
  */
-public class Projectile extends object {
+public class Projectile extends Object {
     Point2D dir;
 
     /**

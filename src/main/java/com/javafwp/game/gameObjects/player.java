@@ -11,7 +11,7 @@ import javafx.scene.paint.Paint;
  * Spieler Objekt
  * Erbt von Objekt.java
  */
-public class Player extends object{
+public class Player extends Object{
     boolean canJump = false;
     Point2D vel;
 
@@ -57,12 +57,12 @@ public class Player extends object{
      * @param scrollSpeed Geschwindigkeit der Plattformen
      */
     // Applys Gravity and Handles Collissions
-    public void update(long tick, ArrayList<plattform> plattforms, double scrollSpeed) {
+    public void update(long tick, ArrayList<Plattform> plattforms, double scrollSpeed) {
         boolean coll = false;
-        plattform collPlattform = null;
+        Plattform collPlattform = null;
 
         // check if any intersection occured
-        for(plattform plattform: plattforms) {
+        for(Plattform plattform: plattforms) {
             if(entity.getBoundsInParent().intersects(plattform.getEntity().getBoundsInParent())) {
                 collPlattform = plattform;
                 coll = true;

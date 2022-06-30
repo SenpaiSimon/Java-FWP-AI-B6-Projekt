@@ -23,7 +23,7 @@ public class Object implements ObjectInterface {
      * @param height Y-Länge des Objekts
      * @param paint Farbe des Objekts
      */
-    public object(double xPos, double yPos, double length, double height, Paint paint) {
+    public Object(double xPos, double yPos, double length, double height, Paint paint) {
         entity = new Rectangle(length, height);
         entity.setTranslateX(xPos);
         entity.setTranslateY(yPos);

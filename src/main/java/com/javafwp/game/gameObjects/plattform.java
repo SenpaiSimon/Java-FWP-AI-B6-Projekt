@@ -6,7 +6,7 @@ import javafx.scene.paint.Paint;
  * Plattform Objekte 
  * Erbt von Objekt.java
  */
-public class Plattform extends object{
+public class Plattform extends Object{
     /**
      * Konstruktor für Plattformen
      * 
@@ -16,7 +16,7 @@ public class Plattform extends object{
      * @param height Y-Länge des Objekts
      * @param paint Farbe des Objekts
      */
-    public plattform(double xPos, double yPos, double length, double height, Paint paint) {
+    public Plattform(double xPos, double yPos, double length, double height, Paint paint) {
         super(xPos, yPos, length, height, paint);
         this.type = com.javafwp.game.OwnTypes.type.plattform;
     }

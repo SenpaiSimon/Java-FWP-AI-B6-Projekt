@@ -7,7 +7,7 @@ import javafx.scene.paint.Paint;
  * Gegener Objekt 
  * Erbt von Objekt.java
  */
-public class Enemy extends object{
+public class Enemy extends Object{
 
     private Paint[] frames;
     private int animationCounter = 0;

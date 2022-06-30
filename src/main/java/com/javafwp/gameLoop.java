@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.javafwp.game.gameObjects.Enemy;
 import com.javafwp.game.gameObjects.Heatbar;
-import com.javafwp.game.gameObjects.plattform;
+import com.javafwp.game.gameObjects.Plattform;
 import com.javafwp.game.gameObjects.Player;
 import com.javafwp.game.gameObjects.Projectile;
 import com.javafwp.game.highscoreSystem.HighscoreSystem;
@@ -59,7 +59,7 @@ public class GameLoop extends Application implements Globals{
     private Player player;
 
     // plattform stuff
-    private ArrayList <plattform> plattforms = new ArrayList<plattform>();
+    private ArrayList <Plattform> plattforms = new ArrayList<Plattform>();
     private Paint plattformPaint = imageLoader.loadImage("platform.png");
 
     // missle stuff
@@ -417,16 +417,16 @@ public class GameLoop extends Application implements Globals{
      */
     private void addPlattform() {
         if(plattforms.size() != 0) {
-            plattform lastPlattform = plattforms.get(plattforms.size() - 1);
+            Plattform lastPlattform = plattforms.get(plattforms.size() - 1);
             if(lastPlattform.getX() + lastPlattform.getWidth() < width) { // plattform is fully in window
-                plattform newPlatt = new plattform(width + randomBetweenBounds(distanceMinX, distanceMaxX), height/3 * 2 + randomBetweenBounds(-distanceY, distanceY), plattformWidth, plattformHeight, plattformPaint);
+                Plattform newPlatt = new Plattform(width + randomBetweenBounds(distanceMinX, distanceMaxX), height/3 * 2 + randomBetweenBounds(-distanceY, distanceY), plattformWidth, plattformHeight, plattformPaint);
                 plattforms.add(newPlatt);
                 gameRoot.getChildren().add(newPlatt.getEntity());
                 score++;
                 scoreSfx.play();
             }
         } else {
-            plattform firstPlatt = new plattform(width/4 * 3, height/2, plattformWidth, plattformHeight, plattformPaint);
+            Plattform firstPlatt = new Plattform(width/4 * 3, height/2, plattformWidth, plattformHeight, plattformPaint);
             plattforms.add(firstPlatt);
             gameRoot.getChildren().add(firstPlatt.getEntity());
         }
@@ -594,7 +594,7 @@ public class GameLoop extends Application implements Globals{
         score = 0;
 
         // remove them from the scene and clear the list
-        for(plattform platt: plattforms) {
+        for(Plattform platt: plattforms) {
             gameRoot.getChildren().remove(platt.getEntity());
         }
         for(Projectile proj: projectiles) {
@@ -710,7 +710,7 @@ public class GameLoop extends Application implements Globals{
             addPlattform();
             removeOffscreenPlattform();
 
-            for(plattform object: plattforms) {
+            for(Plattform object: plattforms) {
                 object.update(scrollSpeed);
             }
 

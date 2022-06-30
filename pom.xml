@@ -42,7 +42,7 @@
           </descriptorRefs>
           <archive>
             <manifest>
-              <mainClass>com.javafwp.mainStart</mainClass>
+              <mainClass>com.javafwp.MainStart</mainClass>
             </manifest>
           </archive>
           <forceCreation>true</forceCreation>
@@ -55,7 +55,7 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>1.2.1</version>
         <configuration>
-            <mainClass>com.javafwp.mainStart</mainClass>
+            <mainClass>com.javafwp.MainStart</mainClass>
             <arguments>
                 <argument></argument>
             </arguments>

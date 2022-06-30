@@ -8,7 +8,7 @@ import javafx.scene.shape.Rectangle;
  * Hitzeleisten Objekt 
  * Erbt von Objekt.java
  */
-public class Heatbar extends object {
+public class Heatbar extends Object {
     private Color heatColor;
     private Rectangle heat;
     private int currentHeat;
