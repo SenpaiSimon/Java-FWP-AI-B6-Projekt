@@ -8,7 +8,7 @@ import javafx.scene.shape.Rectangle;
  * Hitzeleisten Objekt 
  * Erbt von Objekt.java
  */
-public class heatbar extends object {
+public class Heatbar extends object {
     private Color heatColor;
     private Rectangle heat;
     private int currentHeat;
@@ -23,7 +23,7 @@ public class heatbar extends object {
      * @param baseColor Hintergrundfarbe der Leiste
      * @param heatColor Farbe des Hitzebalkens
      */
-    public heatbar(double xPos, double yPos, double maxHeat, double height, Color baseColor, Color heatColor) {
+    public Heatbar(double xPos, double yPos, double maxHeat, double height, Color baseColor, Color heatColor) {
         super(xPos, yPos, maxHeat, height, baseColor);
         this.heatColor = heatColor;
         heat = new Rectangle(50, height);
@@ -31,7 +31,7 @@ public class heatbar extends object {
         heat.setTranslateY(yPos);
         heat.setFill(this.heatColor);
         currentHeat = 0;
-        this.type = com.javafwp.game.ownTypes.type.heatbar;
+        this.type = com.javafwp.game.OwnTypes.type.heatbar;
     }
 
     

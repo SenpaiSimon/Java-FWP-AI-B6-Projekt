@@ -7,11 +7,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.SQLTimeoutException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeoutException;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
@@ -42,7 +40,7 @@ final class dbc {
      * @param entry highscoreEntry der geschrieben werden soll
      * @param connectOnline soll die Online verbindung benutzt werden
      */
-    public static void writeToDatabase(highscoreEntry entry, boolean connectOnline) {
+    public static void writeToDatabase(HighscoreEntry entry, boolean connectOnline) {
         if(connectOnline)   {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
@@ -152,8 +150,8 @@ final class dbc {
      * @param connectOnline soll die Online verbindung benutzt werden
      * @return Array list an highscoreEntry aus dem result set der Abfrage
      */
-    public static ArrayList<highscoreEntry> getFromDatabase(boolean connectOnline) {
-        ArrayList<highscoreEntry> entries = new ArrayList<highscoreEntry>();
+    public static ArrayList<HighscoreEntry> getFromDatabase(boolean connectOnline) {
+        ArrayList<HighscoreEntry> entries = new ArrayList<HighscoreEntry>();
 
         if (connectOnline) {
             try {
@@ -164,7 +162,7 @@ final class dbc {
 
                 while (rs.next()) {
                     // System.out.println(rs.getInt("Score"));
-                    entries.add(new highscoreEntry(rs.getString("Name"), rs.getInt("Score")));
+                    entries.add(new HighscoreEntry(rs.getString("Name"), rs.getInt("Score")));
                 }
 
             } catch (ClassNotFoundException e) {
@@ -190,7 +188,7 @@ final class dbc {
                     String name = record.get(0);
                     int score = Integer.parseInt(record.get(1));
 
-                    entries.add(new highscoreEntry(name, score));
+                    entries.add(new HighscoreEntry(name, score));
                 }
             }   catch(Exception e)  {
                 e.printStackTrace();

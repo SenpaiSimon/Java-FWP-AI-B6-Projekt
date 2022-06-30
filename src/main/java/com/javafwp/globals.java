@@ -3,7 +3,7 @@ package com.javafwp;
 /**
  * Globale Variablen um Fine-Tuning an der Anwendung auszuführen
  */
-public interface globals {
+public interface Globals {
     // Fenster Stuff
 
     /**

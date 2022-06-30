@@ -12,12 +12,12 @@ import javafx.scene.text.Text;
 /**
  * Einfaches Highscore Sytem zum hinzufügen von Highscores und auch verwalten
  */
-public class highscoreSystem {
+public class HighscoreSystem {
     private Text displayText;
     private Text infoDisplay;
     private Text congrats;
     private TextField inputName;
-    private ArrayList<highscoreEntry> entries;
+    private ArrayList<HighscoreEntry> entries;
     private int tempScoreEntry;
 
     private int maxEntries;
@@ -35,7 +35,7 @@ public class highscoreSystem {
      * @param maxEntries Maximale Anzahl an Einträgen
      * @param maxNameLength Maximale Namenslänge
      */
-    public highscoreSystem(int textXPos, int textYPos, int maxEntries, int maxNameLength, boolean onlineMode) {
+    public HighscoreSystem(int textXPos, int textYPos, int maxEntries, int maxNameLength, boolean onlineMode) {
         this.textXPos = textXPos;
         this.textYPos = textYPos;
         this.maxNameLength = maxNameLength;
@@ -73,7 +73,7 @@ public class highscoreSystem {
         inputName.setFocusTraversable(false);
 
         // other vars
-        entries = new ArrayList<highscoreEntry>();
+        entries = new ArrayList<HighscoreEntry>();
         tempScoreEntry = 0;
 
         // if user pressed "ENTER" complete addition
@@ -126,7 +126,7 @@ public class highscoreSystem {
     private void completeAddingNewEntry() {
         if(!inputName.getText().isEmpty()) {
             // longest name is 10 letters
-            highscoreEntry entry = new highscoreEntry(inputName.getText(), tempScoreEntry);
+            HighscoreEntry entry = new HighscoreEntry(inputName.getText(), tempScoreEntry);
             entries.add(entry);
             dbc.writeToDatabase(entry, onlineMode);
 
@@ -150,9 +150,9 @@ public class highscoreSystem {
      * Sortiert die Einträge nach Score absteigend
      */
     private void sort() {
-        Collections.sort(entries, new Comparator<highscoreEntry>() {
+        Collections.sort(entries, new Comparator<HighscoreEntry>() {
             @Override
-            public int compare(highscoreEntry entry1, highscoreEntry entry2)
+            public int compare(HighscoreEntry entry1, HighscoreEntry entry2)
             {
                 return entry2.getScore() - entry1.getScore();
             }
@@ -166,7 +166,7 @@ public class highscoreSystem {
         entries = dbc.getFromDatabase(onlineMode);
         sort();
         String tempText = "Top " + maxEntries + " Highscores:\n";
-        for(highscoreEntry entry: entries) {
+        for(HighscoreEntry entry: entries) {
             tempText += entry.getName() + ":\t" + entry.getScore() + "\n";
         }
         displayText.setText(tempText);

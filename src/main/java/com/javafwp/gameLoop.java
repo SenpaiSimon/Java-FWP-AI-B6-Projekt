@@ -4,16 +4,16 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import com.javafwp.game.gameObjects.enemy;
-import com.javafwp.game.gameObjects.heatbar;
+import com.javafwp.game.gameObjects.Enemy;
+import com.javafwp.game.gameObjects.Heatbar;
 import com.javafwp.game.gameObjects.plattform;
-import com.javafwp.game.gameObjects.player;
-import com.javafwp.game.gameObjects.projectile;
-import com.javafwp.game.highscoreSystem.highscoreSystem;
-import com.javafwp.game.ownTypes.gameState;
-import com.javafwp.sprites.imageLoader;
-import com.javafwp.sound.musicPlayer;
-import com.javafwp.sound.paralellSfxPlayer;
+import com.javafwp.game.gameObjects.Player;
+import com.javafwp.game.gameObjects.Projectile;
+import com.javafwp.game.highscoreSystem.HighscoreSystem;
+import com.javafwp.game.OwnTypes.gameState;
+import com.javafwp.sprites.ImageLoader;
+import com.javafwp.sound.MusicPlayer;
+import com.javafwp.sound.ParalellSfxPlayer;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -35,15 +35,15 @@ import javafx.stage.Stage;
  * Erbt von javafx.application.Application
  * Implementiert globals.java
  */
-public class gameLoop extends Application implements globals{
+public class GameLoop extends Application implements Globals{
     AnimationTimer timer;
     private gameState gameState;
     Stage primaryStage;
     Text scoreText;
-    imageLoader imageLoader = new imageLoader();
+    ImageLoader imageLoader = new ImageLoader();
 
     private int score = 0;
-    private paralellSfxPlayer scoreSfx = new paralellSfxPlayer("score.wav", 0.1, 5);
+    private ParalellSfxPlayer scoreSfx = new ParalellSfxPlayer("score.wav", 0.1, 5);
 
     /**
      * Globals are now in the globals interface
@@ -56,27 +56,27 @@ public class gameLoop extends Application implements globals{
     private Rectangle playingBackground;
 
     // Player stuff
-    private player player;
+    private Player player;
 
     // plattform stuff
     private ArrayList <plattform> plattforms = new ArrayList<plattform>();
     private Paint plattformPaint = imageLoader.loadImage("platform.png");
 
     // missle stuff
-    private ArrayList <projectile> projectiles = new ArrayList<projectile>();
+    private ArrayList <Projectile> projectiles = new ArrayList<Projectile>();
     private Paint missleColor = imageLoader.loadImage("pizza.png");
-    private paralellSfxPlayer missileSfx = new paralellSfxPlayer("throw.wav", 0.4, 5);
+    private ParalellSfxPlayer missileSfx = new ParalellSfxPlayer("throw.wav", 0.4, 5);
 
     // heatbar stuff
-    private heatbar heatbar;
+    private Heatbar heatbar;
 
     // enemy stuff
-    private ArrayList <enemy> enemys = new ArrayList<enemy>();
+    private ArrayList <Enemy> enemys = new ArrayList<Enemy>();
     int currentTick = 0;
-    private paralellSfxPlayer enemySfx = new paralellSfxPlayer("enemy.wav", 0.5, 5);
+    private ParalellSfxPlayer enemySfx = new ParalellSfxPlayer("enemy.wav", 0.5, 5);
 
     // highscore system
-    highscoreSystem highscoreSystem = new highscoreSystem(textXPos, textYPos, maxEntries, maxNameLength, onlineMode);
+    HighscoreSystem highscoreSystem = new HighscoreSystem(textXPos, textYPos, maxEntries, maxNameLength, onlineMode);
 
     // death screen stuff
     private Text deathMessage;
@@ -94,7 +94,7 @@ public class gameLoop extends Application implements globals{
     private TextField password;
 
     // sound stuff
-    private musicPlayer musicPlayer;
+    private MusicPlayer musicPlayer;
 
     // debug prints -- may slow down application
     public static boolean debug = false;
@@ -185,14 +185,14 @@ public class gameLoop extends Application implements globals{
 
         // add listener for mouse positions
         gameRoot.setOnMouseClicked(mousePointer -> {
-            if(gameState == com.javafwp.game.ownTypes.gameState.playing) {
+            if(gameState == com.javafwp.game.OwnTypes.gameState.playing) {
                 if(heatbar.addHeat(heatPerShot)) {
                     addMissle(mousePointer);
                 }
             }
         });
 
-        musicPlayer = new musicPlayer();
+        musicPlayer = new MusicPlayer();
 
         // init the rest
         initPlayState();
@@ -202,14 +202,14 @@ public class gameLoop extends Application implements globals{
         initDeathScreen();
 
         // set initial state
-        switchState(com.javafwp.game.ownTypes.gameState.mainMenu);
+        switchState(com.javafwp.game.OwnTypes.gameState.mainMenu);
     }
 
     /**
      * Initialisiert die Leiste welche Hitze anzeigt und dessen Bestandteile
      */
     private void initHeatbar() {
-        heatbar = new heatbar(heatX, heatY, maxHeat, heatHeigth, Color.WHITE, Color.ORANGE);
+        heatbar = new Heatbar(heatX, heatY, maxHeat, heatHeigth, Color.WHITE, Color.ORANGE);
         scoreRoot.getChildren().addAll(heatbar.getEntities());
     }
 
@@ -301,7 +301,7 @@ public class gameLoop extends Application implements globals{
         runningFrames[0] = imageLoader.loadImage("player-running1.png");
         runningFrames[1] = imageLoader.loadImage("player-running2.png");
 
-        player = new player(
+        player = new Player(
             (width/4.0) * 3 + 10,
             height/2.0 - 50,
             64.0, 64.0,
@@ -352,24 +352,24 @@ public class gameLoop extends Application implements globals{
 
         switch(newState) {
             case mainMenu:
-                if(gameState == com.javafwp.game.ownTypes.gameState.playing) {
+                if(gameState == com.javafwp.game.OwnTypes.gameState.playing) {
                     appRoot.getChildren().removeAll(gameRoot, scoreRoot);
-                } else if(gameState == com.javafwp.game.ownTypes.gameState.shop) {
+                } else if(gameState == com.javafwp.game.OwnTypes.gameState.shop) {
                     appRoot.getChildren().removeAll(shopRoot);
-                } else if(gameState == com.javafwp.game.ownTypes.gameState.death) {
+                } else if(gameState == com.javafwp.game.OwnTypes.gameState.death) {
                     appRoot.getChildren().removeAll(deathRoot, gameRoot, scoreRoot);
                 }
                 appRoot.getChildren().add(menuRoot);
             break;
 
             case playing:
-                if(gameState == com.javafwp.game.ownTypes.gameState.mainMenu) {
+                if(gameState == com.javafwp.game.OwnTypes.gameState.mainMenu) {
                     appRoot.getChildren().removeAll(menuRoot);
-                } else if (gameState == com.javafwp.game.ownTypes.gameState.death) {
+                } else if (gameState == com.javafwp.game.OwnTypes.gameState.death) {
                     appRoot.getChildren().remove(deathRoot);
                 }
 
-                if(gameState != com.javafwp.game.ownTypes.gameState.death) {
+                if(gameState != com.javafwp.game.OwnTypes.gameState.death) {
                     // because we dont unload these when in death menu
                     appRoot.getChildren().addAll(gameRoot, scoreRoot);
                 }
@@ -377,7 +377,7 @@ public class gameLoop extends Application implements globals{
             break;
 
             case shop:
-                if(gameState == com.javafwp.game.ownTypes.gameState.mainMenu) {
+                if(gameState == com.javafwp.game.OwnTypes.gameState.mainMenu) {
                     appRoot.getChildren().removeAll(menuRoot);
                 }
                 resetText.setText("Reset ALL Scores globally!");
@@ -386,13 +386,13 @@ public class gameLoop extends Application implements globals{
             break;
 
             case exit:
-                if(gameState == com.javafwp.game.ownTypes.gameState.mainMenu) {
+                if(gameState == com.javafwp.game.OwnTypes.gameState.mainMenu) {
                     primaryStage.close();
                 }
             break;
 
             case death:
-                if(gameState == com.javafwp.game.ownTypes.gameState.playing) {
+                if(gameState == com.javafwp.game.OwnTypes.gameState.playing) {
                     // nothing to unload yet
                 }
 
@@ -464,7 +464,7 @@ public class gameLoop extends Application implements globals{
 
         missileSfx.play();
 
-        projectile newProj = new projectile(
+        Projectile newProj = new Projectile(
             player.getX() + player.getWidth() / 2.0,
             player.getY(),
             missleLength, missleHeight, dir, missleColor);
@@ -476,7 +476,7 @@ public class gameLoop extends Application implements globals{
      * Entfernt jegliche Projektile, welche nicht mehr auf dem Bildschirm liegen
      */
     private void removeOffscreenMissle() {
-        for(projectile proj: projectiles) {
+        for(Projectile proj: projectiles) {
             if((proj.getX() > width + 100) ||          // right edge
                (proj.getX() + missleLength < -100) ||  // left edge
                (proj.getY() + missleHeight < -100) ||  // top edge
@@ -523,7 +523,7 @@ public class gameLoop extends Application implements globals{
             enemyFrames[1] = imageLoader.loadImage("dominos2.png");
             enemyFrames[2] = imageLoader.loadImage("dominos3.png");
             enemyFrames[3] = imageLoader.loadImage("dominos4.png");
-            enemy enem = new enemy(xPos, yPos, enemyLength, enemyHeight, enemyFrames);
+            Enemy enem = new Enemy(xPos, yPos, enemyLength, enemyHeight, enemyFrames);
             enemys.add(enem);
             gameRoot.getChildren().add(enem.getEntity());
             currentTick = 0;
@@ -535,9 +535,9 @@ public class gameLoop extends Application implements globals{
      * Handelt die Kollission zwischen Gegner und Spieler ab
      */
     private void enemyPlayerColl() {
-        for(enemy enem: enemys) {
+        for(Enemy enem: enemys) {
             if(player.getEntity().getBoundsInParent().intersects(enem.getEntity().getBoundsInParent())) {
-                switchState(com.javafwp.game.ownTypes.gameState.death);
+                switchState(com.javafwp.game.OwnTypes.gameState.death);
                 break;
             }
         }
@@ -548,8 +548,8 @@ public class gameLoop extends Application implements globals{
      */
     private void enemyProjColl() {
         loop:
-        for(enemy enem: enemys) {
-            for(projectile proj: projectiles) {
+        for(Enemy enem: enemys) {
+            for(Projectile proj: projectiles) {
                 if(enem.getEntity().getBoundsInParent().intersects(proj.getEntity().getBoundsInParent())) {
                     gameRoot.getChildren().removeAll(enem.getEntity(), proj.getEntity());
                     projectiles.remove(proj);
@@ -581,7 +581,7 @@ public class gameLoop extends Application implements globals{
      */
     private void playerDeath() {
         if(player.getY() + player.getHeight() > height) {
-            switchState(com.javafwp.game.ownTypes.gameState.death);
+            switchState(com.javafwp.game.OwnTypes.gameState.death);
         }
     }
 
@@ -597,10 +597,10 @@ public class gameLoop extends Application implements globals{
         for(plattform platt: plattforms) {
             gameRoot.getChildren().remove(platt.getEntity());
         }
-        for(projectile proj: projectiles) {
+        for(Projectile proj: projectiles) {
             gameRoot.getChildren().remove(proj.getEntity());
         }
-        for(enemy enem: enemys) {
+        for(Enemy enem: enemys) {
             gameRoot.getChildren().remove(enem.getEntity());
         }
 
@@ -626,48 +626,48 @@ public class gameLoop extends Application implements globals{
      */
     private void keyActions() {
         if(isPressedKey(KeyCode.D)) {
-            if(gameState == com.javafwp.game.ownTypes.gameState.playing) {
+            if(gameState == com.javafwp.game.OwnTypes.gameState.playing) {
                 player.move(new Point2D(moveSpeed, 0));
             }
         }
         if(isPressedKey(KeyCode.A)) {
-            if(gameState == com.javafwp.game.ownTypes.gameState.playing) {
+            if(gameState == com.javafwp.game.OwnTypes.gameState.playing) {
                 player.move(new Point2D(-moveSpeed, 0));
             }
         }
         if(isPressedKey(KeyCode.SPACE)) {
-            if(gameState == com.javafwp.game.ownTypes.gameState.playing) {
+            if(gameState == com.javafwp.game.OwnTypes.gameState.playing) {
                 player.jump(jumpForce);
-            } else if (gameState == com.javafwp.game.ownTypes.gameState.death) {
-                switchState(com.javafwp.game.ownTypes.gameState.playing);
-            } else if(gameState == com.javafwp.game.ownTypes.gameState.mainMenu) {
-                switchState(com.javafwp.game.ownTypes.gameState.playing);
+            } else if (gameState == com.javafwp.game.OwnTypes.gameState.death) {
+                switchState(com.javafwp.game.OwnTypes.gameState.playing);
+            } else if(gameState == com.javafwp.game.OwnTypes.gameState.mainMenu) {
+                switchState(com.javafwp.game.OwnTypes.gameState.playing);
                 synchronousInputDelay(100);
             }
         }
         if(isPressedKey(KeyCode.ESCAPE)) {
-            if(gameState == com.javafwp.game.ownTypes.gameState.playing) {
-                switchState(com.javafwp.game.ownTypes.gameState.mainMenu);
-            } else if(gameState == com.javafwp.game.ownTypes.gameState.mainMenu) {
-                switchState(com.javafwp.game.ownTypes.gameState.exit);
-            } else if(gameState == com.javafwp.game.ownTypes.gameState.shop)  {
-                switchState(com.javafwp.game.ownTypes.gameState.mainMenu);
-            } else if(gameState == com.javafwp.game.ownTypes.gameState.death) {
-                switchState(com.javafwp.game.ownTypes.gameState.mainMenu);
+            if(gameState == com.javafwp.game.OwnTypes.gameState.playing) {
+                switchState(com.javafwp.game.OwnTypes.gameState.mainMenu);
+            } else if(gameState == com.javafwp.game.OwnTypes.gameState.mainMenu) {
+                switchState(com.javafwp.game.OwnTypes.gameState.exit);
+            } else if(gameState == com.javafwp.game.OwnTypes.gameState.shop)  {
+                switchState(com.javafwp.game.OwnTypes.gameState.mainMenu);
+            } else if(gameState == com.javafwp.game.OwnTypes.gameState.death) {
+                switchState(com.javafwp.game.OwnTypes.gameState.mainMenu);
             }
             synchronousInputDelay(100);
         }
         if(isPressedKey(KeyCode.Q)) {
-            if(gameState == com.javafwp.game.ownTypes.gameState.mainMenu) {
-                switchState(com.javafwp.game.ownTypes.gameState.playing);
+            if(gameState == com.javafwp.game.OwnTypes.gameState.mainMenu) {
+                switchState(com.javafwp.game.OwnTypes.gameState.playing);
             }
             synchronousInputDelay(100);
         }
         if(isPressedKey(KeyCode.E)) {
-            if(gameState == com.javafwp.game.ownTypes.gameState.shop) {
-                switchState(com.javafwp.game.ownTypes.gameState.mainMenu);
-            } else if(gameState == com.javafwp.game.ownTypes.gameState.mainMenu) {
-                switchState(com.javafwp.game.ownTypes.gameState.shop);
+            if(gameState == com.javafwp.game.OwnTypes.gameState.shop) {
+                switchState(com.javafwp.game.OwnTypes.gameState.mainMenu);
+            } else if(gameState == com.javafwp.game.OwnTypes.gameState.mainMenu) {
+                switchState(com.javafwp.game.OwnTypes.gameState.shop);
             }
             synchronousInputDelay(100);
         }
@@ -680,7 +680,7 @@ public class gameLoop extends Application implements globals{
      * @param delay Wartezeit
      */
     private void synchronousInputDelay(int delay) {
-        if(gameState != com.javafwp.game.ownTypes.gameState.playing) {
+        if(gameState != com.javafwp.game.OwnTypes.gameState.playing) {
             try {
                 TimeUnit.MILLISECONDS.sleep(delay);
             } catch (Exception e) {
@@ -701,7 +701,7 @@ public class gameLoop extends Application implements globals{
         keyActions();
         musicPlayer.updateMusic(gameState);
 
-        if(gameState == com.javafwp.game.ownTypes.gameState.playing) {
+        if(gameState == com.javafwp.game.OwnTypes.gameState.playing) {
              // player stuff
             player.update(tick, plattforms, scrollSpeed);
             playerDeath();
@@ -718,7 +718,7 @@ public class gameLoop extends Application implements globals{
             updateTexts();
 
             // missle stuff
-            for(projectile object: projectiles) {
+            for(Projectile object: projectiles) {
                 object.update(projectileSpeed);
             }
             removeOffscreenMissle();
@@ -726,12 +726,12 @@ public class gameLoop extends Application implements globals{
 
             // enemy stuff
             addEnemy();
-            for(enemy object: enemys) {
+            for(Enemy object: enemys) {
                 object.update(tick, new Point2D(player.getX(), player.getY()), enemySpeed);
             }
             enemyPlayerColl();
             enemyProjColl();
-        }   else if(gameState == com.javafwp.game.ownTypes.gameState.mainMenu)  {
+        }   else if(gameState == com.javafwp.game.OwnTypes.gameState.mainMenu)  {
             if(tick % 1000 == 0) {
                 menuFrameCounter++;
                 menuFrameCounter = menuFrameCounter % menuFrames.length;

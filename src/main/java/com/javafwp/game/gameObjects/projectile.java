@@ -7,7 +7,7 @@ import javafx.scene.paint.Paint;
  * Schießbare Projektile 
  * Erbt von Objekt.java
  */
-public class projectile extends object {
+public class Projectile extends object {
     Point2D dir;
 
     /**
@@ -20,10 +20,10 @@ public class projectile extends object {
      * @param dir Bewegungsrichtung
      * @param paint Farbe des Objekts
      */
-    public projectile(double xPos, double yPos, double length, double height, Point2D dir, Paint paint) {
+    public Projectile(double xPos, double yPos, double length, double height, Point2D dir, Paint paint) {
         super(xPos, yPos, length, height, paint);
         this.dir = dir.normalize();
-        this.type = com.javafwp.game.ownTypes.type.projectile;
+        this.type = com.javafwp.game.OwnTypes.type.projectile;
     }
 
     

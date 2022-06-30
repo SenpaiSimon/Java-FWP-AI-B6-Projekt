@@ -1,6 +1,6 @@
 package com.javafwp.game.gameObjects;
 
-import com.javafwp.game.ownTypes.type;
+import com.javafwp.game.OwnTypes.type;
 
 import javafx.scene.Node;
 import javafx.scene.paint.Paint;
@@ -8,7 +8,7 @@ import javafx.scene.paint.Paint;
 /**
  * Interface welches alle Funktionen angibt, welche ein Spielobjekt haben sollte
  */
-public interface objectInterface {
+public interface ObjectInterface {
     public Node getEntity();
     public double getWidth ();
     public double getHeight ();

@@ -1,7 +1,7 @@
 package com.javafwp.sound;
 
 
-import com.javafwp.game.ownTypes.gameState;
+import com.javafwp.game.OwnTypes.gameState;
 
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
@@ -10,7 +10,7 @@ import javafx.scene.media.MediaPlayer;
 /**
  * Eigener Musik Player zum behandeln von Hintergrund Musik im Spiel
  */
-public class musicPlayer {
+public class MusicPlayer {
 
     private MediaPlayer   menuLoop;
     private MediaPlayer   start;
@@ -26,7 +26,7 @@ public class musicPlayer {
      * Konstruktor des Musik Players
      * Lädt die Sound Dateien vor
      */
-    public musicPlayer()   {
+    public MusicPlayer()   {
         this.menuLoop   = this.loadAudioClip("intro.wav");
         this.start      = this.loadAudioClip("start.wav");
         this.gameLoop   = this.loadAudioClip("game.wav");

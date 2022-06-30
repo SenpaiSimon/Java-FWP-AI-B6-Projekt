@@ -8,14 +8,14 @@ import javafx.util.Duration;
 /**
  *  Sound Effect Manager um mehrere Effekte parallel abzuspielen
  */
-public class paralellSfxPlayer {
+public class ParalellSfxPlayer {
     private MediaPlayer[] clips;
 
     /**
      * Konstruktor des SFX managers
      * Lädt die Sound Dateien vor
      */
-    public paralellSfxPlayer(String filename, double volume, int amount)  {
+    public ParalellSfxPlayer(String filename, double volume, int amount)  {
         this.clips = new MediaPlayer[amount];
 
         Media media = new Media(getClass().getResource(filename).toExternalForm());

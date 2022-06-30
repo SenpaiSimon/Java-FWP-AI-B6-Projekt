@@ -3,7 +3,7 @@ package com.javafwp.game;
 /**
  * Klasse, welche eigenen Typen definiert
  */
-public class ownTypes {
+public class OwnTypes {
     /**
      * Typ Enum um die Unterklassen von Objekt klar festzustellen
      */

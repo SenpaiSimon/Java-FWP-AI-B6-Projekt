@@ -2,7 +2,7 @@ package com.javafwp.game.gameObjects;
 
 import java.util.ArrayList;
 
-import com.javafwp.sound.paralellSfxPlayer;
+import com.javafwp.sound.ParalellSfxPlayer;
 
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Paint;
@@ -11,7 +11,7 @@ import javafx.scene.paint.Paint;
  * Spieler Objekt
  * Erbt von Objekt.java
  */
-public class player extends object{
+public class Player extends object{
     boolean canJump = false;
     Point2D vel;
 
@@ -21,7 +21,7 @@ public class player extends object{
     Paint[] runningFrames;
     int animationFrameCounter = 0;
 
-    paralellSfxPlayer jumpSfx;
+    ParalellSfxPlayer jumpSfx;
 
     /**
      * Konstruktor für den Spieler
@@ -34,16 +34,16 @@ public class player extends object{
      * @param idleFrames Animationframes beim Stillstand
      * @param runningFrames Animationframes beim Bewegen
      */
-    public player(double xPos, double yPos, double length, double height, double acc, Paint[] idleFrames, Paint[] runningFrames) {
+    public Player(double xPos, double yPos, double length, double height, double acc, Paint[] idleFrames, Paint[] runningFrames) {
         super(xPos, yPos, length, height, idleFrames[0]);
-        this.type = com.javafwp.game.ownTypes.type.player;
+        this.type = com.javafwp.game.OwnTypes.type.player;
         vel = new Point2D(0, 1);
         this.acc = acc;
 
         this.idleFrames = idleFrames;
         this.runningFrames = runningFrames;
 
-        jumpSfx = new paralellSfxPlayer("jump.wav", 0.4, 2);
+        jumpSfx = new ParalellSfxPlayer("jump.wav", 0.4, 2);
     }
 
 

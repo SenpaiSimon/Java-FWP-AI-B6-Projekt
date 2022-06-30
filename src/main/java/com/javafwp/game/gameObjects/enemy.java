@@ -7,7 +7,7 @@ import javafx.scene.paint.Paint;
  * Gegener Objekt 
  * Erbt von Objekt.java
  */
-public class enemy extends object{
+public class Enemy extends object{
 
     private Paint[] frames;
     private int animationCounter = 0;
@@ -21,9 +21,9 @@ public class enemy extends object{
      * @param height Y-Länge des Objekts
      * @param frames Animations Frames des Objekts
      */
-    public enemy(double xPos, double yPos, double length, double height, Paint[] frames) {
+    public Enemy(double xPos, double yPos, double length, double height, Paint[] frames) {
         super(xPos, yPos, length, height, frames[0]);
-        this.type = com.javafwp.game.ownTypes.type.enemy;
+        this.type = com.javafwp.game.OwnTypes.type.enemy;
 
         this.frames = frames;
     }

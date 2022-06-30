@@ -1,6 +1,6 @@
 package com.javafwp.game.gameObjects;
 
-import com.javafwp.game.ownTypes.type;
+import com.javafwp.game.OwnTypes.type;
 
 import javafx.scene.Node;
 import javafx.scene.paint.Paint;
@@ -10,7 +10,7 @@ import javafx.scene.shape.Rectangle;
  * Oberklasse für alle Zeichenbaren Objekte des Spiels
  * Implementiert objectInterface.java
  */
-public class object implements objectInterface {
+public class Object implements ObjectInterface {
     protected type type;
     protected Rectangle entity;
 

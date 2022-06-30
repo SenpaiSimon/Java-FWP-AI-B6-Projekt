@@ -3,7 +3,7 @@ package com.javafwp.game.highscoreSystem;
 /**
  * Einträge, welche in der Highscore Tabelle gespeichert werden
  */
-public class highscoreEntry {
+public class HighscoreEntry {
     private String name;
     private int score;
 
@@ -13,7 +13,7 @@ public class highscoreEntry {
      * @param name Name des Eintrags
      * @param score Erreichte Punkte
      */
-    public highscoreEntry(String name, int score) {
+    public HighscoreEntry(String name, int score) {
         this.name = name;
         this.score = score;
     }
