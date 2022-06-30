@@ -112,7 +112,7 @@ public class highscoreSystem {
         }
 
         // set the input field relative to the text height
-        congrats.setTranslateY(displayText.getBoundsInParent().getMinY() + displayText.getBoundsInParent().getHeight() + 40);
+        congrats.setTranslateY(displayText.getBoundsInParent().getMinY() + displayText.getBoundsInParent().getHeight() + 100);
         inputName.setTranslateY(congrats.getBoundsInParent().getMinY() + congrats.getBoundsInParent().getHeight() + 10);
         infoDisplay.setTranslateY(inputName.getTranslateY() + inputName.getMaxHeight() + 10);
     }
