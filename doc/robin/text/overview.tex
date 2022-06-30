@@ -10,14 +10,17 @@ Das Spiel \textit{Pizza Hut 2077} ist ein Sidescolling Jump'n'Run.
 Das Spiel besteht aus einer simplen 2-Dimensionalen Welt.
 Diese ist mit zufällig generierten Plattformen gefüllt.
 Das konkrete Ziel des Spiels besteht lediglich in dem Highscore.
-Während des Ablaufes entstehen Gegner die den Spiele von allen Seiten berühren.
-Der Spieler kann diese durch das Werfen von Pizzen eliminieren.
+Während des Ablaufes muss der Spieler Gegnern ausweichen und sich von Platform zu Platform hangeln.
+Der Spieler kann diese Gegner durch das Werfen von Pizzen eliminieren.
 Die Feuerrate der Pizzen ist jedoch limitiert.
 Das Spiel ist zu Ende, wenn der Spieler von einem Gegner berührt wird oder aus der Welt fällt (bzw. nicht auf einer Platform landet).
+Alle dem Genre üblichen Funktionen sind wie zu erwarten realisiert.
 
 Am Ende des Spiels kann der Spieler seinen Highscore mitsamt einem Namen in einer Datenbank speichern.
-Die \gls{mysql} Datenbank ist online, darum wird eine funktionierende Internetverbindung benötigt.
-In dem Credits-Bildschirm kann, mit dem notwendigen Administrator Passwort, die Highscores der remote Datenbank zurückgesetzt werden.
+Die \gls{mysql} Datenbank ist online gehosted, darum wird eine funktionierende Internetverbindung benötigt.
+In dem Credits-Bildschirm kann, mit dem notwendigen Administrator Passwort, die Highscore Tabelle der Datenbank zurückgesetzt werden.
+Das einfügen von neuen Highscores zum Spielende verläuft ohne Passwort.
+Die Dateneingabe hat jedoch nur Rechte zum Erstellen neuer Daten und ist auch gegen \texttt{SQL}-Injections gehärtet.
 
 Die Hintergrundmusik des Spiels reagiert auf den jeweiligen Zustand.
 Im Hauptmenü wird eine ruhigere Version des Arpeggio Leitmotivs gespielt.
@@ -36,7 +39,8 @@ Interaktive Elemente wie Text und Eingabefelder nutzen jedoch \gls{jfx} Widgets.
 Das Projekt wird mithilfe von \gls{maven} kompiliert.
 Zur Ausführung ist eine funktionierende Instanz davon nicht notwendig, lediglich eine \gls{jre} von Version 18 oder später.
 Da das Projekt in eine eigenständige \gls{jar} mitsamt aller Ressourcen (Sprites und Sounds) und aller notwendigen Abhängigkeiten (\gls{jfx} und Freunde) kompiliert werden kann.
-Außerdem kann durch \gls{maven} eine vollwertige Dokumentation mit \gls{javadoc} erstellt werden.
+Außerdem kann durch \gls{maven} eine vollwertige und interaktive Dokumentation mit \gls{javadoc} erstellt werden.
+Die gesamte Codebase ist auch in der \gls{javadoc} Konvention kommentiert.
 
 Anleitungen zur Kompilation, Steuerung und Tasten und weiteres können in der \texttt{README.md} gefunden werden.
 Attribution für benutzte Ressourcen ist in der \texttt{ATTRIBUTION.md} gelistet.
