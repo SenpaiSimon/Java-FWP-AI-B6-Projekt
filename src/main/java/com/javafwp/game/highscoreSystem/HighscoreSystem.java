@@ -102,7 +102,7 @@ public class HighscoreSystem {
      * @param newScore neue erreichte Punktezahl nach Tod
      */
     public void addEntry(int newScore) {
-        entries = dbc.getFromDatabase(onlineMode);
+        entries = Dbc.getFromDatabase(onlineMode);
         sort();
         if(entries.isEmpty() || entries.size() < maxEntries || newScore > entries.get(entries.size() - 1).getScore()) {
             // make user able to type in text
@@ -128,7 +128,7 @@ public class HighscoreSystem {
             // longest name is 10 letters
             HighscoreEntry entry = new HighscoreEntry(inputName.getText(), tempScoreEntry);
             entries.add(entry);
-            dbc.writeToDatabase(entry, onlineMode);
+            Dbc.writeToDatabase(entry, onlineMode);
 
             sort(); // sort again to get rid of lowest score in the next step
 
@@ -163,7 +163,7 @@ public class HighscoreSystem {
      * Generiert den Text der den Highscore anzeigt
      */
     public void generateText() {
-        entries = dbc.getFromDatabase(onlineMode);
+        entries = Dbc.getFromDatabase(onlineMode);
         sort();
         String tempText = "Top " + maxEntries + " Highscores:\n";
         for(HighscoreEntry entry: entries) {
@@ -179,7 +179,7 @@ public class HighscoreSystem {
      * @return
      */
     public boolean resetScore(String pass, String defaultPassword) {
-        return dbc.resetScore(pass, onlineMode, defaultPassword);
+        return Dbc.resetScore(pass, onlineMode, defaultPassword);
     }
 
     /**

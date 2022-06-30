@@ -21,7 +21,7 @@ import java.sql.ResultSet;
 /*
  * Klasse zur Kommunikation mit einer Datenbank
  */
-final class dbc {
+final class Dbc {
     static final String HIGHSCORES_FILE = "highscore.csv";
 
     /* These are online required for the online database */
