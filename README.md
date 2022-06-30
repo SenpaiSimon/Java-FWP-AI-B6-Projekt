@@ -39,6 +39,22 @@ Die resultierende `JAR` ist unter `./target` mit dem Suffix `-jar-with-dependenc
 Das Projekt wurde mit [microsoft visualstudio code](https://code.visualstudio.com) erstellt. Die Ausführung und Bearbeitung unter Eclipse wurde nicht getestet.
 Die UML Diagramme wurden mit IntelliJ erstellt.
 
+## Git
+
+Da git standardmäßig case-insesitive ist, muss man die Sensitivität für Klassen einschalten:
+```bash
+git config core.ignorecase false
+```
+
+## Datenbank Offline Modus
+
+Es kann entweder eine Online Datenbank oder eine Lokale genutzt werden.
+Die Online Datenbank muss SQL fähig sein.
+Die lokale ist durch eine einfache CSV Datei realisiert.
+
+Der Online Modus kann in [Globals.onlineMode](./src/main/java/com/javafwp/Globals.java#L144) verändert werden.
+Das standard Passwort im Offline Modus ist unter [Globals.defaultPassword](./src/main/java/com/javafwp/Globals.java#L149) gesetzt.
+
 ## Steuerung
 
 | Funktion              | Taste             |
