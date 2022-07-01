@@ -1,0 +1,27 @@
+\subsection{Highscore \& Datenbankverbindung}
+
+Das Highscore System und die Datenbankverbindung ermöglichen es einen Highscore sowohl zu speichern, als auch die $n$ größten Highscores anzuzeigen.
+Dabei ist $n$ in \texttt{Globals} frei einstellbar\footnote{Die Anzahl ist standardmäßig $n=10$.}.
+Die Anzeige der Highscores erscheint zum Ende eines Spiels, wenn entweder weniger als $n$ Highscores existieren oder der erreichte Score größer als der kleinste ist.
+Erfüllt der erreichte Score diese Kriterien, so wird der Spieler aufgefordert seinen frei wählbaren Namen anzugeben\footnote{Die Länge des Namens ist auch in \texttt{Globals} standardmäßig auf $10$ Zeichen limitiert.}.
+Die Angabe des Namens ist jedoch optional, das Spiels kann auch ohne Eintragung neu gestartet werden.
+Die Highscore Daten können entweder in eine Online-Datenbank oder offline in eine \gls{csv} Datei gespeichert werden.
+Standardmäßig ist die Offline \gls{csv} Version eingestellt.
+Das kann wieder in \texttt{Globals} verändert werden.
+Die Implementation dieser gesamten Funktionalität konzentriert sich auf die Klassen \texttt{Dbc} (kurz für \textit{DataBase Connection}), \texttt{HighscoreSystem} und \texttt{HighscoreEntry}.
+Außerdem hat das System Einzugsbereiche im \texttt{GameLoop}.
+Zu einem wird die Anzeige daraus gestartet und erhält den aktuellen Score.
+Zum anderen kann die Datenbank, egal ob online oder offline, durch eine Passworteingabe im \textit{Credits} Bildschirm zurückgesetzt bzw. gelöscht werden.
+Für die Online-Datenbank wird das Administrator Passwort der Datenbank benötigt.Für die Offline-Datenbank ist es das \texttt{DefaultPassword} in \texttt{Globals}.
+
+Die Online Datenbank ist eine \gls{mysql} Datenbank, welche mit \texttt{preparedStatements} arbeitet.
+Die Offline Datenbank benutzt \textit{Apache}'s \texttt{commons-csv} Bibliothek um die Daten in eine \gls{csv} Datei zu schreiben.
+Die Implementation befindet sich in \texttt{Dbc}.
+Die Klasse \texttt{Dbc} ist final und hat keinen internen Zustand.
+Somit werden zwar mehr Ressourcenaufrufe benötigt, jedoch wird sichergestellt, dass die angezeigten Daten stets so aktuell wie möglich sein können.
+
+Die Klasse \texttt{HighscoreEntry} stellt einen einzelnen Highscore, ein Datenpaar aus Name und Score dar.
+Diese werden im \texttt{HighscoreSystem} als Arraylist gespeichert.
+Dort werden diese Daten und auch das Namenseingabefeld und die Überschrift graphisch angezeigt.
+Die Texteingabe und Validierung in das Namensfeld wird auch darin gehandhabt.
+Die \texttt{Dbc} wird folgend davon aufgerunfen um entweder einen neuen Highscore zu schreiben, alle geschriebenen auszulesen oder um alle zu löschen.

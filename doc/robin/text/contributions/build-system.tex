@@ -1,0 +1,40 @@
+\subsection{Build-System}
+
+Das Build-System des Projekts stellt das System zur Kompilation, Ausführung, Verpackung, Abhängigkeits management und der \gls{javadoc} Dokumentation dar.
+Das Projekt benutzt dafür \gls{maven}.
+Die Konfigurationsdatei dafür ist \texttt{pom.xml}.
+Die Kommandos (auf der Kommandozeile) aus \autoref{tab:command} werden dadurch zur Verfügung gestellt.
+
+\gls{maven} kümmert sich außerdem um die externen Abhängigkeiten, wie \gls{jfx}, \texttt{commons-csv} und \texttt{mysql-connector-java}.
+Dabei werden die angegebenen Versionen bei bedarf automatisch aus dem \gls{maven} Repository heruntergeladen.
+
+Die komilierten Dateien und die \gls{jar} Datei sind im \texttt{./target} Underordner anzufinden.
+Es werden mehrere \glsplural{jar} erstellt.
+Die relevante ist unter \texttt{\seqsplit{./target/SidescrollerGame-jar-with-dependencies.jar}}.
+Aufgrund der \gls{jfx} Abhängigkeiten ist diese leider nicht Platformagnostisch.
+Ergo kann diese nur auf dem Betriebssystem / der Prozessorarchitekur auf der sie erstellt wurde ausgeführt werden \footnote{Dies wurde getestet zwischen einem x86 Windows 10 Computer und einem Apple M1 MacBook Pro.}.
+Die \gls{jar} kann jedoch ohne \gls{jdk}, nur mit \gls{jre}, ausgeführt werden, da alle Abhängigkeiten und Ressourcen inkludiert werden.
+Das hebt jedoch die Dateigröße auf rund $27$ Megabyte an.
+
+Die \glsplural{javadoc} ist in \texttt{./javadoc} anzufinden.
+Diese beziehen sich dabei auf die \gls{javadoc} Kommentare im Code.
+Außerdem wird zu jeder Klasse in der interaktiven \gls{html} Dokumentation ein kleines \gls{uml}-Diagramm generiert.
+Die passiert durch das \texttt{umldoclet} Plugin von \texttt{talsmasoftware}.
+Die Dokumentation kann mit \texttt{./javadoc/index.html} durch jeden Browser geöffnet werden.
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{0.8\textwidth}{|l|X|}
+    \hline
+    \textbf{Kommando} & \textbf{Bedeutung} \\
+    \hline
+    \texttt{mvn clean} & Löscht alle Build-Atrefakte \\
+    \texttt{mvn compile} & Kompiliert das Projekt \\
+    \texttt{mvn package} & Kompiliert und Erstellt eine \gls{jar} Datei \\
+    \texttt{mvn exec:java} & Kompiliert und führt das Projekt aus \\
+    \texttt{mvn javadoc:javadoc} & Erstellt die interaktive \acrshort{html} Dokumentation \\
+    \hline
+\end{tabularx}
+\caption{\gls{maven} Kommandos}
+\label{tab:command}
+\end{table}

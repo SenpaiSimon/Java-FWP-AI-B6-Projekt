@@ -1,0 +1,19 @@
+\subsection{Graphik \& Animationen}
+
+Alle Bilder und Animationen werden durch Sprites implementiert.
+Diese sind im \texttt{sprites} Unterordner anzutreffen.
+Sie wurden durch \textit{Adobe Photoshop}, \textit{After Effects} und \textit{Media Encoder} erstellt.
+Bilder könenn durch den \texttt{ImageLoader} geladen werden.
+Diese greift auf Dateien zu, daher stand die Implementation sehr in Verbindung mit dem Build-System.
+Es musste sichergestellt werden, dass die zu ladenenden Bilder auch in der \gls{jar} zugänglich sind.
+
+Der \texttt{ImageLoader} läd Sprites so, dass diese durch die implizite Skalierung bei der Anwendung der Sprites auf ein Graphikobjekt ohne Anti-Aliasing skaliert werden.
+Dadurch ersteht der Effekt, dass alle Sprites, egal wie groß, eine annehmbare Größe annehmen und dabei auch piexeliert werden.
+Das hilft sofern, dass eigene Piexl-Art tatsächlich auf den Dimensionen der Piexl gezeichnet werden kann und zum Export nicht skaliert werden muss.
+Beispielsweise können die Spieler Sprites im Format von $16 \times 16$ Pixel gezeichnet und gespiechert werden, die Hintergründe können aber wesentlich größer sein.
+Im Spiel nehmen beide jedoch eine vergleichbare Sklaierung an.
+
+Animationen zwischen mehrern Sprites können im Spieler, den Projektielen, den Gegener und im Hauptmenü gefunden werden.
+Die Animationen bestehen aus einem einfachen Timer, welcher nach definierter Zeit die Sprite wechselt.
+Der Spieler verfügt über zwei verschiedene Animationszustände: Ein \textit{Idle} und ein \textit{Running} Zustand.
+Je nach der momentanen geschwindigkeit des Spielers werden die stationäre \textit{Idle} Animation oder die bewegende \textit{Running} Animation benutzt.
