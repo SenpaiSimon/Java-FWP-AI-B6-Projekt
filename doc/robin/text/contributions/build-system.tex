@@ -8,11 +8,11 @@ Die Kommandos (auf der Kommandozeile) aus \autoref{tab:command} werden dadurch z
 \gls{maven} kümmert sich außerdem um die externen Abhängigkeiten, wie \gls{jfx}, \texttt{commons-csv} und \texttt{mysql-connector-java}.
 Dabei werden die angegebenen Versionen bei bedarf automatisch aus dem \gls{maven} Repository heruntergeladen.
 
-Die komilierten Dateien und die \gls{jar} Datei sind im \texttt{./target} Underordner anzufinden.
+Die kompilierten Dateien und die \gls{jar} Datei sind im \texttt{./target} Unterordner anzufinden.
 Es werden mehrere \glsplural{jar} erstellt.
 Die relevante ist unter \texttt{\seqsplit{./target/SidescrollerGame-jar-with-dependencies.jar}}.
 Aufgrund der \gls{jfx} Abhängigkeiten ist diese leider nicht Platformagnostisch.
-Ergo kann diese nur auf dem Betriebssystem / der Prozessorarchitekur auf der sie erstellt wurde ausgeführt werden \footnote{Dies wurde getestet zwischen einem x86 Windows 10 Computer und einem Apple M1 MacBook Pro.}.
+Ergo kann diese nur auf dem Betriebssystem / der Prozessorarchitektur auf der sie erstellt wurde ausgeführt werden \footnote{Dies wurde getestet zwischen einem x86 Windows 10 Computer und einem Apple M1 MacBook Pro.}.
 Die \gls{jar} kann jedoch ohne \gls{jdk}, nur mit \gls{jre}, ausgeführt werden, da alle Abhängigkeiten und Ressourcen inkludiert werden.
 Das hebt jedoch die Dateigröße auf rund $27$ Megabyte an.
 
@@ -28,7 +28,7 @@ Die Dokumentation kann mit \texttt{./javadoc/index.html} durch jeden Browser ge�
     \hline
     \textbf{Kommando} & \textbf{Bedeutung} \\
     \hline
-    \texttt{mvn clean} & Löscht alle Build-Atrefakte \\
+    \texttt{mvn clean} & Löscht alle Build-Artefakte \\
     \texttt{mvn compile} & Kompiliert das Projekt \\
     \texttt{mvn package} & Kompiliert und Erstellt eine \gls{jar} Datei \\
     \texttt{mvn exec:java} & Kompiliert und führt das Projekt aus \\

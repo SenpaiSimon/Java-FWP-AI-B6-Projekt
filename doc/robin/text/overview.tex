@@ -26,7 +26,7 @@ Die Hintergrundmusik des Spiels reagiert auf den jeweiligen Zustand.
 Im Hauptmenü wird eine ruhigere Version des Arpeggio Leitmotivs gespielt.
 Zum Spielstart geht diese mit über eine Brücke in den Hauptteil über.
 Der Hauptteil wird während des Spielverlaufs gelooped.
-Wenn der Spieler stirbt, wird der Hauptteil durch das Outro unterbrochen.
+Wenn der Spieler stirbt, wird der Hauptteil durch das Outtro unterbrochen.
 Der Soundtrack stammt aus eigener Komposition.
 Außerdem haben die Aktionen des Spielers zugehörige Soundeffekte, wie beispielsweise beim Springen oder bei dem Werfen von Pizzen, die passend abgespielt werden.
 
@@ -54,7 +54,7 @@ Attribution für benutzte Ressourcen ist in der \texttt{ATTRIBUTION.md} gelistet
     \label{fig:uml}
 \end{figure}
 
-Das ist \autoref{fig:uml} dargestellte \gls{uml} Diagramm gibt den gesamten Inhalt des implementierten Packets an.
+Das ist \autoref{fig:uml} dargestellte \gls{uml} Diagramm gibt den gesamten Inhalt des implementierten Projekts an.
 Äußere Abhängigkeiten werden nicht aufgeführt.
 Der Großteil spielt sich in und um der Klasse \texttt{GameLoop} ab.
 Die relevanten Teile der Core-Gameplay-Schleife und weiteres werden darin erstellt und aktualisiert.
@@ -62,4 +62,4 @@ Alle im Spiel auftretenden Elemente erben von der Klasse \texttt{Objekt}, welche
 Musik wird durch die \texttt{MusicPlayer} Klasse gehandhabt und Sound durch den \texttt{ParralellSFXPlayer}.
 Bilder und Graphiken werden durch den \texttt{ImageLoader} geladen aber von den Verbrauchern selbst verwaltet.
 Das Highscore System mitsamt der Datenbank Verbindung wird in \texttt{HighscoreSystem}, \texttt{HighscoreEntry} und \texttt{DBC} (DataBase Connection) implementiert.
-Die Klasse \texttt{MainStart} ist eine helferklasse um die \gls{jfx} Applikation zu initialisieren.
+Die Klasse \texttt{MainStart} ist eine Helferklasse um die \gls{jfx} Applikation zu initialisieren.
